@@ -115,7 +115,7 @@ A closed-loop light-following implementation in which the servo position respond
 This folder now includes one self-contained Arduino sketch per activity:
 
 * `activity-01/external-interrupts.ino`
-* `activity-02/interrupt-timing.ino`
+* `activity-02/interrupts-timing.ino`
 * `activity-03/dual-ldr.ino`
 * `activity-04/light-following-servo.ino`
 

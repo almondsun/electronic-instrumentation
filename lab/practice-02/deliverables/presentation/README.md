@@ -6,6 +6,7 @@ Recommended contents:
 
 * source slides such as `.pptx`, `.odp`, or similar
 * an exported `.pdf` version when available
+* supporting assets such as `activity-01-02-debounce-circuits.jpeg`
 
 The presentation should briefly cover:
 

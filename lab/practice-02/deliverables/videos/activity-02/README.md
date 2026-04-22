@@ -1,9 +1,9 @@
-# Activity 02 Video Placeholder
+# Activity 02 Video
 
-Add the public Google Drive link for the Activity 2 demonstration here.
+Public link:
 
-Suggested checklist:
+* https://youtube.com/shorts/ansOQB4kI1w?si=nRZDw5iUew97xv6x
 
-* show the same debounced pushbutton setup
-* demonstrate consecutive button presses
-* show the measured elapsed time in the Serial Monitor
+Repository file:
+
+* `interrupts-timing.mp4`

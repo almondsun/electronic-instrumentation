@@ -1,9 +1,9 @@
-# Activity 01 Video Placeholder
+# Activity 01 Video
 
-Add the public Google Drive link for the Activity 1 demonstration here.
+Public link:
 
-Suggested checklist:
+* https://youtube.com/shorts/mXq1ssp9a_E?si=6mYtNUmcXtz9WJfp
 
-* show the wiring for the pushbutton input
-* demonstrate that bounce does not create false counts
-* show the Serial Monitor output while pressing the button
+Repository file:
+
+* `external-interrupts.mp4`
