@@ -1,15 +1,20 @@
 /*
  * Practice 02 - Activity 3
- * Dual-LDR acquisition, resistance estimation, direction detection,
- * and LED side alarm.
+ * Dual-LDR light direction detector with resistance estimation
+ * and a threshold-driven indicator LED.
  *
- * Wiring assumption for each LDR divider:
- * - 3.3 V --- LDR --- ADC pin --- 10 kOhm resistor --- GND
+ * Wiring assumptions:
+ * - Left LDR divider:  3.3 V --- LDR --- GPIO 4 --- 10 kOhm resistor --- GND
+ * - Right LDR divider: 3.3 V --- LDR --- GPIO 5 --- 10 kOhm resistor --- GND
+ * - Indicator LED connected to GPIO 2
  *
- * LED behavior:
- * - Left LED on  -> light predominantly on the left sensor
- * - Right LED on -> light predominantly on the right sensor
- * - Both off     -> light distribution is approximately centered
+ * Behavior:
+ * - The sketch samples both LDR channels, estimates each resistance,
+ *   and derives a normalized light balance.
+ * - The serial summary reports both resistance estimates plus the
+ *   interpreted light direction: left, right, or center.
+ * - The LED turns on when either sensor exceeds the configured
+ *   brightness threshold.
  */
 
 struct LdrReading {
@@ -20,21 +25,25 @@ struct LdrReading {
 };
 
 constexpr uint32_t SERIAL_BAUD_RATE = 115200;
-constexpr uint8_t LEFT_LDR_PIN = 34;
-constexpr uint8_t RIGHT_LDR_PIN = 35;
-constexpr uint8_t LEFT_LED_PIN = 18;
-constexpr uint8_t RIGHT_LED_PIN = 19;
+
+constexpr uint8_t LEFT_LDR_PIN = 4;
+constexpr uint8_t RIGHT_LDR_PIN = 5;
+constexpr uint8_t LED_PIN = 2;
 
 constexpr uint8_t ADC_RESOLUTION_BITS = 12;
 constexpr uint16_t ADC_MAX_COUNTS = (1U << ADC_RESOLUTION_BITS) - 1U;
 constexpr float ADC_REFERENCE_VOLTAGE = 3.3f;
 constexpr float FIXED_RESISTOR_OHMS = 10000.0f;
+
 constexpr uint8_t SAMPLES_PER_CHANNEL = 16;
 constexpr float BRIGHTNESS_EPSILON = 1.0e-6f;
-constexpr float DIRECTION_DEADBAND = 0.12f;
-constexpr uint32_t PLOTTER_PERIOD_MS = 200;
+
+constexpr float DIRECTION_DEADBAND = 0.05f;
+constexpr float BRIGHTNESS_THRESHOLD = 0.00015f;
+
 constexpr uint32_t SUMMARY_PERIOD_MS = 1000;
 
+// Returns an averaged ADC reading to reduce short-term noise.
 uint16_t readAveragedAdc(uint8_t pin) {
   uint32_t total = 0;
 
@@ -43,9 +52,11 @@ uint16_t readAveragedAdc(uint8_t pin) {
     delayMicroseconds(250);
   }
 
-  return static_cast<uint16_t>(total / SAMPLES_PER_CHANNEL);
+  return total / SAMPLES_PER_CHANNEL;
 }
 
+// Converts an ADC code into the estimated LDR resistance for the
+// voltage-divider wiring described in the header comment.
 float resistanceFromRaw(uint16_t raw) {
   const float clampedRaw = constrain(raw, 1U, ADC_MAX_COUNTS - 1U);
   const float voltage = (clampedRaw * ADC_REFERENCE_VOLTAGE) / ADC_MAX_COUNTS;
@@ -53,6 +64,7 @@ float resistanceFromRaw(uint16_t raw) {
   return FIXED_RESISTOR_OHMS * ((ADC_REFERENCE_VOLTAGE / voltage) - 1.0f);
 }
 
+// Samples one LDR channel and derives the values used by the balance logic.
 LdrReading sampleLdr(uint8_t pin) {
   LdrReading reading = {};
   reading.raw = readAveragedAdc(pin);
@@ -62,12 +74,15 @@ LdrReading sampleLdr(uint8_t pin) {
   return reading;
 }
 
+// Computes a normalized balance in the range [-1, 1] where negative values
+// mean the left sensor is brighter and positive values mean the right sensor
+// is brighter.
 float computeBalance(const LdrReading &left, const LdrReading &right) {
-  const float numerator = right.brightness - left.brightness;
-  const float denominator = right.brightness + left.brightness + BRIGHTNESS_EPSILON;
-  return numerator / denominator;
+  return (right.brightness - left.brightness) /
+         (right.brightness + left.brightness + BRIGHTNESS_EPSILON);
 }
 
+// Maps the normalized balance into a stable text label.
 const char *directionFromBalance(float balance) {
   if (balance <= -DIRECTION_DEADBAND) {
     return "left";
@@ -78,57 +93,42 @@ const char *directionFromBalance(float balance) {
   return "center";
 }
 
-void updateAlarmLeds(float balance) {
-  digitalWrite(LEFT_LED_PIN, balance <= -DIRECTION_DEADBAND ? HIGH : LOW);
-  digitalWrite(RIGHT_LED_PIN, balance >= DIRECTION_DEADBAND ? HIGH : LOW);
+// Drives the indicator LED when either sensor crosses the configured
+// minimum brightness threshold.
+void updateLed(const LdrReading &left, const LdrReading &right) {
+  const bool ledOn = (left.brightness > BRIGHTNESS_THRESHOLD) ||
+                     (right.brightness > BRIGHTNESS_THRESHOLD);
+
+  digitalWrite(LED_PIN, ledOn ? HIGH : LOW);
 }
 
 void setup() {
   Serial.begin(SERIAL_BAUD_RATE);
   analogReadResolution(ADC_RESOLUTION_BITS);
-  analogSetAttenuation(ADC_11db);
 
-  pinMode(LEFT_LED_PIN, OUTPUT);
-  pinMode(RIGHT_LED_PIN, OUTPUT);
+  pinMode(LED_PIN, OUTPUT);
 
-  Serial.println();
-  Serial.println("Activity 3 - Dual LDR light direction detector");
-  Serial.println("Plotter line format: left_ohms, right_ohms, balance");
+  Serial.println("Dual LDR light direction detector with threshold LED");
 }
 
 void loop() {
-  static uint32_t lastPlotterMs = 0;
   static uint32_t lastSummaryMs = 0;
 
   const LdrReading left = sampleLdr(LEFT_LDR_PIN);
   const LdrReading right = sampleLdr(RIGHT_LDR_PIN);
   const float balance = computeBalance(left, right);
   const char *direction = directionFromBalance(balance);
-  const uint32_t nowMs = millis();
 
-  updateAlarmLeds(balance);
+  updateLed(left, right);
 
-  if (nowMs - lastPlotterMs >= PLOTTER_PERIOD_MS) {
-    lastPlotterMs = nowMs;
-    Serial.print("left_ohms:");
+  if (millis() - lastSummaryMs >= SUMMARY_PERIOD_MS) {
+    lastSummaryMs = millis();
+
+    Serial.print("LDR1=");
     Serial.print(left.resistanceOhms, 1);
-    Serial.print(",right_ohms:");
+    Serial.print(" | LDR2=");
     Serial.print(right.resistanceOhms, 1);
-    Serial.print(",balance:");
-    Serial.println(balance, 3);
-  }
-
-  if (nowMs - lastSummaryMs >= SUMMARY_PERIOD_MS) {
-    lastSummaryMs = nowMs;
-    Serial.print("left_raw=");
-    Serial.print(left.raw);
-    Serial.print(", right_raw=");
-    Serial.print(right.raw);
-    Serial.print(", left_ohms=");
-    Serial.print(left.resistanceOhms, 1);
-    Serial.print(", right_ohms=");
-    Serial.print(right.resistanceOhms, 1);
-    Serial.print(", direction=");
+    Serial.print(" | direction=");
     Serial.println(direction);
   }
 }
