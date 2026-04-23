@@ -2,7 +2,7 @@
 
 Public link:
 
-* local repository video only in this snapshot
+* https://youtu.be/JjKAwNEbkUQ?si=QeLI2wHBnJXu98TE
 
 Repository file:
 
