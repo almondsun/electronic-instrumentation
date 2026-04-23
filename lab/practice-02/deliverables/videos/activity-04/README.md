@@ -1,9 +1,24 @@
-# Activity 04 Video Placeholder
+# Activity 04 Video
 
-Add the public Google Drive link for the Activity 4 demonstration here.
+Public link:
 
-Suggested checklist:
+* local repository video only in this snapshot
 
-* show both LDRs, the servo, and the power arrangement
-* move the light source and show the servo response
-* show the Serial Monitor and/or Serial Plotter with sensor and angle data
+Repository file:
+
+* `light-following-servo.mp4`
+
+Captions:
+
+* `light-following-servo.es.srt`
+
+What the video shows:
+
+* two LDR inputs used to compare relative illumination
+* two direction LEDs and one threshold LED
+* serial reporting of resistance and brightness values
+
+Implementation note:
+
+* the assignment originally asked for a servo-based light-following demo, but the recorded implementation replaced the servo with LEDs
+* according to the spoken explanation in the video, the servo was omitted because the available ESP32 power supply was not sufficient and an external battery was not used for the demo

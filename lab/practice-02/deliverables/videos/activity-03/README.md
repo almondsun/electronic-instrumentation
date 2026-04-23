@@ -1,9 +1,23 @@
-# Activity 03 Video Placeholder
+# Activity 03 Video
 
-Add the public Google Drive link for the Activity 3 demonstration here.
+Public link:
 
-Suggested checklist:
+* local repository video only in this snapshot
 
-* show both LDRs and the LED indicators
-* move the light source between the two sides
-* show the Serial Monitor and/or Serial Plotter response
+Repository file:
+
+* `dual-ldr.mp4`
+
+Captions:
+
+* `dual-ldr.es.srt`
+
+What the video shows:
+
+* two LDRs connected to the ESP32 through voltage dividers
+* one threshold LED connected to `GPIO 2`
+* serial reporting of both LDR measurements plus a `left` / `right` direction label
+
+Implementation note:
+
+* the original lab brief mentions a side-indicator LED arrangement, but the recorded implementation uses one threshold LED and the Serial Monitor for the direction result

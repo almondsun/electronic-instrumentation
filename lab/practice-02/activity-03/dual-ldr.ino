@@ -15,6 +15,10 @@
  *   interpreted light direction: left, right, or center.
  * - The LED turns on when either sensor exceeds the configured
  *   brightness threshold.
+ *
+ * Recorded-demo note:
+ * - The video shows a single threshold LED on GPIO 2 and the direction
+ *   result through the Serial Monitor instead of separate left/right LEDs.
  */
 
 struct LdrReading {
@@ -108,6 +112,7 @@ void setup() {
 
   pinMode(LED_PIN, OUTPUT);
 
+  Serial.println();
   Serial.println("Dual LDR light direction detector with threshold LED");
 }
 

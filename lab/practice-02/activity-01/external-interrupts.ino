@@ -1,3 +1,18 @@
+/*
+ * Practice 02 - Activity 1
+ * External-interrupt pulse counter with stable-state software debounce.
+ *
+ * Hardware used in the recorded demo:
+ * - pushbutton connected to GPIO 4 with INPUT_PULLUP behavior
+ * - onboard NeoPixel connected to GPIO 48
+ * - capacitor added in the breadboard setup as extra hardware filtering
+ *
+ * Behavior:
+ * - the interrupt service routine only raises an event flag
+ * - debounce validation is performed in loop() with two consistent reads
+ * - each accepted button press increments pulse_count on the Serial Monitor
+ */
+
 #include <Adafruit_NeoPixel.h>
 
 // ---------------- LED CONFIGURATION ----------------
@@ -13,7 +28,7 @@ Adafruit_NeoPixel pixel(NUMPIXELS, RGB_PIN, NEO_GRB + NEO_KHZ800);
 
 // ---------------- BUTTON CONFIGURATION ----------------
 
-// Pin connected to the button
+// Pin connected to the pushbutton shown in the recorded demo
 constexpr uint8_t BUTTON_PIN = 4;
 
 // Serial communication speed

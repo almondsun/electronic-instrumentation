@@ -17,6 +17,12 @@
  * - LED 3 turns on when either sensor exceeds the configured
  *   brightness threshold.
  * - The Serial Monitor shows both resistance and brightness values.
+ *
+ * Recorded-demo note:
+ * - The file keeps the original Activity 4 naming, but the local video
+ *   documents a fallback LED-based implementation instead of servo control.
+ * - The spoken explanation states that the servo was not used because the
+ *   available ESP32 power was insufficient and no external battery was added.
  */
 
 struct LdrReading {
@@ -110,6 +116,7 @@ void setup() {
   pinMode(LED2_PIN, OUTPUT);
   pinMode(LED3_PIN, OUTPUT);
 
+  Serial.println();
   Serial.println("Dual LDR system with three LEDs");
 }
 

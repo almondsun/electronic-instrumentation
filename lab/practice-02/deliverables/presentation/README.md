@@ -13,3 +13,4 @@ The presentation should briefly cover:
 * implementation approach for each activity
 * main experimental results
 * public links to the four demonstration videos
+* any deviation between the original assignment target and the demonstrated implementation, especially for Activity 4

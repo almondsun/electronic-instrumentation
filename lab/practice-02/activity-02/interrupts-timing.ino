@@ -1,3 +1,19 @@
+/*
+ * Practice 02 - Activity 2
+ * Interrupt-driven pulse counter with software debounce and
+ * elapsed-time measurement between consecutive valid presses.
+ *
+ * Hardware used in the recorded demo:
+ * - pushbutton connected to GPIO 4 with INPUT_PULLUP behavior
+ * - onboard NeoPixel connected to GPIO 48
+ *
+ * Behavior:
+ * - the interrupt service routine only raises an event flag
+ * - debounce validation is performed in loop() with two consistent reads
+ * - each accepted button press increments pulse_count
+ * - the sketch also reports dt(ms), the elapsed time since the last valid pulse
+ */
+
 #include <Adafruit_NeoPixel.h>
 
 // ---------------- LED CONFIGURATION ----------------
@@ -13,7 +29,7 @@ Adafruit_NeoPixel pixel(NUMPIXELS, RGB_PIN, NEO_GRB + NEO_KHZ800);
 
 // ---------------- BUTTON CONFIGURATION ----------------
 
-// Button pin
+// Pushbutton pin used in the recorded timing demo
 constexpr uint8_t BUTTON_PIN = 4;
 
 // Serial port speed

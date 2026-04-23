@@ -112,22 +112,56 @@ A closed-loop light-following implementation in which the servo position respond
 
 ### 3.1 Repository Implementation for ESP32 + Arduino IDE
 
-This folder now includes one self-contained Arduino sketch per activity:
+This folder includes one self-contained Arduino sketch per activity:
 
 * `activity-01/external-interrupts.ino`
 * `activity-02/interrupts-timing.ino`
 * `activity-03/dual-ldr.ino`
 * `activity-04/light-following-servo.ino`
 
-Each sketch is designed for an **ESP32 DevKit-style board** in the **Arduino IDE**.
-The default pin assignment used by the implementation is:
+All sketches target an **ESP32 DevKit-style board** in the **Arduino IDE**.
+This README documents the implementations that were actually demonstrated in the local video evidence, not only the original assignment target.
 
-* pushbutton input with pull-up: `GPIO 27`
-* left LDR ADC input: `GPIO 34`
-* right LDR ADC input: `GPIO 35`
-* left indicator LED: `GPIO 18`
-* right indicator LED: `GPIO 19`
-* servo PWM output: `GPIO 23`
+#### Activity-by-activity implementation summary
+
+**Activity 1 - External Interrupts**
+
+* Sketch: `activity-01/external-interrupts.ino`
+* Hardware shown in the video: pushbutton on `GPIO 4`, onboard NeoPixel on `GPIO 48`, and a capacitor used as additional hardware debouncing support
+* Software behavior: interrupt on the button pin, ISR sets an event flag, debounce is validated in `loop()` with a stable-state double read
+* Serial output: `pulse_count=<n>`
+
+**Activity 2 - Interrupt-Based Timing**
+
+* Sketch: `activity-02/interrupts-timing.ino`
+* Hardware shown in the video: pushbutton on `GPIO 4`, onboard NeoPixel on `GPIO 48`
+* Software behavior: same interrupt-driven pushbutton approach as Activity 1, but the sketch also reports the elapsed time between consecutive valid presses
+* Debounce strategy used in the recorded demo: software-only debounce
+* Serial output: `pulse_count=<n> | dt(ms)=<delta>`
+
+**Activity 3 - Analog Inputs and A/D Conversion**
+
+* Sketch: `activity-03/dual-ldr.ino`
+* Hardware shown in the video:
+  * left LDR ADC input: `GPIO 4`
+  * right LDR ADC input: `GPIO 5`
+  * threshold indicator LED: `GPIO 2`
+* Software behavior: both LDR channels are sampled, resistance is estimated from the divider equation, brightness is inferred as the inverse of resistance, and a normalized balance is mapped to `left`, `right`, or `center`
+* Serial output: `LDR1=<ohms> | LDR2=<ohms> | direction=<label>`
+* Important note: the original lab brief mentions one LED per side, but the implementation kept in this repository and shown in the video uses one threshold LED plus a direction label on the Serial Monitor
+
+**Activity 4 - PWM-Based Analog Output**
+
+* Sketch: `activity-04/light-following-servo.ino`
+* Hardware shown in the video:
+  * LDR 1 ADC input: `GPIO 4`
+  * LDR 2 ADC input: `GPIO 5`
+  * direction LED 1: `GPIO 18`
+  * direction LED 2: `GPIO 17`
+  * threshold LED: `GPIO 2`
+* Software behavior: both LDR channels are sampled and compared; two LEDs indicate which side is brighter, and a third LED turns on when the brightness threshold is exceeded
+* Serial output: `LDR1=<ohms> | LDR2=<ohms> | B1=<brightness> | B2=<brightness>`
+* Important note: the file keeps the original activity naming, but the demonstrated implementation does **not** drive a servo. According to the spoken explanation in the Activity 4 video, the servo was omitted because the available ESP32 power was not sufficient and adding an external battery was considered too cumbersome for the demonstration
 
 #### Wiring assumptions used by Activities 3 and 4
 
@@ -144,9 +178,10 @@ update the constants at the top of the corresponding sketch before running the l
 #### Practical notes
 
 * The pushbutton examples assume `INPUT_PULLUP`, so the button should connect the pin to `GND` when pressed.
-* Activities 1 and 2 use **interrupt-level software debouncing** so they can be demonstrated without extra hardware.
-* Activity 4 drives the servo using the ESP32 LEDC PWM peripheral and does **not** depend on an external Arduino servo library.
-* Power the servo from an appropriate external supply when required, and always share **common ground** with the ESP32.
+* Activity 1 was demonstrated with both software debounce and an additional capacitor for hardware filtering.
+* Activity 2 was demonstrated with software debounce only.
+* Activities 3 and 4 use the same pair of LDR inputs (`GPIO 4` and `GPIO 5`) but different visual outputs.
+* The subtitles stored next to the videos were generated from the recorded narration and are useful for understanding the exact hardware choices made during the demo.
 
 ---
 
@@ -161,6 +196,8 @@ The presentation must include:
 * and a **public access link** to a **video hosted on Google Drive** for each exercise, clearly demonstrating correct operation.
 
 Accordingly, **four videos** must be provided in total, one for each activity.
+
+For this repository snapshot, the `deliverables/videos/` directory also includes Spanish `.srt` subtitle files generated from the recorded explanations so the implementation details remain traceable.
 
 ---
 
