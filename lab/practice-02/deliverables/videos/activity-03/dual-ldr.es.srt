@@ -1,0 +1,39 @@
+1
+00:00:00,000 --> 00:00:09,600
+Este es el punto 3. Contamos con dos fotoresistencias y un LED. La primera fotoresistencia esta conectada al pin 4,
+
+2
+00:00:09,600 --> 00:00:17,800
+la segunda fotoresistencia esta conectada al pin 5 y nuestro LED esta conectado al pin 2 de nuestro ESP.
+
+3
+00:00:17,800 --> 00:00:24,800
+Basicamente lo que hacemos es dos divisores de tension, uno por cada fotoresistencia.
+
+4
+00:00:24,800 --> 00:00:38,800
+Nuestro codigo lo que hace es calcular cada valor de este divisor de tension y de la resistencia para compararlo.
+
+5
+00:00:38,800 --> 00:00:47,400
+Entonces aqui tenemos la fotoresistencia 1, la fotoresistencia 2 y la direccion.
+
+6
+00:00:47,400 --> 00:00:49,600
+Que quiere decir la direccion?
+
+7
+00:00:49,600 --> 00:00:55,800
+Quiere decir hacia que lado se esta dirigiendo la luz.
+
+8
+00:00:55,800 --> 00:01:06,500
+En este caso, vamos a cubrir esta, y ya nos cambia a left.
+
+9
+00:01:06,500 --> 00:01:18,500
+Y nuestro LED es el que indica cuando una o ambas fotoresistencias estan llegando al valor de un umbral.
+
+10
+00:01:18,500 --> 00:01:31,640
+Al limite. Entonces aqui podemos ver que por un lado se va a prender el LED y por el otro lado tambien nos prende nuestro LED.

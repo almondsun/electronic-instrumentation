@@ -1,0 +1,71 @@
+1
+00:00:01,010 --> 00:00:12,010
+Bueno, este es el montaje de la primera parte de la actividad, correspondiente a la Actividad 1, que es el contador de pulsos.
+
+2
+00:00:12,010 --> 00:00:22,310
+Vemos que aca tenemos un boton de pulsos y aqui esta el codigo, entonces vamos a ponerlo a correr.
+
+3
+00:00:22,310 --> 00:00:29,310
+Ya esta compilado el programa; de hecho, esta corriendo. Como podemos ver en el monitor serial no hay nada.
+
+4
+00:00:29,310 --> 00:00:35,310
+Asi que vamos a resetear la placa para que empiece desde cero y vuelva a ejecutar el programa.
+
+5
+00:00:35,310 --> 00:00:40,310
+Y asi se va a mostrar en el monitor lo primero que debe mostrarse.
+
+6
+00:00:40,310 --> 00:00:46,310
+Bueno, una vez presionado el pin de reset, muestra que imprime dos mensajes.
+
+7
+00:00:46,310 --> 00:00:56,310
+El contador con debounce por estado estable para la ESP32-S3, que es el modelo de esta placa, y el pulso que es 0.
+
+8
+00:00:56,310 --> 00:01:00,310
+Ya que no hemos tocado ni una sola vez el boton de aca.
+
+9
+00:01:00,310 --> 00:01:04,310
+Asi que vamos a hacer unas pruebas.
+
+10
+00:01:04,310 --> 00:01:12,310
+Tocando tres o, no, mejor, cinco veces, y a ver que aparece aca en el serial.
+
+11
+00:01:12,310 --> 00:01:25,690
+Entonces va: 1, 2, 3, 4, 5. Y efectivamente en el monitor serial aparecen 5 pulsaciones.
+
+12
+00:01:25,690 --> 00:01:32,690
+Y bueno, esas fueron relativamente lentas, pero, por ejemplo, que pasa si presionamos 5 veces otra vez, pero mas rapido.
+
+13
+00:01:32,690 --> 00:01:36,690
+1, 2, 3, 4, 5. Ah bueno, presionamos 6 veces.
+
+14
+00:01:36,690 --> 00:01:41,690
+Pero bueno, vamos aca, efectivamente.
+
+15
+00:01:41,690 --> 00:01:46,690
+Habiamos presionado cinco lentamente y relativamente presionamos 6 veces, por lo que llego a 11.
+
+16
+00:01:46,690 --> 00:01:53,690
+Asi que efectivamente el codigo funciona y el hardware tambien.
+
+17
+00:01:53,690 --> 00:02:03,690
+Vemos que hay un capacitor, ya que la actividad solicitaba debounce por software y tambien por hardware.
+
+18
+00:02:03,690 --> 00:02:11,690
+Y la via hardware era hacerlo colocando un capacitor justo en la salida del pin, antes del pulsador, para que filtrara el ruido mecanico.

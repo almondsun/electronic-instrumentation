@@ -1,0 +1,55 @@
+1
+00:00:00,560 --> 00:00:08,240
+Aqui tenemos el punto 4. El punto 4 consta de dos fotoresistencias y un servomotor.
+
+2
+00:00:08,240 --> 00:00:13,700
+En este caso no se utiliza un servomotor porque la alimentacion del ESP no era suficiente.
+
+3
+00:00:13,700 --> 00:00:21,080
+Utilizar una bateria externa nos complicaba un poco, entonces se decidio conectar dos LEDs.
+
+4
+00:00:21,080 --> 00:00:27,280
+Un LED es para la fotoresistencia del lado derecho y otro LED para la fotoresistencia del lado izquierdo.
+
+5
+00:00:27,280 --> 00:00:35,640
+En este momento le esta entrando mas iluminacion a nuestra fotoresistencia del lado derecho.
+
+6
+00:00:35,640 --> 00:00:45,830
+Como podemos ver, si tapamos esta, se va a encender el LED de la fotoresistencia del lado izquierdo.
+
+7
+00:00:45,830 --> 00:00:50,990
+En el caso real del punto 4, lo que tenia que hacer era mover el servo hacia el lado izquierdo
+
+8
+00:00:50,990 --> 00:01:00,390
+o hacia el lado derecho, dependiendo de la iluminacion detectada.
+
+9
+00:01:00,390 --> 00:01:06,950
+Tambien podemos observar que ambos, o al menos uno de ellos, cuando se acercan a un umbral,
+
+10
+00:01:06,950 --> 00:01:18,140
+encienden el LED. Podemos observar que el lado derecho prende el LED verde y el del otro lado tambien.
+
+11
+00:01:18,140 --> 00:01:35,680
+Y aqui en el codigo podemos observar los valores que toman nuestras resistencias.
+
+12
+00:01:35,680 --> 00:01:43,320
+LED 1 y LED 2 corresponden a los dos fotoresistores.
+
+13
+00:01:43,320 --> 00:01:51,400
+En el otro caso se observaria el angulo al cual estaria nuestro servo,
+
+14
+00:01:51,400 --> 00:01:52,810
+pero en este caso nos muestra el voltaje de cada LED en este momento.

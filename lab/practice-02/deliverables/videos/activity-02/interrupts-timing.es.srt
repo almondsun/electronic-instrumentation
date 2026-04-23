@@ -1,0 +1,59 @@
+1
+00:00:00,140 --> 00:00:04,360
+Bueno, para la Actividad 2 tenemos nada mas el pulsador conectado a la placa.
+
+2
+00:00:04,360 --> 00:00:10,900
+Debido a que, en este caso, se nos da a elegir entre debounce por hardware o debounce por software.
+
+3
+00:00:10,900 --> 00:00:14,900
+Y en este caso elegiremos puramente el software.
+
+4
+00:00:14,900 --> 00:00:20,860
+Asi que lo que queremos para esta actividad sera que, aparte de contar las pulsaciones,
+
+5
+00:00:20,860 --> 00:00:26,900
+tambien mediremos el tiempo de diferencia que hay entre cada pulsacion.
+
+6
+00:00:26,900 --> 00:00:33,260
+Asi que, como podemos ver, aqui ya esta impreso el mensaje que bota el codigo por la funcion
+
+7
+00:00:34,260 --> 00:00:35,420
+de setup.
+
+8
+00:00:35,420 --> 00:00:43,060
+Dice: conteo mas tiempo entre pulsos para la ESP32-S3, y vemos que el contador de pulsos esta en cero.
+
+9
+00:00:43,060 --> 00:00:50,940
+Asi que vamos a oprimir unas 5 veces el boton y vamos a ver
+
+10
+00:00:50,940 --> 00:00:57,510
+lo que aparece en el monitor serial.
+
+11
+00:00:57,710 --> 00:01:03,050
+Vemos entonces que aca el monitor serial nos esta mostrando que, aparte de contar las pulsaciones,
+
+12
+00:01:03,050 --> 00:01:06,230
+tambien nos esta mostrando la diferencia entre pulsos.
+
+13
+00:01:06,230 --> 00:01:15,030
+Esta primera diferencia aca es la que nos tomo realizar el primer pulso con respecto al primer contador.
+
+14
+00:01:15,030 --> 00:01:19,670
+Asi que por eso aparece una diferencia de tiempo tan grande.
+
+15
+00:01:19,670 --> 00:01:22,430
+Cabe aclarar que esto de aqui son milisegundos.

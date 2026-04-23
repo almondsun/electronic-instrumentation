@@ -1,13 +1,22 @@
 /*
  * Practice 02 - Activity 4
- * Servo positioning from dual-LDR light detection.
+ * Dual-LDR light comparison with three indicator LEDs.
  *
- * Wiring assumption for each LDR divider:
- * - 3.3 V --- LDR --- ADC pin --- 10 kOhm resistor --- GND
+ * Wiring assumptions:
+ * - LDR 1 divider: 3.3 V --- LDR --- GPIO 4 --- 10 kOhm resistor --- GND
+ * - LDR 2 divider: 3.3 V --- LDR --- GPIO 5 --- 10 kOhm resistor --- GND
+ * - Direction LED for sensor 1 on GPIO 18
+ * - Direction LED for sensor 2 on GPIO 17
+ * - Global detection LED on GPIO 2
  *
- * Servo note:
- * - Use an external supply when the servo current exceeds what the board can provide
- * - Connect servo ground and ESP32 ground together
+ * Behavior:
+ * - The sketch samples both LDR channels and estimates voltage,
+ *   resistance, and relative brightness for each sensor.
+ * - LED 1 turns on when LDR 1 detects more light than LDR 2.
+ * - LED 2 turns on when LDR 2 detects more light than LDR 1.
+ * - LED 3 turns on when either sensor exceeds the configured
+ *   brightness threshold.
+ * - The Serial Monitor shows both resistance and brightness values.
  */
 
 struct LdrReading {
@@ -18,33 +27,26 @@ struct LdrReading {
 };
 
 constexpr uint32_t SERIAL_BAUD_RATE = 115200;
-constexpr uint8_t LEFT_LDR_PIN = 34;
-constexpr uint8_t RIGHT_LDR_PIN = 35;
-constexpr uint8_t LEFT_LED_PIN = 18;
-constexpr uint8_t RIGHT_LED_PIN = 19;
-constexpr uint8_t SERVO_PIN = 23;
+
+constexpr uint8_t LDR1_PIN = 4;
+constexpr uint8_t LDR2_PIN = 5;
+
+constexpr uint8_t LED1_PIN = 18;
+constexpr uint8_t LED2_PIN = 17;
+constexpr uint8_t LED3_PIN = 2;
 
 constexpr uint8_t ADC_RESOLUTION_BITS = 12;
 constexpr uint16_t ADC_MAX_COUNTS = (1U << ADC_RESOLUTION_BITS) - 1U;
 constexpr float ADC_REFERENCE_VOLTAGE = 3.3f;
 constexpr float FIXED_RESISTOR_OHMS = 10000.0f;
+
 constexpr uint8_t SAMPLES_PER_CHANNEL = 16;
 constexpr float BRIGHTNESS_EPSILON = 1.0e-6f;
-constexpr float DIRECTION_DEADBAND = 0.10f;
+constexpr float BRIGHTNESS_THRESHOLD = 0.00015f;
 
-constexpr uint8_t SERVO_PWM_CHANNEL = 0;
-constexpr uint16_t SERVO_PWM_FREQUENCY_HZ = 50;
-constexpr uint8_t SERVO_PWM_RESOLUTION_BITS = 16;
-constexpr uint16_t SERVO_PERIOD_US = 20000;
-constexpr uint16_t SERVO_MIN_PULSE_US = 500;
-constexpr uint16_t SERVO_MAX_PULSE_US = 2400;
-constexpr uint16_t SERVO_MAX_ANGLE = 180;
-constexpr uint16_t SERVO_CENTER_ANGLE = SERVO_MAX_ANGLE / 2;
-constexpr float MAX_STEP_DEGREES_PER_UPDATE = 2.5f;
+constexpr uint32_t REPORT_PERIOD_MS = 500;
 
-constexpr uint32_t CONTROL_PERIOD_MS = 20;
-constexpr uint32_t REPORT_PERIOD_MS = 250;
-
+// Returns an averaged ADC reading to reduce short-term measurement noise.
 uint16_t readAveragedAdc(uint8_t pin) {
   uint32_t total = 0;
 
@@ -53,9 +55,11 @@ uint16_t readAveragedAdc(uint8_t pin) {
     delayMicroseconds(250);
   }
 
-  return static_cast<uint16_t>(total / SAMPLES_PER_CHANNEL);
+  return total / SAMPLES_PER_CHANNEL;
 }
 
+// Converts an ADC code into the estimated LDR resistance based on the
+// documented voltage-divider wiring.
 float resistanceFromRaw(uint16_t raw) {
   const float clampedRaw = constrain(raw, 1U, ADC_MAX_COUNTS - 1U);
   const float voltage = (clampedRaw * ADC_REFERENCE_VOLTAGE) / ADC_MAX_COUNTS;
@@ -63,6 +67,7 @@ float resistanceFromRaw(uint16_t raw) {
   return FIXED_RESISTOR_OHMS * ((ADC_REFERENCE_VOLTAGE / voltage) - 1.0f);
 }
 
+// Samples one LDR channel and derives the values used by the comparison logic.
 LdrReading sampleLdr(uint8_t pin) {
   LdrReading reading = {};
   reading.raw = readAveragedAdc(pin);
@@ -72,89 +77,62 @@ LdrReading sampleLdr(uint8_t pin) {
   return reading;
 }
 
-float computeBalance(const LdrReading &left, const LdrReading &right) {
-  const float numerator = right.brightness - left.brightness;
-  const float denominator = right.brightness + left.brightness + BRIGHTNESS_EPSILON;
-  return numerator / denominator;
-}
-
-void updateAlarmLeds(float balance) {
-  digitalWrite(LEFT_LED_PIN, balance <= -DIRECTION_DEADBAND ? HIGH : LOW);
-  digitalWrite(RIGHT_LED_PIN, balance >= DIRECTION_DEADBAND ? HIGH : LOW);
-}
-
-float computeTargetAngle(float balance) {
-  if (fabsf(balance) < DIRECTION_DEADBAND) {
-    return SERVO_CENTER_ANGLE;
+// Updates the direction LEDs so the brighter sensor is highlighted.
+void updateDirectionLeds(const LdrReading &ldr1, const LdrReading &ldr2) {
+  if (ldr1.brightness > ldr2.brightness) {
+    digitalWrite(LED1_PIN, HIGH);
+    digitalWrite(LED2_PIN, LOW);
+  } else if (ldr2.brightness > ldr1.brightness) {
+    digitalWrite(LED1_PIN, LOW);
+    digitalWrite(LED2_PIN, HIGH);
+  } else {
+    digitalWrite(LED1_PIN, LOW);
+    digitalWrite(LED2_PIN, LOW);
   }
-
-  const float centeredBalance = constrain(balance, -1.0f, 1.0f);
-  const float halfRange = SERVO_MAX_ANGLE / 2.0f;
-  return constrain(SERVO_CENTER_ANGLE + centeredBalance * halfRange, 0.0f, static_cast<float>(SERVO_MAX_ANGLE));
 }
 
-void writeServoAngle(float angleDegrees) {
-  const float clampedAngle = constrain(angleDegrees, 0.0f, static_cast<float>(SERVO_MAX_ANGLE));
-  const float pulseSpan = static_cast<float>(SERVO_MAX_PULSE_US - SERVO_MIN_PULSE_US);
-  const float pulseUs = SERVO_MIN_PULSE_US + (clampedAngle / SERVO_MAX_ANGLE) * pulseSpan;
-  const uint32_t maxDuty = (1UL << SERVO_PWM_RESOLUTION_BITS) - 1UL;
-  const uint32_t duty = static_cast<uint32_t>((pulseUs / SERVO_PERIOD_US) * maxDuty);
+// Turns on the global detection LED when either sensor exceeds the
+// configured brightness threshold.
+void updateThresholdLed(const LdrReading &ldr1, const LdrReading &ldr2) {
+  const bool lightDetected = (ldr1.brightness > BRIGHTNESS_THRESHOLD) ||
+                             (ldr2.brightness > BRIGHTNESS_THRESHOLD);
 
-  ledcWrite(SERVO_PWM_CHANNEL, duty);
+  digitalWrite(LED3_PIN, lightDetected ? HIGH : LOW);
 }
 
 void setup() {
   Serial.begin(SERIAL_BAUD_RATE);
+  delay(1000);
+
   analogReadResolution(ADC_RESOLUTION_BITS);
-  analogSetAttenuation(ADC_11db);
 
-  pinMode(LEFT_LED_PIN, OUTPUT);
-  pinMode(RIGHT_LED_PIN, OUTPUT);
+  pinMode(LED1_PIN, OUTPUT);
+  pinMode(LED2_PIN, OUTPUT);
+  pinMode(LED3_PIN, OUTPUT);
 
-  ledcSetup(SERVO_PWM_CHANNEL, SERVO_PWM_FREQUENCY_HZ, SERVO_PWM_RESOLUTION_BITS);
-  ledcAttachPin(SERVO_PIN, SERVO_PWM_CHANNEL);
-  writeServoAngle(SERVO_CENTER_ANGLE);
-
-  Serial.println();
-  Serial.println("Activity 4 - Light-following servo controller");
-  Serial.println("Plotter line format: left_ohms, right_ohms, servo_angle");
+  Serial.println("Dual LDR system with three LEDs");
 }
 
 void loop() {
-  static uint32_t lastControlMs = 0;
   static uint32_t lastReportMs = 0;
-  static float currentAngle = SERVO_CENTER_ANGLE;
 
-  const uint32_t nowMs = millis();
-  if (nowMs - lastControlMs < CONTROL_PERIOD_MS) {
-    return;
-  }
-  lastControlMs = nowMs;
+  const LdrReading ldr1 = sampleLdr(LDR1_PIN);
+  const LdrReading ldr2 = sampleLdr(LDR2_PIN);
 
-  const LdrReading left = sampleLdr(LEFT_LDR_PIN);
-  const LdrReading right = sampleLdr(RIGHT_LDR_PIN);
-  const float balance = computeBalance(left, right);
-  const float targetAngle = computeTargetAngle(balance);
+  updateDirectionLeds(ldr1, ldr2);
+  updateThresholdLed(ldr1, ldr2);
 
-  updateAlarmLeds(balance);
+  if (millis() - lastReportMs >= REPORT_PERIOD_MS) {
+    lastReportMs = millis();
 
-  if (targetAngle > currentAngle) {
-    currentAngle = min(currentAngle + MAX_STEP_DEGREES_PER_UPDATE, targetAngle);
-  } else {
-    currentAngle = max(currentAngle - MAX_STEP_DEGREES_PER_UPDATE, targetAngle);
-  }
-
-  writeServoAngle(currentAngle);
-
-  if (nowMs - lastReportMs >= REPORT_PERIOD_MS) {
-    lastReportMs = nowMs;
-    Serial.print("left_ohms:");
-    Serial.print(left.resistanceOhms, 1);
-    Serial.print(",right_ohms:");
-    Serial.print(right.resistanceOhms, 1);
-    Serial.print(",balance:");
-    Serial.print(balance, 3);
-    Serial.print(",servo_angle:");
-    Serial.println(currentAngle, 1);
+    Serial.print("LDR1=");
+    Serial.print(ldr1.resistanceOhms, 1);
+    Serial.print(" | LDR2=");
+    Serial.print(ldr2.resistanceOhms, 1);
+    Serial.print(" | B1=");
+    Serial.print(ldr1.brightness, 6);
+    Serial.print(" | B2=");
+    Serial.print(ldr2.brightness, 6);
+    Serial.println();
   }
 }
