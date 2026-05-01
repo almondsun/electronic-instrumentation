@@ -83,3 +83,12 @@ activity, following the same repository pattern used in Practice 02.
 * Software behavior: the sketch initializes the I2C display, computes an elapsed digital clock from `millis()`, reads and averages the potentiometer ADC value, and displays both values at the same time
 * LCD output: row 1 shows `Clock HH:MM:SS`; row 2 shows `Pot <raw> <percent>%`
 * Serial feedback: `time=<HH:MM:SS> | pot_raw=<raw> | pot_percent=<percent>%`
+
+### Activity 3 - SPI BMP280 Sensor Monitor
+
+* Sketch: `activity-03/spi-bmp280-monitor.ino`
+* Hardware: ESP32 DevKit-style board and BMP280 breakout configured for SPI operation
+* Wiring assumptions: BMP280 `SCK` on `GPIO 18`, `MISO/SDO` on `GPIO 19`, `MOSI/SDI` on `GPIO 23`, and `CS` on `GPIO 5`
+* Library dependencies: `Adafruit BMP280 Library` and `Adafruit Unified Sensor` from the Arduino IDE Library Manager
+* Software behavior: the sketch initializes the SPI bus, detects and configures the BMP280, reads temperature and pressure periodically, and retries initialization if the sensor is not available
+* Serial feedback: `temperature_c=<value> | pressure_pa=<value> | pressure_hpa=<value>`
