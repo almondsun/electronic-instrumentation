@@ -57,3 +57,19 @@ Additionally, the presentation must include the link to one video for each exerc
 Each group will present one of the first five points, as well as the sixth point. The session will begin exactly on time.
 
 **Note:** Only one member of each group must upload the presentation and the videos.
+
+---
+
+## Repository Implementation for ESP32 + Arduino IDE
+
+This folder is organized as one self-contained Arduino sketch per implementation
+activity, following the same repository pattern used in Practice 02.
+
+### Activity 1 - UART Guess the Number
+
+* Sketch: `activity-01/guess-the-number-uart.ino`
+* Hardware: ESP32 DevKit-style board connected to the Arduino IDE Serial Monitor through USB
+* Serial configuration: `115200` baud, one input per line
+* Software behavior: the sketch prompts for a minimum value and a maximum value, validates the interval, generates an inclusive random secret number, and receives guesses over UART
+* Serial feedback: invalid inputs are rejected, out-of-range guesses are rejected, incorrect guesses report whether the secret number is lower or higher, and a correct guess reports the number of valid attempts
+* Restart behavior: after success, the user can type `y` to start another game or `n` to stop the session
