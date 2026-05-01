@@ -1,1990 +1,0 @@
-Instrumentación
-     Electrónica
-    230 problemas resueltos
-
-
-
-       .     ,,     ,        ,
-      Miguel Angel Perez Garc1a
- INSTRUMENTACIÓN ELECTRÓNICA
- 230 Problemas resueltos
-
- Miguel Ángel Pérez García
- ISBN: 978-84-15452-00-3
- IBERGARCETA PUBLICACIONES, S.L., Madrid, 2012
- Edición: 1ª.
- Nº de páginas: 436
- Formato: 20 x 26
- Materia BIC: T JF. Ingeniería electrónica
-
-
-Reservados los derechos para todos los países de lengua española. De conformidad con lo dispuesto en el
-artículo 270 y siguientes del código penal vigente, podrán ser castigados con penas de multa y privación de
-libertad quienes reprodujeren o plagiaren, en todo o en parte, u.na obra literaria, artística o científica fijada en
-cualquier tipo de soporte sin la preceptiva autorización. Ninguna parte de esta publicación, incluido el diseño
-de la cubierta, puede ser reproducida, almacenada o trasmitida de ninguna forma, ni por ningún medio, sea
-éste electrónico, químico, mecánico, electro-óptico, grabación, fotocopia o cualquier otro, sin la previa auto-
-rización escrita por parte de la editorial.
-
-Diríjase a CEDRO (Centro Español de Derechos Reprográficos), www.cedro.org, si necesita fotocopiar o
-escanear algún fragmento de esta obra.
-
-
-INSTRUMENTACIÓN ELECTRÓNICA. 230 Problemas resueltos
-ISBN: 978-84-15452-00-3
-
-
-© Miguel Ángel Pérez García
-
-COPYRIGHT© 2012 IBERGARCETA PUBLICACIONES, S.L.
-info@garceta.es
-
-Edición: lª.
-
-Impresión: 2ª.
-Depósito legal: M-2553-2012
-
-
-
-Impresión: PRINTHOUSE., marca registrada de Copiar S.A.
-OI: 197/2012
-
-
-IMPRESO EN ESPAÑA-PRINTED IN SPAIN
-Nota sobre enlaces a páginas web ajenas: Este libro puede incluir referencias a sitios web gestionados por
-terceros y ajenos a IBERGARCETA PUBLICACIONES, SL, que se incluyen sólo con finalidad informativa.
-IBERGARCETA PUBLICACIONES, SL, no asume ningún tipo de responsabilidad por los daños y perjui-
-cios derivados del uso de los datos personales que pueda hacer un tercero encargado del mantenimiento de las
-páginas web ajenas a IBERGARCETA PUBLICACIONES, SL, y del funcionamiento, accesibilidad y man-
-tenimiento de los sitios web no gestionados por IBERGARCETA PUBLICACIONES, SL, directamente. Las
-referencias se proporcionan en el estado en que se encuentran en el momento de publicación sin garantías
-expresas o implícitas, sobre la información que se proporcione en ellas.
-                                                                                                                    Contenido
-
-
-Prólogo. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .   VII
-
-Capítulo l. Caracterización de sistemas instrumentales
-                   (18 problemas resueltos).......... . ..... . . . . . . . . . . . . . . . . . . . . . . . . .                              2
-Capítulo 2. El amplificador operacional real
-                   (59 problemas resueltos).... . .. ... . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .                      34
-Capítulo 3. Amplificadores integrados
-                   (21 problemas resueltos). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .               126
-Capítulo 4. Filtros activos
-                   (14 problemas resueltos). .................. . . . . . . . . . . . . . . . . . . . . . .                                166
-Capítulo 5. Conversión AID
-                   (18 problemas resueltos). . ... .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .                  196
-Capítulo 6. Sensores resistivos
-                   (20 problemas resueltos).. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .                234
-Capítulo 7. Sensores capacitivos e inductivos
-                   (15 problemas resueltos). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .               276
-Capítulo 8. Sensores generadores de señal
-                   (35 problemas resueltos).. ... .. .. ... . . . . . . . . . . . . . . . . . . . . . . . . . . . . .                      320
-Capítulo 9. Sistemas instrumentales
-                   (17 problemas resueltos). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .               386
-Capítulo 10. Atenuación e interferencias
-                   (12 problemas resueltos). . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .               404
-
-Tabla de símbolos. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .           424
-                                                                                       Prólogo
-
-
-Una aproximación práctica a la Instrumentación electrónica
-El presente trabajo pretende ofrecer un panorama general de los sistemas de medida analógicos desde un
-punto de vista fundamentalmente práctico, basado en una serie de ejercicios de cálculo, toma de decisiones
-y diseño en los que el alumno debe afrontar retos más o menos complejos.
-
-   Aunque el hilo conductor del conjunto es el de los sistemas de control de procesos, en cuyo ámbito se
-enmarcan todos los bloques, lo cierto es que la horizontalidad de la Instrumentación Electrónica, desde el
-punto de vista de su aplicabilidad, hace que todos los casos planteados tengan cabida en otros contextos,
-sobre todo en aquellos en que la captación de información, la medida, la supervisión o el control de cual-
-quier variable de cualquier tipo pueda ser de interés. Esto amplía el abanico de la Instrumentación Electró-
-nica a cualquier faceta de nuestras vidas, presididas por todo tipo de sensores y bloques de adaptación que
-conviven con nosotros en las industrias, en el trabajo, en nuestro hogar, cada vez que usamos el móvil,
-cuando dormimos o, simplemente, cada vez que estamos en la calle. Allá donde estemos, el ojo del Gran
-Hermano de George Orwell toma datos, lee variables, vigila, controla, protege y, con sus ventajas e incon-
-venientes sobre los que se podría debatir por años, forma parte de nuestra propia existencia ...
-
-    Detrás de cualquiera de estos sistemas, un sinnúmero de equipos de medida trabaja de forma incansable.
-Estos sistemas están formados por bloques como los que aquí se presentan. Algunos de esos bloques son
-comunes a todos ellos y están formados por amplificadores (Capítulos 2 y 3), filtros que mejoren la calidad
-de la señal (Capítulo 4) y sistemas que permiten cuantificar sus valores y entregarlos al universo digital
-(Capítulo 5). Sin embargo, otros bloques son más específicos para cada variable, como los que correspon-
-den a algunos ejemplos generales de sensores (Capítulos 6, 7, y 8), que pretenden cubrir las diversas posibi-
-lidades de tratamiento de las señales que proceden de ellos, independientemente de su propia naturaleza y,
-cuyas conclusiones, el lector deberá extrapolar a otros casos con los que pueda encontrarse en un futuro
-más o menos cercano. Para concluir el estudio de los sensores, se presenta una visión desde un mayor nivel
-de abstracción (Capítulo 9), una visión diferente a la presentada con anterioridad y que permite enfrentarse
-con el proceso de decisión, selección y comparación, más que con el estricto cálculo desarrollado hasta ahí.
-Pero, como quiera que los sistemas instrumentales suelen manejar señales débiles o muy débiles, están
-sujetos a las «inclemencias» del ambiente; aspectos como la atenuación y las interferencias deben ser trata-
-dos, con vistas a cuantificarlos y tratar de hacer que nuestros sistemas puedan convivir en un ambiente
-electromagnéticamente hostil (Capítulo 10).
-•       INSTRUMENTACIÓN ELECTRÓNICA. 230 PROBLEMAS RESUELTOS
-
-
-
-   Como la práctica es, al final de todo, el objeto de nuestra actividad, es hora de empezar con ella, por lo
-que el lector queda invitado a empezar con un primer capítulo destinado a fijar los criterios básicos y las
-definiciones con las que trabajaremos a lo largo de los 230 problemas que constituyen este texto. En eso
-consiste el Tema 1, un tema crucial para el buen desarrollo posterior de los demás.
-
-
-
-
-Cómo usar este libro
-La Instrumentación Electrónica es una materia que precisa conocimientos amplios sobre electrónica, de
-modo que es dificil evolucionar favorablemente sin una base, por lo que el lector debe tener nociones de:
-
-    •   Teoría de circuitos, con capacidad de analizar circuitos sencillos de continua y de alterna.
-    •   Dinámica de sistemas, incluyendo su caracterización en el dominio del tiempo y de la frecuencia, y
-        los conceptos básicos de sistemas realimentados y estabilidad.
-    •   Electrónica analógica básica, desde circuitos muy sencillos con diodos y transistores hasta los blo-
-        ques que usan amplificadores operacionales, considerados como ideales.
-
-    No obstante, cada tema incluye una breve introducción teórica para refrescar los conceptos directamente
-relacionados con el objeto del propio tema y proporciona las relaciones más básicas que el lector puede
-necesitar para el desarrollo de los ejercicios. Estos ejercicios se han calificado en función del nivel de difi-
-cultad genérico, desde el más sencillo<*****) hasta el más complejo(*****). El lector debe
-enfrentarse con los conceptos más simples y luego, poco a poco, ir escalando hasta mayores niveles de
-dificultad. En algunos ejercicios, además de los conceptos antes comentados, se precisan algunas ideas
-adicionales sobre matemáticas o fisica (podrían suponerse, pero ... ), en cuyo caso se han destacado, respec-
-tivamente con  m     o con n.
-    Para ser prácticos, algunos de los ejercicios se han resuelto en una hoja de cálculo y estos están señala-
-dos con este signo: ~..:.No es estrictamente necesario acudir al fichero en el que están hechos los cálculos,
-ya que en él sólo se recoge el procedimiento de cálculo y no los conceptos; pero hacerlo proporciona un
-valor añadido en el entrenamiento del lector. En algunos de los ejercicios se manejan datos reales de dispo-
-sitivos, proporcionados por sus fabricantes en sus hojas de características. En este caso, el signo que figura
-en el encabezado del problema es este: [1}-; a lo largo de la resolución se citarán los datos procedentes de
-esas hojas de datos y el lugar donde pueden encontrarlos exactamente, sobre todo en los primeros proble-
-mas, para familiarizar al lector con estas fuentes. Eso sí, la mayoría de esos datos están en inglés, pero eso
-no es un problema ¿verdad?
-
-    Todos los archivos de datos de características de dispositivos y de hojas de cálculo a que se hace refe-
-rencia en el libro, están a disposición de todas las personas interesadas, alojados en la página web que tiene
-el libro dedicada en el servidor de la editorial, en la siguiente dirección: www.garceta.es.
-
-
-
-
-                                                                                          Gijón, enero de 2012
-
-                                                                                                    EL AUTOR
-                  Capítulo   1
-CARACTERIZACIÓN DE SISTEMAS
-     INSTRUMENTALES
-
-
-
-
-    SENSORES                                    CONTROL
-  CAPACITIVOS E              FILTRO       AJD
-                                                 DIGITAL
-   INDUCTIVOS
-
-
-    SENSORES
-  GENERADORES                FILTRO
-     DE SEÑAL
-
-
-
-
-                             ACTUADORES
-
-
-
-
-    PROCESO
-                                           CARACTERIZACIÓN DE SISTEMAS INSTRUMENTALES •
-
-
-
-
-Objetivos del capítulo
-
-      El objetivo del presente capítulo es el de conseguir establecer
-      los criterios de cuantificación del comportamiento de sistemas
-      instrumentales, definiendo aquellos parámetros que permiten
-      decidir si un sistema es o no adecuado para una determinada
-      aplicación.
-
-         Estos parámetros se pueden dividir en dos grandes grupos:
-
-         a) Parámetros estáticos, de régimen permanente o de con-
-            tinua, que cuantifican cómo se comporta un sistema cu-
-            yas variables evolucionan lentamente.
-
-         b) Parámetros dinámicos o de alterna que cuantifican el
-            comportamiento de un sistema en el que sus variables
-            cambian periódicamente o sufren cambios de nivel relati-
-            vamente rápidos.
-
-
-
-
-1.1 Parámetros estáticos
-Curva de calibración (static transfer fanction ): es la relación que existe entre la entrada y la salida de un
-sistema en régimen permanente.
-
-                                                          y
-
-
-
-
-Campo de medida (range): es el conjunto de valores de entrada a un sistema instrumental admisibles,
-comprendidos entre el máximo y el mínimo [Xm.ro Xmín]. Las unidades de medida corresponden a las de la
-variable de entrada.
-•       INSTRUMENTACIÓN ELECTRÓNICA. 230 PROBLEMAS RESUELTOS
-
-
-
-                                                        y
-
-
-
-
-                                                                              Campo de medida
-
-                                                                          /
-                                                            Xmin                  Xmax X
-
-
-
-Alcance o fondo de escala (span o full sea/e): es la diferencia entre los extremos del campo de medida.
-
-                                             S = Xmax - Xmín
-
-    Las unidades de medida corresponden a las de la variable de entrada.
-
-
-                                                            y
-
-
-                  _x____. .l_____:--v-t.~
-
-
-
-Fondo de escala de salida (ful/ scale output): es la diferencia entre el máximo y el mínimo de la salida de
-un sistema.
-
-                                            FSO = Ymax - Ymín
-
-    Las unidades de medida corresponden a las de la variable de salida.
-
-
-                                                                   y
-
-
-
-              _x~---1..Ml~_____.---y-t..~         FSO
-
-
-
-
-                                                                                                X
-                                              CARACTERIZACIÓN DE SISTEMAS INSTRUMENTALES.
-
-
-
-Sensibilidad (sensitivity): es la pendiente de la curva de calibración.
-
-                                                       ayl
-                                                 Sxo = -
-                                                       ax X=Xo
-   Sus unidades de medida son las de la variable de salida, divididas por las de la variable de entrada.
-
-
-                                                                 y
-
-
-
-
-                                                                                Xo          X
-
-
-
-
-No linealidad (nonlinearity): es la máxima diferencia entre los valores de la curva de calibración y la recta
-que mejor se ajuste a esa curva.
-
-
-
-
-   Las unidades de medida corresponden a las de la variable de entrada.
-
-
-                                                             y
-
-
-
-
-                                                                                            X
-                                                                 Xmin                Xmax
-
-
-
-
-Resolución (resolution): es el mínimo cambio de la variable de entrada que produce un cambio apreciable
-en la salida. Habitualmente se refiere a los cambios en las salidas digitales y, en ese caso, se suele medir
-mediante el número de bits que permite representar todos los valores posibles de entrada.
-
-
-Error: valor que acota la incertidumbre de un determinado sistema y que puede expresarse como:
-    a) Error absoluto: máxima diferencia entre el valor obtenido y el real en el campo de medida.
-
-                                         E   = (IXreal - Xmedido Dmáx
-•          INSTRUMENTACIÓN ELECTRÓNICA. 230 PROBLEMAS RESUELTOS
-
-
-
-            Las unidades de medida corresponden a las de la variable de entrada.
-       b) Error relativo: error absoluto referido al alcance de la medida.
-
-                                                    (IXreal - Xmedido Dmáx
-                                               E= - - - - - - - - -
-                                                                S
-
-    Es un parámetro adimensional que se suele expresar en p.u. (por unidad), tal y como está en la expresión
-anterior, en porcentaje, en ppm (partes por millón) o, en muy contadas ocasiones, en ppb (partes por
-billón 1) o ppt (partes por trillón2).
-
-
-Repetitividad (repeatability): concepto cualitativo que expresa la diferencia entre varias medidas sobre un
-mismo valor, tomadas en tiempos próximos con el mismo sistema de medida y realizadas por el mismo
-operador.
-
-
-Reproducibilidad (reproducibility): concepto cualitativo que expresa la diferencia entre varias medidas
-sobre un mismo valor, tomadas en tiempos no próximos, con equipos diferentes de un mismo modelo y
-realizadas por distinto operador.
-
-
-Precisión (precision): concepto cualitativo que expresa la concordancia entre diversas medidas de un mis-
-mo valor y que puede cuantificarse mediante la repetitividad, la reproducibilidad o ambas.
-
-Veracidad (trueness): concepto cualitativo que expresa la concordancia entre el valor promediado de varias
-medidas con el valor real.
-
-
-Exactitud (accuracy): concepto cualitativo que agrupa la precisión y la veracidad.
-
-   Expresión de los errores en las operaciones: cuando se realiza una operación de cálculo con dos varia-
-bles que incluyen una incertidumbre acotada por el error, se debe tener en cuenta lo siguiente:
-       •    En una operación de suma o de substracción, el error absoluto del resultado es la suma de los erro-
-            res absolutos de los operandos.
-            En una operación de producto o cociente, el error relativo del resultado es la suma de los errores
-            relativos de los operandos.
-
-
-
-1.2 Parámetros dinámicos
-Ancho de banda de un sistema (bandwidth): conjunto de frecuencias comprendidas entre una frecuencia
-de corte inferior y una frecuencia de corte superior caracterizadas porque el error de la variable de salida
-está dentro de una banda especificada. El error hace referencia a la variable de interés, que puede ser la
-amplitud, la fase o la frecuencia. El valor se mide en Hz o en rad/s.
-
-
-1
-    Partes por billón, en el sentido que el término tiene en inglés (billion), equivalente a 109 .
-2
-    Partes por trillón, en el sentido que el término tiene en inglés, equivalente a 1012 •
-                                                                CARACTERIZACIÓN DE SISTEMAS INSTRUMENTALES •
-
-
-
-                                 Error de ganancia permitido ------
-     G --¡-~~--jr,;¡¡o-----t------t------;--..~--=¡~'
-             ··········--; • ------------ -------------- --------------- ······"'' ••• •        ""...._         Error de desfase permi~do
-
-      ('IJ
-      ·oe:     /                                                               ; º.- -------------- ----------- ~.::------------- -------------~~ ----
-      e:
-         ,,,
-      ('IJ
-
-      ('IJ
-                                                                               jJ          - -------------- ------------- --------------- ........ ~ ~-
-                                                                                                                                            .::00         ----
-
-      C>
-                                                                                                                                                           ............
-
-
-
-
-                                                   B                                                                              B
-                                            Frecuencia                                                             Frecuencia
-
-Tiempo de establecimiento de un sistema (settling time): ante un cambio en la entrada de forma de es-
-calón, es el tiempo que tarda el sistema en proporcionar un valor en la salida dentro de la banda de error
-alrededor del valor final o valor de régimen permanente. Se mide en segundos [s].
-
-                                                       X Y                                    Error del sistema
-
-
-
-
-                                                                                                   t.
-
-
-Relación señal-ruido (signal-to-noise ratio): cociente entre la potencia de señal y la de ruido en un deter-
-minado punto de un sistema.
-                                                                                   Ps
-                                                                       S/N = 10log Pn
-
-   Cuando la potencia de la señal y la de ruido están referidas a una misma carga:
-                                                                                     Vs                   Is
-                                                              S/N = 20logVn = 20log In
-
-   Es un parámetro adimensional que se suele expresar en decibelios [dB] para cualquiera de las expresio-
-nes anteriores.
-
-Distorsión armónica (total harmonic distortion): cociente entre la señal y las señales de otras frecuencias
-producidas por el sistema y que no estaban en la entrada del sistema.
-                                                                                            Vs
-                                                                         THD = - -
-                                                                                       jr.viz
-Es un parámetro adimensional que habitualmente se expresa en porcentaje o en ppm.
-•        INSTRUMENTACIÓN ELECTRÓNICA. 230 PROBLEMAS RESUELTOS
-
-
-
-
-PROBLEMAS RESUELTOS
-
-1.1   *****
-Se pretende comprobar el funcionamiento de una báscula capaz de medir desde Oa 1Okg. Para ello, se usan
-varias pesas como patrón y se anota el resultado de la medida que muestra el display, en kg y de cuatro
-cifras significativas. Los resultados obtenidos se muestran en la Tabla 1.1.
-
-                                                          Tabla 1.1
-
-                Patrón            100 g         200 g     500 g       1 kg      2 kg       5 kg      10 kg
-                                                                                                             ~
-
-
-                Lectura           0,101         0,198     0,496       0,990     2,005      4,983     9,950
-
-
-
-    Considerando que la incertidumbre del patrón empleado es menor de 1 g, determínese:
-    a)   Los errores absolutos de la medida.
-    b) Los errores relativos en cada punto de medida referidos a ese mismo punto.
-    e)   El error de la báscula en % y ppm.
-    d) ¿Le parece apropiado el número de cifras significativas del display de la báscula?
-
-
-SOLUCIÓN
-    a)   Los errores absolutos son la diferencia entre los valores medidos y los reales en valor absoluto;
-         como quiera que los patrones tienen una incertidumbre menor que la resolución de nuestro sistema
-         de medida, podemos considerar que los pesos de los patrones son valores reales, ya que los cam-
-         bios respecto de la realidad no causarían ningún efecto en la báscula. De esa forma, los errores ab-
-         solutos son los que se muestran en la Tabla 1.2, en gramos.
-
-                                                          Tabla 1.2
-
-             Patrón                 100 g         200 g     5009         1 kg      2 kg      5 kg      10 kg
-             Lectura                0,101         0,198     0,496       0,994     2,005      4,983     9,988
-
-             Error absoluto [g]       1             1         4           6            5      17        12
-
-
-
-
-    b) Los errores relativos pueden referirse a cada medida; en tal caso, la expresión que los proporciona
-       es la siguiente:
-
-                                                  error absoluto
-                                          E =                    100 [%)
-                                                 valor verdadero
-            La expresión anterior proporciona el error en tanto por ciento; si se quiere obtener el valor del
-         error relativo en partes por millón, la expresión es muy similar:
-
-                                                 error absoluto
-                                      E =                       10 6 [ppm]
-                                                valor verdadero
-                                                CARACTERIZACIÓN DE SISTEMAS INSTRUMENTALES •
-
-
-
-    Aplicando estas expresiones, en la Tabla 1.3 se muestran los resultados para el error relativo expre-
-    sado en% y en ppm.
-
-
-
-                                                        Tabla 1.3
-
-        Patrón                   100 g          200 g        500 g    1 kg    2 kg    5 kg    10 kg
-        Lectura                  O, 101         0,198        0,496   0,994   2,005   4,983   9,988
-                                                 ,
-        Error absoluto [g]           1            J            4       6       5       17      12
-        Error relativo [%]           1           0,5          0,8     0,6     0,25    0,34    0,12
-        Error relativo [ppm]     10000           5000         8000    6000    2500    3400    1200
-
-
-
-
-c) Pero los errores relativos no reflejan el comportamiento de un instrumento en toda su escala de
-   medida ya que, cuando la medida se acerca a los puntos más bajo, el valor crece y llegaría a hacer-
-   se infinito cuando el valor verdadero fuese nulo.
-        El error que mejor representa el comportamiento de un sistema de medida en toda su escala es
-    el que queda referido al alcance de la escala. Por ello, se elige el mayor de los valores absolutos y
-    se divide por este valor:
-
-                                          error absoluto máximo
-                               Eps   =           alcance        lOO [%]
-
-       En este caso, el mayor de los errores absolutos es el que corresponde a la medida de ({kg (Tabla
-    1.4).
-
-                                                        Tabla 1.4
-
-         Patrón                 100 g           200g         500 g   1 kg    2 kg    5kg     10 kg
-         Lectura                0,101           0,198        0,496   0,994   2,005   4,983   9,988
-         Error absoluto [g]          1            1           4       6       5       17      12
-
-
-
-      Como el alcance de la medida es la diferencia entre el valor máximo y el mínimo del campo de
-    medida, el error de la escala de medida resulta ser:
-
-                                                        17
-                                          EFs   = lOOOO 100 = 0,17%
-    Expresado en ppm:
-
-                                                   17    6
-                                         EFs   = 10000 10 = 1700 ppm
-
-d) A la vista de los resultados, la última cifra de la pantalla de la báscula no resulta fiable y puede de-
-   cirse que las dos primeras son válidas mientras que la tercera puede alejarse del valor real hasta en
-   dos unidades ya que el error es algo menor del 0,2%.
-•        INSTRUMENTACIÓN ELECTRÓNICA. 230 PROBLEMAS RESUELTOS
-
-
-
-
-Un voltímetro para tensiones continuas tiene dos escalas de medida, de O a 2 V y de O a 20 V. Si el fabrican-
-te especifica un error máximo de 0,01 % en las dos escalas y dispone de una pantalla capaz de representar
-desde 00000 hasta 19999, ¿qué valores podríamos leer al medir una tensión de 857,9 mV en las dos esca-
-las?
-
-
-SOLUCIÓN
-Aplicando la expresión que proporciona el error a fondo de escala:
-
-                                          error absoluto máximo
-                                Eps   =          alcance
-                                                                100 [o/o]
-
-   El valor absoluto máximo que podemos esperar cuando medimos en la escala de O a 2 V (el alcance es
-de 2 V) se obtendría de la expresión:
-
-                                             error absoluto máximo
-                                   0,01 =              2             100
-
-    Es decir:
-
-                                                      2. 0,01
-                       error absoluto máximo =                = 0,0002 V = 0,2 mV
-                                                       100
-
-   Así, la medida sería de 857 ,9 ± 0,2 mV, es decir, podríamos leer en la pantalla cualquier valor compren-
-dido entre 857,7 y 858,1 mV.
-
-  Si la medida se realiza en la escala mayor, la de O a 20 V, el alcance sería de 20 V, con lo que el error
-máximo de la medida sería:
-
-                                                      20. 0,01
-                         error absoluto máximo =               = 0,002 V = 2 mV
-                                                        100
-
-    Así, la medida sería de 857,9 ± 2 mV, es decir, podríamos leer en la pantalla cualquier valor comprendi-
-do entre 855,9 y 859,9 mV. Como en la escala de O a 20 V, sólo se dispone de posibilidad de representar
-desde 00.000 hasta 19.999, no tendríamos posibilidad de visualizar nada más que el mV. En tal caso, si el
-circuito aproxima bien al valor más cercano, podríamos leer cualquier valor comprendido entre 856 y
-860mV.
-
-   Como se puede observar, la medida resulta más fiable cuando se usa una escala más baja. Los sistemas
-de medida denominados «autorango» ajustan la escala más baja posible para cada medida, aprovechando,
-de esa manera, todas las posibilidades del instrumento.
-
-
-
-
-1.3   *****
-La repetitividad y la reproducibilidad son conceptos cualitativos que pueden cuantificarse usando paráme-
-tros estadísticos como la desviación estándar, entre otras posibilidades.
-                                            CARACTERIZACIÓN DE SISTEMAS INSTRUMENTALES •
-
-
-
-    Para conocer la repetitividad y la reproducibilidad de un determinado instrumento, tres laboratorios di-
-ferentes realizan una serie de ensayos con ese mismo tipo de instrumento empleando un patrón de 100 uni-
-dades de medida, obteniendo los resultados de la Tabla 1.5.
-
-
-                                                      Tabla 1.5
-
-          Medida              1        2             3       4          5    6      7         8
-          Lectura LAB 1      110      112            109    118        105   111   109       113
-          Lectura LAB 2      99       90             100    105        95    96    101       98
-          Lectura LAB 3      120      121            119    120        122   119   120       118
-
-
-
-
-   Determine la repetitividad y la reproducibilidad del instrumento empleando la desviación estándar como
-parámetro de referencia. ¿Cuál le parece el mejor de los tres instrumentos?
-
-SOLUCIÓN
-La repetitividad tiene que referirse a cada uno de los instrumentos, asumiendo que todas las medidas han
-sido realizadas en el mismo lugar, por el mismo operador y en momentos cercanos en el tiempo. Si el
-parámetro que usamos para cuantificar la repetitividad es la desviación estándar, la expresión que usaremos
-para calcularla es:
-
-
-                                            (J   =
-                                                      .Lf= 1 (m-M) 2
-                                                           n-1
-
-   Donde m es cada una de las n medidas realizadas y Mes el promedio de todas ellas.
-
-
-    •   Para el instrumento 1, el promedio es M 1 = 110,9 unidades y la desviación estándar muestra! será
-        O"¡= 3,76.
-
-    •   Para el instrumento 2, el promedio es M 2 = 98,00 unidades y la desviación estándar muestra! será
-        cr2 = 4,47.
-    •   Para el instrumento 3, el promedio es M 3 = 119,9 unidades y la desviación estándar muestra! será
-        0"3 =1,25.
-El conjunto de todas las pruebas refleja la reproducibilidad del tipo de instrumento, eliminando de las pre-
-misas la necesidad de un mismo operador y la cercanía en el tiempo para los ensayos. Usando el mismo
-estimador estadístico, el promedio para la medida es M= 109,6 y la desviación estándar muestra! será u =
-9,74.
-
-   A la hora de comparar los tres instrumentos, lo cierto es que el que proporciona unos resultados más
-cercanos a la realidad es el instrumento 2, ya que su promedio es el más parecido al valor del patrón em-
-pleado; sin embargo, el instrumento 3 posee una menor desviación, por lo que repite mucho mejor los en-
-sayos, aunque su medida está muy desviada de la realidad. En términos cualitativos, se suele decir que el
-más veraz es el instrumento 2 y, el más preciso, el instrumento 3.
-
-   En su conjunto, este tipo de instrumentos posee una baja reproducibilidad -alta desviación estándar-
-ya que pueden equivocarse casi en 10 unidades (cr = 9,74).
-•       INSTRUMENTACIÓN ELECTRÓNICA. 230 PROBLEMAS RESUELTOS
-
-
-
-
-Un amplificador con ganancia 100 está construido usando un amplificador operacional ideal y resistencias
-de lK y 99K con un 5% de tolerancia. Admitiendo que está correctamente alimentado, indique qué valores
-de tensión se pueden encontrar cuando en la entrada se introduce una señal continua de 10,0 mV. ¿Qué
-error de ganancia tendrá el amplificador?
-
-SOLUCIÓN
-Para conseguir una ganancia de 100, el amplificador operacional debe estar configurado como no-inversor
-tal como se muestra en la Figura 1.1.
-
-                                                                R2
-
-
-                                         R1
-
-
-
-
-                                                   Figura 1.1
-
-
-En este caso, la ganancia viene dada por la expresión:
-                                                       Rl+R2
-                                                  G=     Rl
-
-    Pero, los valores de Rl y R2 no son deterministas, sino que presentan una tolerancia acotada en el 5%,
-es decir, pueden expresarse como R ± 0,05R.
-
-   Para sumar Rl y R2 hay que tener en cuenta que la suma de dos valores determinados con sus corres-
-pondientes errores relativos tiene como valor la suma de los valores y como error absoluto, la suma de los
-respectivos errores absolutos, es decir:
-
-                                 valor final: Rl + R2 ~ Rl + R2 = 100K
-
-                              error: ER 1 + ERz ~ 0,05 · 1K + 0,05 · 99K = 5K
-
-   La suma de Rl y R2 puede expresarse como lOOK ± 5K, o expresado en errores relativos, lOOK ±
-0,05· lOOK.
-
-   Para dividir Rl + R2 entre Rl, hay que tener en cuenta que el resultado se expresará de la siguiente for-
-ma:
-                                                 Rl+R2   Rl+R2
-                                  valor final:     Rl  ~   Rl  = 100
-                           error: Enuinerador + Edenominador ~ 0,05 + 0,05 = 0,1
-    Es decir, el error relativo es la suma de los errores relativos. Así, se puede decir que el error de ganancia
-del amplificador es de 0,1 p.u. o, lo que es lo mismo, 10%, es decir, el doble de la tolerancia de las resisten-
-cias.
-                                            CARACTERIZACIÓN DE SISTEMAS INSTRUMENTALES •
-
-
-
-
-t.5 **frtrf:~
-Dado el mal resultado del problema anterior, se decide. emplear resistencias de menor tolerancia, optando
-por lK y 99K con una tolerancia de 0,1 %. En las mismas condiciones de ese problema, determine:
-    a) La tensión de salida con una entrada de tensión continua de 10,0 mV.
-
-   Si el amplificador no es ideal sino que puede desplazar la tensión en un valor de ±20 mV en su salida,
-determine:
-    b) La tensión real de salida que se puede obtener y el máximo error del amplificador.
-    c) El error total del sistema suponiendo que el campo de la salida es [0-1 O] V.
-
-
-SOLUCIÓN
-    a)   El montaje del amplificador es, obviamente, el mismo que el del problema anterior (Figura 1.1). La
-         diferencia es que las resistencias tienen una tolerancia más baja, es decir, son mucho más precisas;
-         sus valores se obtendrán como R ± O,OOlR. Siguiendo un desarrollo paralelo, tenemos que:
-
-                                                R1+R2=100K
-
-                          0,001 · 1K + 0,001 · 99K = 0,1K (corresponde a E = 0,1 %)
-
-                                                          R1+R2
-                                            ganancia:       Rl  = 100
-                         error: Enumerador + Edenominador --+ 0,001 + 0,001 = 0,002
-            La tensión de salida se obtiene multiplicando la entrada por la ganancia, es decir:
-                                                          R1+R2
-                                                 Vo   =     R1 Ve
-
-                               V0   = (100 ± 0,002 · 100) · 10,0 = 1000 ± 2 [mV]
-            Sin embargo, se puede asumir que la tensión de 10,0 mV de entrada, tal y como está expresada,
-         incluye la incertidumbre de la cuarta cifra significativa, es decir, ±0,05 mV, por lo que se podría
-         poner como 1O ± 0,005 · 1O [mV]. En tal caso, los cálculos anteriores sufrirían un ligero cambio, ya
-         que el error final será la suma de los errores relativos de ambos multiplicandos, es decir:
-
-                       error: Emultiplicandol + Emultiplicando2 --+ 0,002 + 0,005 = 0,007
-            Así, el valor final de la tensión será de 1000 ± 7 mV.
-    b) Si el amplificador produce un desplazamiento de tensión no predecible de 20 m V, como máximo,
-       el error final será la suma de los errores absolutos, es decir, la salida será de 1000 ± 27 mV.
-    c) El error del sistema no depende del que tiene la tensión de entrada, ya que esa tensión es una va-
-       riable totalmente independiente del propio amplificador. Por tanto, el error será la suma de los erro-
-       res absolutos de ganancia y desplazamiento, es decir, 22 mV. Referido al alcance, que resulta ser de
-       1O V, el error total del sistema puede estimarse en:
-                                                 22mV
-                                             E = lOV 100 = 2,2%
-•       INSTRUMENTACIÓN ELECTRÓNICA. 230 PROBLEMAS RESUELTOS
-
-
-
-
-1.6   ***** ~
-Un determinado sensor de temperatura presenta un comportamiento estático que se muestra en la Tabla 1.3
-en su campo de medida, que se extiende desde Ohasta 100 ºC. Se pide:
-    a) Obtener la curva de calibración en función de los valores de la Tabla 1.6.
-    b) Obtener la recta que mejor se ajuste al comportamiento del sensor.
-    c) Determinar los errores producidos por el ajuste lineal anterior y el error de linealidad del conjunto.
-                                                       Tabla 1.6
-
-                 Temperatura           Resistencia                 Temperatura     Resistencia
-                    (ºC]                    [O]                       rc1              [O]
-                    0.000                1000.0                       52.00            1151.0
-                    4.000                1015.0                       56.00            1160.2
-                    8.000                1029.3                       60.00            1169.2
-                    12.00                1042.9                       64.00            1178.1
-                    16.00                1055.8                       68.00            1187.0
-                    20.00                1068.1                       72.00            1196.0
-                    24.00                1079.9                       76.00            1205.0
-                    28.00                1091.2                       80.00            1214.1
-                    32.00                1102.0                       84.00            1223.4
-                    36.00                1112.4                       88.00            1233.0
-                    40.00                1122.5                       92.00            1242.8
-                    44.00                1132.3                       96.00            1252.9
-                    48.00                1141.8                       100.0            1263.4
-
-SOLUCIÓN
-    a) La representación de la curva de calibración se muestra en la Figura 1.2, poniendo la variable de
-       entrada en abscisas y la de resistencia, en ordenadas.
-
-                            1300
-                            1250
-                                                                                     •• ••
-                            1200
-                                                                         •••     •••
-                       g: 1150                                    •• •••
-                       a: 1100                    ••       ••
-                            1050
-                                            •• ••
-                            1000       ••
-                            950
-                            900
-                                   o              20         40          60       80        100
-
-
-                                                              Figura 1.2
-
-           Como se puede observar, los límites de representación del eje de ordenadas se han establecido
-        entre 900 y 1300 O, para apreciar mejor el aspecto de la curva.
-                                            CARACTERIZACIÓN DE SISTEMAS INSTRUMENTALES •
-
-
-
-b) El ajuste de una recta por mínimos cuadrados da lugar a obtener la recta que está a menor de dis-
-   tancia del conjunto de los puntos. En la Figura 1.3 se puede apreciar el ajuste realizado, la ecuación
-   a que da lugar y el valor del coeficiente de correlación.
-
-
-                                       R=2,523·T+1015
-                                         R2 = 0,9949
-
-
-
-
-                         900 - + - - - - - . - --....,-------..,.-------...----
-                              o            20           40           60   80         100
-                                                             r rc1
-     Figura 1.3 (Advertencia: el valor de la correlación se suele representar con la letra R, igual que el valor
-                 de la resistencia lo que puede dar lugar a confusión)
-
-        Como se puede observar, el coeficiente de correlación es bastante bueno: se suele decir que es
-     de «dos nueves» porque sus dos primeras cifras son nueves. Sin embargo, observando la curva y el
-     ajuste logrado, se observa una desviación apreciable en la parte más baja de la curva.
-
-c)   Para obtener el error hay que obtener la diferencia entre el valor real de la curva de calibración y el
-     proporcionado por la recta de ajuste. En la Tabla 1. 7 se proporcionan estos valores: en las colum-
-     nas, «R lin>> corresponden al valor obtenido en el ajuste y las señaladas como <<Difi> presentan la di-
-     ferencia entre este dato y el real, siempre en valor absoluto.
-
-                                                      Tabla 1.7
-
-T[ºC]         R [O]        R !in [O]       Dif[O]                 TfC]    R[O]         Rlin [O]       Dif[O]
-0.000         1000.0        1015.0          15.0                  52.00   1151.0       1146.2          4.8
-4.000         1015.0        1025.1          10.1                  56.00   1160.2       1156.3          3.9
-8.000         1029.3        1035.2              5.9               60.00   1169.2       1166.4          2.8
-12.00         1042.9        1045.3              2.4               64.00   1178.1       1176.5          1.6
-16.00         1055.8        1055.4              0.4               68.00   1187.0       1186.6          0.4
-20.00         1068.1        1065.5              2.6               72.00   1196.0       1196.7          0.7
-24.00         1079.9        1075.6              4.3               76.00   1205.0       1206.7          1.7
-28.00         1091.2        1085.6              5.6               80.00   1214.1       1216.8          2.7
-32.00         1102.0        1095.7              6.3               84.00   1223.4       1226.9          3.5
-36.00         1112.4        1105.8              6.6               88.00   1233.0       1237.0          4.0
-40.00         1122.5        1115.9              6.6               92.00   1242.8       1247.1          4.3
-44.00         1132.3        1126.0              6.3               96.00   1252.9       1257.2          4.3
-48.00         1141.8        1136.1              5.7               100.0   1263.4       1267.3          3.9
-•       INSTRUMENTACIÓN ELECTRÓNICA. 230 PROBLEMAS RESUELTOS
-
-
-
-           Como se puede observar, la máxima diferencia corresponde al valor para O ºC, que es 15,0 n.
-
-           Para calcular el error de linealidad hay que obtener el fondo de escala de salida que es la dife-
-        rencia entre el máximo y el mínimo de la variable de salida. En este caso es 1267,3 - 1000,0 =
-        267 ,3 n. Entonces, el error de linealidad se puede expresar como:
-                                                           15
-                                                    E   = 26713 100 = 5,6%
-
-
-1.7   ***** ~
-Obténgase una curva que represente mejor que la lineal el comportamiento del sensor del problema ante-
-rior, cuyos valores se representan en la Tabla 1.3. Para la curva obtenida, determine el error de ajuste.
-
-SOLUCIÓN
-Buscar el mejor ajuste para una serie de valores empíricos es una tarea poco sencilla en muchas ocasiones y
-en la que se debe apll.car una suma de intuición, conocimiento del comportamiento del sensor, paciencia y,
-sobre todo, sentido común. Existen programas informáticos que comparan los resultados de cientos de po-
-sibles ajustes y proporcionan los parámetros estadísticos que permiten discriminar entre ellos.
-
-    Pero si, por esta vez, tratamos de hacer el razonamiento de una forma manual, una posible idea es ob-
-servar el comportamiento de los residuos para tratar de identificar alguna forma que se ajuste a funciones
-conocidas y que no resulten descabelladas para el sistema. Otra opción sería recurrir a las ecuaciones po-
-linómicas de mayor o menor grado con las que siempre se puede conseguir un ajuste más o menos razona-
-ble. En este caso, hay que procurar que el número de parámetros del polinomio sea menor --o mejor, mu- -
-cho menor- que el número de puntos ya que, de lo contrario, sólo estamos calculando una curva que pase
-por todos los puntos, aunque estos puntos incluyan errores de medida o incertidumbre de cálculo.
-
-    Antes de abordar este caso examinamos los residuos del ajuste lineal del problema anterior, es decir, la
-diferencia entre el valor real y el ajustado (Figura 1.4).
-
-                               10,0
-
-                                 5,0
-                                                     • •••••• ••
-                                                   •             ••
-                          g: o.o               •   20       40        60
-                          a:    -5,0
-                                           +
-                               -10,0
-                                       •
-                               -15,0
-
-                               -20,0
-
-
-                                                         Figura 1.4
-
-    La presencia de un máximo y un mínimo en la curva parece indicar que hay un comportamiento po-
-linómico de tercer grado, ya que el de segundo orden sólo presentaría una de estas singularidades. Por tan-
-to, podríamos probar directamente con una curva polinómica de tercer grado, pero también podemos tratar
-de hacerlo primero, con una de segundo orden que es más sencilla y comprobar si el resultado es suficiente.
-                                             CARACTERIZACIÓN DE SISTEMAS INSTRUMENTALES •
-
-
-
-   La expresión de este ajuste será:
-                                            R =A . T2 + B . T +         e
-   En la Figura 1.5 se presenta el ajuste cuadrático con el correspondiente coeficiente de correlación, R 2 •
-
-
-                           1300
-                                      R = --0,005892·T 2 +3,112·T+1006                •
-                           ::                      R'=0,9988           ~
-                           1150                                .~~ -
-
-                          ~ 1100 .v~
-                           1050
-                           1000
-                            950
-                            900 ;-~~-,-~~~.,-~~--..~~~-.--~~--,
-                                  o         20            40           60    80       100
-                                                               r rc1
-                                                       Figura 1.5
-
-
-   El ajuste parece bastante bueno como refleja el coeficiente de correlación, que tiene ahora tres nueves.
-
-    Los residuos del ajuste se muestran en la Tabla 1.8, con las columnas marcadas como <<Re.» y <<Dif» pa-
-ra indicar, respectivamente, los valores ·previstos usando el ajuste cuadrático y las diferencias entre los pre-
-vistos y los reales.
-                                                       Tabla 1.8
-
-     T[ºC]        R[O]        Re. [O]        Díf[O]                 T[ºC]   R[O]          Re. [O]    Díf[O]
-    0.000        1000.0       1006.0             6.0                52.00   1151.0        1151.9      0.9
-    4.000        1015.0       1018.4             3.4                56.00   1160.2        1161.8      1.6
-    8.000        1029.3       1030.5             1.2                60.00   1169.2        1171.5      2.3
-    12.00        1042.9       1042.5             0.4                64.00   1178.1        1181.0      2.9
-    16.00        1055.8       1054.3             1.5                68.00   1187.0        1190.4      3.4
-    20.00        1068.1       1065.9             2.2                72.00   1196.0        1199.5      3.5
-    24.00        1079.9       1077.3             2.6                76.00   1205.0        1208.5      3.5
-    28.00        1091.2       1088.5             2.7                80.00   1214.1        1217.3      3.2
-    32.00        1102.0       1099.6             2.4                84.00   1223.4        1225.8      2.4
-    36.00        1112.4       1110.4             2.0                88.00   1233.0        1234.2      1.2
-    40.00        1122.5       1121.1             1.4                92.00   1242.8        1242.4      0.4
-    44.00        1132.3       1131.5             0.8                96.00   1252.9        1250.5      2.4
-    48.00        1141.8       1141.8             o.o                100.0   1263.4        1258.3      5.1
-•       INSTRUMENTACIÓN ELECTRÓNICA. 230 PROBLEMAS RESUELTOS
-
-
-
-   Como se puede observar de los valores obtenidos, el máximo error de ajuste corresponde a O ºC y vale
-6,0 n. El error de ajuste será:
-
-                                                                6
-                                                       E =          100 = 2,2%
-                                                              26713
-   A raíz de este dato, el ajuste mejoró sensiblemente respecto del caso lineal. El sufrido lector puede tratar
-de mejorar el ajuste mediante el uso de una función polinómica de tercer grado ...
-
-
-
-1.8   ***** ~
-Un sistema de medida de temperatura presenta una curva de calibración teórica definida por 1a ecuación:
-
-                                                                         43,0
-                                                   V=                           (3000           )
-                                                           4,30 + 4, 70e -r- 12 •8
-
-donde Tes la temperatura en grados Kelvin y V, la tensión de salida en Voltios.
-
-   Sabiendo que el campo de medida va desde -20 ºCa 100 ºC, determine cuál es la zona de medida que
-permite trabajar con errores menores de 10 mV.
-
-SOLUCIÓN
-Salvo que se disponga de una buena visión de las curvas usando sólo su expresión explícita, lo mejor es
-tratar siempre de representarla en ejes cartesianos para observar las zonas más útiles. La representación de
-la ecuación se muestra en la Figura 1.6.
-
-
-
-                         V   10 l                                      Zona de baja sensibilidad_----------,
-
-                              9 ~                                                              ---- -:_,__...---:/'
-                              8
-                                 1i                                             ~~':
-                                                                                        ,,"'    _________ _
-                                                                                                .~    .        ---
-
-
-                              7 -l                                          /
-                              6 J                  _,,,·'
-                                J           --- / '
-                              5 J     ---- /'4
-                              4   ,,./ / ,,,,, /
-                                   i 1 /' /          -~ ........ "zona del punto de inflexión
-                              3 -. , /             ---
-                                  ,,;}il!:. ---'
-                     ./.~-~¡
-                              o    1
-
-                   -20            o                   20               40               60                80         100
-                                                                     r rc1
-
-                                                                 Figura 1.6
-
-
-    La curva representada exhibe un punto de inflexión. Esto es interesante desde el punto de vista de los
-ajustes lineales, puesto que se consigue una gran linealidad y sensibilidad en el entorno de un punto de
-inflexión. También presenta una zona con baja sensibilidad para temperaturas altas. Los puntos de inflexión
-                                                        CARACTERIZACIÓN DE SISTEMAS INSTRUMENTALES •
-
-
-
-se encuentran resolviendo la ecuación que sale de igualar la segunda derivada a cero. La primera derivada
-es:
-
-                                           3800 · 4 70e(3~º - 12·0 ))
-                     -43,0 °       -                 T2                                    3800      )
-                                                                               767980e ( --r- 12'8
-                                                   I
-
-               dV              (
-
-                                                    12 8 -""'- = T 2 ( 4,30 + 4,70e(3~º- 12 · 8 ))
-                                                            2                                      2
-               dT = --(4-,-3_0_+_4_,-70_e_(=-
-                                          38_T_o-o_-- -')-)-=-
-
-
-
-
-   Ahora, se podría obtener la segunda derivada e igualarla a cero, pero nos llevaría a un complejo proceso
-de cálculo sin mayor interés instrumental. En cambio, podemos representar esta curva -la de la derivada
-que corresponde a la sensibilidad- y buscar su valor máximo, que será el punto de inflexión. En la Figura
-1.7 se muestra esta representación, encontrando que el máximo está, aproximadamente, en T= 19 ºC.
-
-
-                    dV/dT 0.121
-
-                             o.1v      1    --~
-
-
-
-                           ~
-                      / o.o6·j
-                            0.04 ..J
-
-                            0.02
-
-
-                     -20               o               20       40        60          80          100
-                                            19ºC               r rc1
-
-                                                             Figura 1.7
-
-
-   La pendiente en ese punto se obtiene de la expresión de la derivada y resulta ser:
-
-                                       dvl
-                                       dT
-                                                       = 0,1089 VK- 1 = 0,1089 v c- 1
-                                                                                  0
-
-                                             T=19ºC
-
-  El valor de la tensión de salida en ese punto se obtiene de la expresión del sensor particularizando para
-T= 19 ºC, es decir V= 4,249 V.
-
-   La recta que mejor aproxima el comportamiento es la que pasa por el punto de inflexión y que tiene la
-misma pendiente que la curva. Por ello, expresando esa recta en la forma punto-pendiente:
-
-                                                        V - V0 = m(T - T0 )
-
-   Que, en este caso queda como:
-
-                                               V - 4,249 = 0,1089(T - 292)
-
-   Es decir,
-                                                       V = 0,1089T - 27,55
-•       INSTRUMENTACIÓN ELECTRÓNICA. 230 PROBLEMAS RESUELTOS
-
-
-
-   La representación de la curva y de la recta ajustada puede verse en la Figura 1.8, donde se aprecia lazo-
-na en que ambas más se parecen.
-
-   Como se puede apreciar, en los extremos la diferencia es enorme, mucho mayor que la que se obtendría
-con un ajuste por mínimos cuadrados, pero nos ha permitido identificar la zona más lineal del sensor.
-
-    Para determinar la zona con errores menores del 1O mV, obtenemos la gráfica que representa la diferen-
-cia entre la curva real y el ajuste realizado, tal como se representa en la Figura 1.9.
-
-
-
-
-                                          8
-
-                                          6
-
-                                          4
-
-
-
-
-                        -40     -20           o        20         40         60    80    100   120
-                                                              r rc1
-                                                            Figura 1.8
-
-
-
-
-                      0.15    error
-                      0.13
-                      0.11
-                      0.09
-                      0.07
-                      0.05
-                      0.03
-                      0.01
-                     -0.01            5           10         15         20        25     30    35    40
-                                                                       r rc1
-                                                  11ºC                            27ºC
-
-                                                            Figura 1.9
-
-   La zona que cumple nuestro criterio de error es la que está comprendida, aproximadamente, entre 11 y
-27 ºC.
-                                           CARACTERIZACIÓN DE SISTEMAS INSTRUMENTALES •
-
-
-
-
-Determine la sensibilidad del sensor del problema anterior e identifique las mejores y peores zonas desde
-ese punto de vista. ¿Qué relación presenta con la zona de medida determinada antes?
-
-SOLUCIÓN
-La sensibilidad del sistema viene representada por la derivada de la función que representaba al sistema,
-que corresponde a la curva representada en la Figura 1.7. Como se puede observar, la sensibilidad es
-máxima en el punto de inflexión, mientras que en las zonas alejadas de él, va cayendo.
-
-
-
-1.10   *****
-Un amplificador con una ganancia de 300 se realiza con un amplificador operacional, que limita su ancho
-de banda a potencia mitad (ancho de banda a 3 dB) desde O a 100 kHz, siendo equivalente a un sistema de
-primer orden. Si el sistema no puede permitirse un error mayor del 1%, ¿cuál sería el ancho de banda real
-del sistema? Si, además, el desfase permitido entre la señal de entrada y la de salida no puede superar los
-2º, ¿cómo se modifica el ancho de banda del sistema?
-
-SOLUCIÓN
-Un amplificador como el que se cita en el enunciado tiene una función de transferencia como esta:
-                                                                 300
-                                            G=------
-                                                   .    1
-                                              1 + JW 314000
-
-   El módulo de la ganancia será, entonces:
-
-                                         IGI =                   300
-
-                                                   J1. - w 2           314~00 2
-   Si el error de ganancia debe ser menor del 1% (3 unidades), la ganancia no puede bajar de 297 con lo
-que, la frecuencia para la que eso ocurre será la determinada por:
-                                                     300
-                                         297 = --;:::=====
-                                                   jl - w
-                                                                  2
-                                                                       314~00 2
-   Resolviendo, e.o = 44700 rad/s, es decir, la frecuencia de corte al 1% será de 7,1 kHz, con lo que este
-será el verdadero ancho de banda en estas condiciones.
-
-    Si el factor limitante es el desfase, el cálculo se puede hacer a partir de ese valor. Para la función de
-transferencia de este sistema, el desfase será:
-
-
-                             <p   = -arctg ( 31 1  .:0oo) = -arctg ( 314000
-                                                                       w )
-
-
-   Igualando al máximo desfase permitido, 2°, tenemos:
-
-                               2° = arctg (
-                                              31
-                                                   :0   00
-                                                             )   --+   w = 10965 rad/s
-•        INSTRUMENTACIÓN ELECTRÓNICA. 230 PROBLEMAS RESUELTOS
-
-
-
-    Es decir, el ancho de banda de desfase quedaría restringido a 1,7 kHz. En la Figura 1.10 se muestran es-
-tos anchos de banda en relación con el ancho de banda «tradicional» referidos a una caída de 3 dB.
-
-
-
-                                                                        1%
-
-
-
-
-                                                                                        /og m
-
-
-
-
-                                                  1,7 kHz         100 kHz               /og m
-              -2º Oº
-
-
-
-                   -45º
-
-
-                   E
-                   Q)
-                   UJ
-                   ca
-                   u..
-
-                                                Figura 1.10
-
-
-
-
-1.11     *****
-Un sistema de amplificación tiene una banda de paso a 3 dB comprendida entre 20 Hz y 20 kHz y una ga-
-nancia de 45 dB en la zona plana. Se pide:
-    a) ¿Qué tensión de salida proporciona el sistema cuando la señal de entrada es una senoide de 50 mV
-       y 30kHz?
-    b) ¿A qué frecuencias deja de amplificar?
-    c)   ¿Cuál es el ancho de banda real si no se admite una amplificación menor de 44 dB?
-
-SOLUCIÓN
-La función de transferencia del sistema tiene un cero en el origen y dos polos en 20 Hz y 20 kHz y con una
-ganancia de 178, es decir, el comportamiento del sistema vendrá representado por:
-
-                                                   1,41 ·jw
-                                      G=          .         .
-                                           ( 1 + Í~6) ( + 12~~00)
-                                                       1
-                                         CARACTERIZACIÓN DE SISTEMAS INSTRUMENTALES •
-
-
-
-a)   Cuando la frecuencia de entrada es de 30 kHz, w = 188000 rad/s, luego la tensión de salida será,
-     según la expresión anterior:
-
-
-
-        Es decir,
-                                 jl,41. 188000. so            j13250000
-                    V    -                            - ---------
-                        o - (1 +j188000) (1 +j188000) - (1 + j1490)(1 + jl,49)
-                                   126        126000
-        Despreciando 1 frente a 1490 en el numerador, la tensión de salida será:
-
-                                                    8890
-                                          V = ----
-                                             o   (1 + jl,49)
-
-        Que supone un módulo de 4,95 V y un desfase de 56º, es decir, 0,98 rad. De esa forma, la ten-
-     sión de salida se puede escribir como:
-
-                                  v0 = 4,95 sen(188000t + 0,98) [V]
-
-b) Como se puede ver a partir de los resultados del apartado anterior, el amplificador sigue amplifi-
-   cando más allá de su frecuencia de corte, aunque mucho menos que en la banda de paso. Para saber
-   hasta qué frecuencia amplifica, se iguala a uno el módulo de la ganancia:
-
-                                                  1,41 · w
-                                  1=   -;::::=====--;:======
-                                       J (1~6/ J
-                                        1+            1 + (12:'ooo/
-
-        El resultado dará dos valores de la pulsación, uno por debajo del primer polo y otro, por enci-
-     ma. Para simplificar el cálculo del primero de esos puntos puede despreciarse el segundo sumando
-     dentro de la segunda raíz, ya que la frecuencia a la que va a ocurrir va a ser muy baja (también
-     puede despreciarse el término equivalente en la primera raíz). De esa forma, se puede obtener w 1 =
-     0,71 rad/s, es decir, 0,11 Hz.
-
-        De la misma manera, para calcular el segundo punto se despreciará el 1 de la primera raíz, ya
-     que la frecuencia va a ser muy alta (también puede despreciarse el 1 de la segunda por el mismo
-     motivo). Resolviendo lo que queda, w 2 = 22·10 6 rad/s, es decir, 3,6 MHz.
-
-c) 44 dB es una ganancia equivalente a 158. Igualando el módulo de la ganancia a este valor, se ob-
-   tendrán las dos frecuencias de corte superior e inferior.
-
-                                             1,41 ·w
-                                 158 = -:=====--:=====2
-                                       J (1~6/ J
-                                        1+       1 + (12:'ooo)
-
-        Resolviendo la ecuación anterior, se obtienen dos valores: W¡ = 102 rad/s, es decir, 16,2 Hz y
-                 3
-     w2= 64,8·10   rad/s, es decir, 10,3 kHz.
-
-        El ancho de banda será, entonces Ji - Ji = 10,3 kHz, es decir, más o menos la mitad del ancho
-     de banda a 3 dB.
-•        INSTRUMENTACIÓN ELECTRÓNICA. 230 PROBLEMAS RESUELTOS
-
-
-
-
-1.12    *****
-Un determinado sensor posee un comportamiento que se puede asimilar a una fuente· de tensión proporcio-
-nal a la magnitud a medir y una red RC con R = 312 kO y C = 1,95 nF, tal como se muestra en la Figura
-1.11.
-
-
-
-                                                       R
-
-
-                              X,_...
-                      (variable a medir)
-                                                                  e
-                                                                      t            Vo
-                                                                          1(salida del sensor)
-
-
-
-
-                                                   SENSOR
-
-                                                  Figura 1.11
-
-
-
-   Si el error especificado es de 0,1%, ¿cuál es el tiempo de establecimiento del sistema en vacío? ¿Cómo
-se modificaría el tiempo de establecimiento si la salida del sensor se conecta a un cable de 1O m de longitud
-con una capacidad de 46 pF/m y al final del cable se conecta a un amplificador que tiene 10 MQ de resis-
-tencia de entrada y 100 pF de capacidad de entrada?
-
-SOLUCIÓN
-El tiempo de establecimiento se mide a partir de la respuesta ante un escalón en la entrada. Cuando se so-
-mete al sistema a un cambio brusco en la variable de entrada X de una magnitud Xi. la tensión de salida del
-sensor evolucionará en el tiempo según la siguiente expresión:
-
-
-
-
-    Con los valores de R y C especificados, la tensión Vo será:
-
-
-                                           Vo = kX1 ( 1 -   eo.oo~6084)
-
-   El valor final será el que corresponda al régimen permanente, es decir, kX1• El tiempo de establecimien-
-to para el error especificado del 0,1 % se obtendrá cuando la tensión Vo alcance ese valor, es decir,
-0,999xkX1, ya que el sistema es de primer orden y, por tanto, no presenta ningún tipo de sobreoscilación:
-
-
-                                     0,999kX1 = kX1 ( 1 - eo.00~6os4)
-
-
-    Con lo que, despejando t, se obtiene el tiempo de establecimiento, ts = 4,2 ms.
-
-   Si al sensor se le conectan otros circuitos, el equivalente se modificará, tal como se muestra en la Figura
-1.12, donde Ce es la capacidad total del cable y Ca, la de entrada del amplificador.
-                                           CARACTERIZACIÓN DE SISTEMAS INSTRUMENTALES •
-
-
-
-                                                      CABLE
-                           R            ---------------- -----~
-
-
-
-
-                                                         Ce                     Ca
-
-
-
-                                        L ___ _ ______________ __ J
-                       SENSOR                                                 AMPUF.
-                                                Figura 1.12
-
-    Con 1O m de cable, Ce vale 460 pF; como las tres capacidades están en paralelo, se suman todas, modi-
-ficando el equivalente final que, ahora, tiene una capacidad de C + Ce + Ca, es decir, 1,95 + 0,46 + O, 1 =
-2,51 nF.
-
-   En estas condiciones, la tensión de salida evolucionará según:
-
-
-
-
-   Resolviendo t para un error de 0,1%, el tiempo de establecimiento será Is = 5,4 ms, algo mayor que el
-anterior.
-
-
-
-1.13   *****
-La señal senoidal que produce un determinado sensor tiene una amplitud de 45 mV y está caracterizada por
-una relación SIN de 63 dB. Esa señal se lleva hasta un sistema de amplificación, que está situado a 5 m de
-distancia, mediante un par trenzado apantallado, pese a lo cual recibe una aportación de ruido del ambiente
-que puede estimarse en unos 200 µV RMS en el total de la banda de trabajo. El amplificador posee una
-ganancia de 40 dB, pero introduce una tensión de ruido que puede estimarse en unos 1O mV en su salida.
-¿Cuál es la relación SIN del conjunto?
-
-SOLUCIÓN
-Si la señal tiene 45 mV de amplitud y es una senoide, su valor eficaz será de 31,8 mV. Si la relación SIN es
-de 63 dB, significa que:
-
-                                                     31,8
-                                            63 = 20lo9-,
-                                                           Vn
-
-
-de donde Vn será de 0,0225 mV de valor RMS. El ruido que recibe la señal hasta llegar al amplificador se
-añadirá a este, de tal forma que, a la entrada del amplificador tendremos:
-
-                                  Vne   = .Jo,0225 2 + 0,2 2 = 0,201 mV
-    Con la ganancia de 40 dB (100), este ruido se amplificará hasta 20,1 mV, mientras que la señal se ampli-
-ficará hasta 3,18 V de valor eficaz. El ruido a la salida será la suma cuadrática del ruido del amplificador
-(10 mV) y el que venía con la señal y que fue amplificado (20,1 mV), por lo que será:
-
-                                     Vno = .J10 2   + 20,1 2 = 22,5 mV
-•        INSTRUMENTACIÓN ELECTRÓNICA. 230 PROBLEMAS RESUELTOS
-
-
-
-    La nueva relación señal-ruido será:
-
-                                                        3,18V
-                                       S/N     = 20log 2215 mV = 43 dB
-    En el diagrama de la Figura 1.13 se resume el proceso de cálculo, indicando cómo evolucionan la señal
-y el ruido a lo largo del sistema.
-                                 0,2mV
-
-
-                  0,0225 mV
-
-                       ~                                                                     22,5mV
-
-
-
-                                                                                  10mV
-                                          5m                            AMPLIF.
-
-                                         CABLE
-
-            SENSOR
-
-                  31,8 mV
-                                          SEÑAL
-                                                                       X100
-                                                                  31,8mV
-                                                                              -----1••        3,18V
-
-
-                                                   Figura 1.13
-
-
-
-
-1.14    *****
-En el problema anterior, la distancia de 5 m entre el sensor y la llegada de la señal no se puede alterar, pero
-se decide acercar el amplificador hasta las proximidades del sensor y conectar luego el cable a la salida del
-amplificador para hacer llegar la señ.al a su destino. ¿Se modifica la relación SIN del conjunto? ¿Qué con-
-clusiones se pueden sacar a la vista de los resultados de ambos casos?
-
-SOLUCIÓN
-Al situar el amplificador inmediatamente detrás del sensor, se amplificará la señal y el ruido que el sensor
-produce, de tal manera que a la salida del amplificador tendremos:
-    •    Señal: 31,8 mV x 100 = 3,18 V.
-    •    Ruido procedente del sensor: 0,0225 mV x 100 = 2,25 mV.
-         Ruido producido por el amplificador: 1O m V.
-
-    El ruido total a la salida del amplificador será, entonces:
-
-                                       Vno   = .J102 + 2,25 2 = 10,2 mV
-   Ahora, la señal viajará -amplificada- por los cables los 5 metros de distancia y se le añadirá un ruido
-de 0,2 mV -suponiendo que las interferencias externas tengan el mismo efecto--, que se añadirá al ruido
-anterior, obteniendo un valor fmal de:
-                                                CARACTERIZACIÓN DE SISTEMAS INSTRUMENTALES •
-
-
-
-
-                                      Vn    = .J10,2 2 + 0,2 2 = 10,3 rnV
-   Si la señal no sufre atenuaciones a lo largo del cable, la relación SIN va a ser:
-
-                                                   3,18V
-                                      S/N = 20lo9 l0, mV = SO dB
-                                                           3
-
-    Como se puede comprobar, comparando los resultados de los dos problemas, este último caso produce
-mejor relación SIN, debido a que la señal viaja ya amplificada y, al ser más intensa, el ruido que se le añada
-tiene menos efecto. En la Figura 1.14 se muestra cómo es ahora el proceso que sigue la señal.
-
-                                                                    0,2mV
-                     0,0225 mV             2,25 mV
-
-                ....._.~~·    X100                                                       10,3 mV
-
-
-
-                                              10mV
-                                                               CABLE
-                                 AMPLIF.
-                                                                    5m
-
-
-              SENSOR
-                                                                   SEÑAL
-                                       3,18 V                                            3,18 V
-                    31,8 mV                                          31,8 mV
-
-
-                                                     Figura 1.14
-
-
-
-
-i.1s1D*****
-Una señal senoidal de 100 kHz y 1 V es amplificada por un sistema sin suficiente rapidez en su salida, de
-modo que la señal se deforma hasta proporcionar una señal triangular de la misma frecuencia que la entrada
-Y 5 V de amplitud. Determine el valor de THD de la salida del sistema.
-
-SOLUCIÓN
-Si la salida del amplificador es una señal triangular de 5 V de amplitud, para calcular el valor de la distor-
-sión armónica habrá que obtener el contenido en armónicos de esa señal, para lo cual es imprescindible
-realizar el desarrollo en serie de Fourier de esa forma de onda.
-
-   Para una señal triangular de amplitud A, su desarrollo en serie de Fourier es:
-•       INSTRUMENTACIÓN ELECTRÓNICA. 230 PROBLEMAS RESUELTOS
-
-
-
-Lógicamente, no habrá que tener en cuenta los «infinitos» términos, porque eso sólo existe en el ámbito
-matemático y no en el mundo real. Se sumarán sólo los necesarios para obtener un valor de THD que no se
-modifique significativamente con uno nuevo. Los valores de los coeficientes de cada uno de los armónicos
-se muestran en la Tabla 1.9.
-
-                                                     Tabla 1.9
-
-                Número de armónico (k)         1           2       3          4             5
-                Valor                        0,405      0,0450   0,0162   0,000675          ...
-
-
-    Con estos valores, teniendo en cuenta que el armónico principal es el 1, que corresponde~a la frecuencia
-principal, el valor del THD, considerando sólo los armónicos 2 y 3 sería:
-
-                                           0,0450 2 + 0,0162 2
-                                 THD   =        0,40 52        100 = 1,39%
-
-    Si se usan los armónicos 2, 3 y 4, tendríamos:
-
-                               0,0450 2 + 0,0162 2 + 0,000675 2
-                         THD =                                  100 = 1 39%
-                                            0,405 2                           I
-
-
-
-
-   Como se puede observar, la distorsión ·no se modifica apreciablemente, luego no es necesario seguir
-considerando más términos, que son aún menores.
-
-
-
-
-1.16   ***** ~
-Para medir temperatura con un determinado alcance se dispone de dos sensores caracterizados por las si-
-guientes curvas de calibración teóricas en el campo de medida [O, 500] ºC:
-
-                 SENSOR 1         t = 0,01978V - 2,001 · 10- 1 v2 + 1,037 · 10-10 y 3
-
-                 SENSOR2          V = 10000(1 + 0,00425t - 1,19 · 10-6 t 2)
-
-donde t, es la temperatura en ºC y V, la tensión producida por el sensor, en µV. Se pide:
-    a) Realizar una comparación de ambos sistemas en función de los parámetros instrumentales básicos.
-    b) Si se pretende medir una temperatura entre Oy 100 ºC, ¿cuál de los dos emplearía?
-
-    SOLUCIÓN
-    a) Lo mejor es tratar de representar sobre la misma gráfica las curvas de calibración de ambos senso-
-       res para ver cuál es su comportamiento. Como quiera que las dos expresiones no son comparables
-       entre sí porque en una aparece como variable explícita la temperatura y en la otra no, la mejor op-
-       ción es poner ambas sobre los mismos ejes cartesianos.
-            Si hacemos eso, ponemos como salida la tensión -V en ordenadas- y como entrada la tempe-
-        ratura - t en abscisas- con lo que se informa sobre el comportamiento causal del sensor. El resul-
-        tado se muestra en la Figura 1.15.
-                                          CARACTERIZACIÓN DE SISTEMAS INSTRUMENTALES •
-
-
-
-                 30000
-
-                 25000
-
-                 20000
-             ~           .
-             ;15000 1                                                 ~
-
-
-                 ':j~
-                 ok               1             1                1         1           1
-
-                  o              100           200              300       400      500
-                                                        r rc1
-                                               Figura 1.15
-
-   Si se observan ambas curvas, se puede concluir que el sensor 1 es menos lineal que el sensor 2
-y que los valores que se obtienen son de un orden de magnitud similar, aunque el sensor 2 produce
-un importante desplazamiento del nivel de la señal.
-
-   Para concretar un poco más, se pueden obtener los parámetros más característicos de ambos
-sensores, como la salida a fondo de escala, la sensibilidad o la linealidad en todo el campo de me-
-dida.
-
-   La salida a fondo de escala resulta ser, para el sensor 1:
-
-                              FSO = V(t = SOOºC) - V(t = OºC)
-
-                                 FSO = 13700 - O = 13,7 mV
-
-   Y para el sensor 2:
-
-                              FSO = 28300 - 10000 = 18,3 mV
-
-   Para conocer el valor de la sensibilidad y la linealidad debemos obtener el ajuste lineal, que se
-puede obtener por mínimos cuadrados (Figura 1.16).
-
-                 35000   l                                  V= 36,96·t+ 10380
-                 30000   1                                     R2 = 0,9982
-                 25000   i
-                 20000 i~
-             ~
-             ~ 15000
-
-                 10000-;                        ~
-                         ~.    ~.
-                                ~                                     V=27,52·t+1585
-                  5000 ~-                  ~                            R2 = 0,9595
-                     O·~              .             ,
-                      o          100            200             300       400      500
-                                                        r rc1
-                                                Figura 1.16
-      •      INSTRUMENTACIÓN ELECTRÓNICA. 230 PROBLEMAS RESUELTOS
-
-
-
-                Como era previsible, el ajuste es bueno para el sensor 2 y regular para el sensor 1, según de-
-              muestra el coeficiente de correlación que tiene dos nueves en un caso y sólo uno en el otro.
-
-                 También el sensor 2 presenta mejor sensibilidad, 36,96 µV/ºC, según se desprende de la ecua-
-              ción obtenida, mientras que el sensor 1 sólo alcanza 27,52 µV/ºC.
-
-                En cuanto al error de linealidad, el valor máximo resulta ser de 1640 µV en el punto t = 500 ºC
-             para el sensor 1, mientras que, para el sensor 2, es de 582, también en el punto T= 500 ºC. Expre-
-             sado en términos relativos referidos al fondo de escala, tenemos que:
-
-                                                              1640
-                                            Eunsensor 1    = 13700 100 = 12%
-
-                                                              582
-                                            Eun sensor 2   = 18300 100 = 3,2%
-          b) Para tomar una decisión sobre la elección de uno de los dos sensores para el campo de medida [O,
-             100] ºC, las curvas deberían ser redibujadas en este nuevo campo, tal como se indica en la Figura
-             1.17 y deben obtenerse los parámetros estadísticos correspondientes.
-
-
-                                16000 1
-
-
-
-',1
-                        r
-                   4,2 mV       1400o1;~~~~~~;;~:::::::=::::::::::::::::::~~~~:
-                                12000 :
-                                10000
-                                                   SENSOR 2
-                                                                                V- 41,30 t+ 10020
-                                                                                   R2 0,9999
-                            ~ 8000 -1
-                            >   6000 1
-                                4000 !
-                   4,BmV                          V=47,53t+74,10
-                                2000
-                                                    R2= 0,9988
-                        ~--o_¡..,,~~=-~----~-------~---~
-                                        o     20            40            60       80          100
-                                                                 T rc1
-
-
-                                                            Figura 1.17
-
-
-                Al considerar un campo de medida más pequeño, los dos sensores tienen un comportamiento
-             mucho más lineal, consiguiendo una correlación de cuatro nueves en el ajuste del sensor 2 y de tres
-             nueves en el del sensor 1.
-
-                 El sensor 2 sigue siendo más lineal que el 1, con un error de 21 ,2 µV (0,5%) frente a 92,8 µV
-             (1,9%) del sensor l. Sin embargo, en esta zona, el sensor 1 tiene un poco más de sensibilidad y,
-             además, no presenta un desplazamiento de tensión tan grande, ya que casi parte de cero.
-
-                La elección entre los dos no es tan obvia como cuando se trabajaba con el campo de medida
-             desde O a 500 ºC, pero aún así, si la linealidad es el factor más restrictivo, deberíamos decantarnos
-             por el sensor l.
-                                            CARACTERIZACIÓN DE SISTEMAS INSTRUMENTALES •
-
-
-
-
-Un determinado instrumento puede caracterizarse por su incertidumbre, acotada por un error total de 0,3%
-y por una relación SIN de 57 dB. Sabiendo que produce una tensión de salida entre O y 5 V, determine su
-máxima resolución. Si esa señal debe ser digitalizada para poder procesarla en un sistema microcontrola-
-dor, ¿cuál sería el número de bits más adecuado del convertidor A/D? Si, en cualquiera de los casos, se
-dispone sólo de un convertidor A/D de 12 bits, ¿cómo utilizaría los datos de la mejor forma posible?
-
-SOLUCIÓN
-Los datos proporcionados indican que la máxima tensión de error es del 0,1 % de 5 V, es decir, 15 mV y la
-tensión de ruido se obtiene a partir de la relación SIN, es decir:
-                                                     5
-                                    57 dB = 20lo9- -+       Vn   = 7,1 mV
-                                                    Vn
-
-   En esas condiciones, la amplitud de la tensión de ruido será 7, 1·1,41 = 10,4 mV. Al tener en cuenta los
-dos factores, tenemos que la señal sufre un cambio imprevisto debido al error y, además, puede fluctuar de
-forma incontrolada debido al ruido. Los dos efectos se presentan en la Figura 1.18.
-
-
-
-
-                                                 Figura 1.18
-
-
-    Como se ve, el conjunto del error y el ruido forman un efecto aditivo que enturbia el valor de la señal en
-un valor que puede llegar a ser la suma de ambos valores. En este caso, tendríamos que la señal puede es-
-cribirse así:
-                                           V= Vreal   ± 25,4 mV
-   Eso implica que la resolución sería de 2·25,4 = 50,8 mV. Si lo expresamos en porcentaje, sería:
-
-                                           50,BmV
-                                           - -v-· 100 = 1%
-                                             5
-
-   Si lo expresamos en bits, necesitaríamos 7 bits, ya que 2 7 = 128.
-
-   Si sólo disponemos de un convertidor de 12 bits, los últimos 5 se moverán caóticamente. Sin embargo,
-podemos emplearlo usando sólo los 7 primeros o efectuando un promediado que reduzca el ruido a su
-mínima expresión, quedando la incertidumbre limitada al error.
-•        INSTRUMENTACIÓN ELECTRÓNICA. 230 PROBLEMAS RESUELTOS
-
-
-
-
-1.18    *****
-Se pretende especificar el circuito de medida de tensión para un voltímetro, que presenta los datos en una
-pantalla de 4 cuatro dígitos y medio. Si se admite que todos los dígitos de los valores presentados tienen
-que ser válidos, ¿qué especificaciones conjuntas de error y ruido serían precisas? Proponga unos valores
-razonables de error y relación SIN para este caso.
-
-SOLUCIÓN
-Una pantalla con cuatro dígitos y medio es capaz de representar valores desde 00000 hasta 19.999, con
-cuatro cifras que pueden variar de O a 9, y una que sólo puede valer O o l. Si, además, tenemos en cuenta el
-signo de la tensión que se representa, la pantalla podrá variar desde -19 .999 hasta +19 .999, suponiendo un
-total de 40.000 valores diferentes. Para representar estos valores necesitaríamos 16 bits    ya que, con uno
-menos, 2 15 tendríamos algo más de 32.000 posibilidades -no llegaría- y 2 16 supera los 65.000 valores
-diferentes.
-
-    Si usamos 16 bits, la distancia que queda entre un valor y el siguiente será:
-
-                                                  1                  -5
-                                               216 _ 1 = 1,5259 . 10
-
-valor que representaría el cambio máximo por unidad que evitaría pasar de un nivel de cuantificación al
-siguiente. Este valor debe acotar la suma del error y el ruido. Si todo él fuera dedicado al error y admitié-
-semos que el ruido es casi nulo, todo nuestro sistema de medida y acondicionamiento debería tener un error
-menor de ese valor, es decir, expresado en forma porcentual, 0,0015%, lo que constituye una especificación
-muy dura para un sistema instrumental.
-
-   Si, por el contrario, todo el cambio permitido se debiese al ruido y el error fuese nulo, llegaríamos a una
-especificación de ruido de algo más de 96 dB, que tampoco es una especificación sencilla de cumplir.
-
-    Sin embargo, las especificaciones reales aún deben ser más duras ya que no pueden darse esas dos con-
-diciones simultáneamente, ya que nos podrían introducir un cambio incontrolado en el valor de la señal del
-doble de lo permitido. Por tanto, debemos <<repartir» el margen de variación entre los dos causantes del
-problema.
-
-   Para hacer un reparto razonable, debemos pensar en qué es lo que se está midiendo y en qué condiciones
-se hace. Si se trata de un voltímetro, se entiende que está previsto para medir valores estáticos, es decir,
-valores cuya evolución temporal sea lenta o muy lenta y de los que representamos su valor en régimen
-permanente. Por tanto, el ancho de banda final puede ser muy pequeño y, por tanto, podemos reducir fuer-
-temente el ruido hasta niveles realmente bajos. Sin embargo, cumplir las especificaciones de error va a ser
-más dificil puesto que son duras, incluso dejando todo el margen permitido para este parámetro.
-
-    En conclusión, y aunque son posibles otras soluciones también razonables y justificables, podemos op-
-tar por dejar un 80% del margen para el error y sólo un 20% para el ruido. Por tanto, el máximo error per-
-mitido sería:
-
-                                               1
-                                   0,8
-                                         216
-                                                _
-                                                    1
-                                                        = 1,22 · 10-5 = 0,0012%,
-
-mientras que el valor de la relación SIN necesario sería:
-                                         CARACTERIZACIÓN DE SISTEMAS INSTRUMENTALES               El
-
-                                              1                -6
-                                       0,2 216 - 1 = 3,05 . 10
-
-                                                     1
-                                  S/N = 20log        . _ = 110 dB
-                                                3105 10 6
-
-   Es decir, el diseño de todos los bloques analógicos debe ser extraordinariamente cuidadoso para mante-
-ner estas exigentes especificaciones.
-                                   Capítulo       2
-                         EL AMPLIFICADOR
-                        OPERACIONAL REAL
-
-
-
-
-                                                                          Señales
-
-                                                                      .¡  c:1gitales
-
-
-                                                                      /
-                                                                            CONTROL
-                                                                             DIGITAL
-
-
-
-
-        :..-~..·-·-~-
-VaMo!es      j ·t .,.           • .. Alime·n.tación y tensiones de trabajo
-de pro-::.eso 1   ' Offset y polarización
-                                   ..
-
-
-      t.fi •:~ . .. Ganancia real
- ,------a~~>. 'I - Modo diferencial y modo común
-                 .. Relación señal ..ruido
-
-
-
-
-                      PROCESO
-                                                          EL AMPLIFICADOR OPERACIONAL REAL •
-
-
-
-
-      Objetivos del capítulo
-
-         El objetivo de este capítulo es adquirir las capacidades de análisis, síntesis y com-
-         paración de circuitos basados en operacionales para propósitos de amplificación,
-         teniendo en cuenta que los dispositivos que se emplean tienen características re-
-         ales que limitan el funcionamiento ideal.
-
-               La capacidad de análisis permitirá analizar circuitos de amplificación basados
-         en amplificadores operacionales reales para obtener sus parámetros instrumenta-
-         les, permitiendo así saber el alcance de uso de cada uno de ellos.
-
-              Una vez fijados los conceptos de análisis, se tratará de desarrollar la capaci-
-         dad de síntesis de estructuras amplificadoras, teniendo en cuenta que se trata de
-         un diseño ceñido a las estructuras prácticas que se usan en realidad en el contexto
-         de la electrónica analógica de precisión, huyendo de circuitos exóticos o no prácti-
-         cos.
-
-              Finalmente, se desarrollará la capacidad de comparación de posibles solucio-
-         nes, atendiendo a las prestaciones instrumentales que manifiesten cuantitativa-
-         mente. Así, lo que se pretende es usar los parámetros instrumenta/es desarrolla-
-         dos en el primer tema -tanto a nivel estático como dinámico- para cuantificar el
-         comportamiento de las estructuras amplificadoras basadas en amplificadores ope-
-         racionales.
-
-              A continuación, se recuerdan los parámetros básicos de las diversas estructu-
-         ras amplificadoras y las relaciones que rigen su funcionamiento.
-
-
-
-
-2.1. Limitaciones generales de los amplificadores operacionales
-Alimentación (power supply): los valores de tensión (Vccmáx) a que se puede alimentar un amplificador
-operacional están limitados por los máximos valores que proporciona el fabricante y que pueden ser valores
-simétricos en los casos de alimentación doble, ±Vccmáx (dual power supply) o valores comprendidos entre O
-y positivo, +Vccmáx en los dispositivos de alimentación simple (single power supply). Los valores de ali-
-mentación deben set menores que esos y son frecuentes los valores de ±15 V, ±12 V, ±5 Y y +5V.
-
-Recorrido de la tensión de salida (output voltage swing): extremos de la tensión de salida cuando el ope-
-racional está alimentado en unas determinadas condiciones. Se suele expresar como diferencia con los ex-
-tremos de la alimentación +Vce - X hasta - Vce + Y. En los casos de dispositivos output rail-to-rail, X e Y
-pueden ser de unas decenas de mV y, en los demás casos, varían entre 1y2 V.
-
-Margen de tensión de entrada (input voltage range): extremos de la tensión admisible en las patillas de
-entrada que son compatibles con un funcionamiento correcto del operacional. Como en el caso anterior se
-definen como distancia a las alimentaciones. En los operacionales input rail-to-rail, se puede llegar hasta
-los valores de alimentación.
-•       INSTRUMENTACIÓN ELECTRÓNICA. 230 PROBLEMAS RESUELTOS
-
-
-
-              V-, V+                                                                   Vo
-
-
-       +Vcc                                                                                     +Vcc
-
-
-
-
-               Q)                                                                     CI
-               CI
-               e:               V-                                                    e
-               m                                                                      -~
-               ....
-               Q)
-               CI
-                                                                              Vo      Q)
-                                                                                      CI
-               ~                                                                      ~
-               o>              V+                                                     o>
-               :;                                                                     :;
-               Q.
-               .E                                                                     .9-
-                                                                                      ~
-                                                                                      o
-
-
-
-       -Vcc                                                                                     -Vcc
-
-
-
-
-Razón de rechazo de la alimentación (power supply rejection ratio), PSRR : parámetro que mide el efecto
-de los cambios de nivel en las alimentaciones, LiVcc~ sobre la salida en continua LiVo y que se expresa en
-dBcomo:
-
-                                                                     .1Vcc
-                                                       PSRR = 20 log .1Vo
-
-
-Ganancia diferencial (Differential gain), Ad: es el valor de la ganancia que presenta el operacional en
-bucle abierto para la tensión diferencial entre sus patillas de entrada. Se define un valor en continua (DC
-differential gain) que es el valor a frecuencia cero y una curva que relaciona la ganancia con la frecuencia.
-Es un parámetro adimensional que se suele expresar como tal, en V/mV o en dB. Los valores en continua
-pueden variar, desde unos 80 dB hasta 140 dB, según el dispositivo.
-
-
-
-                    Ganancia en continua          --
-                                                                       ~
-                                           !\'!
-                                           ü
-                                                                             ~
-                                                                                  ~
-                                           e:
-                                           ~
-                                           Q)
-                                           -
-
-                                                                                      ""
-                                           !\'!
-                                           ü
-                                           e:
-                                           !\'!
-                                           e:
-                                           !\'!
-
-
-                                                                                            ~
-                                                                     Frecuencia
-
