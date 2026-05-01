@@ -101,3 +101,12 @@ activity, following the same repository pattern used in Practice 02.
 * Bluetooth mode: BLE UART-style service named `EI-P03-PhaseA`, using Nordic UART Service-compatible UUIDs
 * Software behavior: the sketch advertises a BLE terminal service, accepts `ON`, `OFF`, `TOGGLE`, `STATUS`, and `HELP` commands from a mobile device, controls the LED, reads the potentiometer, and sends periodic status notifications
 * Bluetooth/serial feedback: `led=<on|off> | sensor_raw=<raw> | sensor_percent=<percent>%`
+
+### Activity 4 Phase B - WiFi Web Server
+
+* Sketch: `activity-04/phase-b-wifi/wifi-web-server.ino`
+* Hardware: ESP32 DevKit-style board, one LED, and one potentiometer
+* Wiring assumptions: LED on `GPIO 2`, potentiometer wiper on `GPIO 34`
+* Network behavior: station mode when `WIFI_SSID` and `WIFI_PASSWORD` are configured, with fallback access-point mode named `EI-P03-PhaseB` when credentials are left empty
+* Software behavior: the sketch exposes a web page and JSON API for visualizing the potentiometer value and controlling the LED from any browser connected to the same network
+* Web/API feedback: `led=<on|off> | sensor_raw=<raw> | sensor_percent=<percent>% | ip=<address>`
