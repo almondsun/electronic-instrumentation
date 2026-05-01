@@ -73,3 +73,13 @@ activity, following the same repository pattern used in Practice 02.
 * Software behavior: the sketch prompts for a minimum value and a maximum value, validates the interval, generates an inclusive random secret number, and receives guesses over UART
 * Serial feedback: invalid inputs are rejected, out-of-range guesses are rejected, incorrect guesses report whether the secret number is lower or higher, and a correct guess reports the number of valid attempts
 * Restart behavior: after success, the user can type `y` to start another game or `n` to stop the session
+
+### Activity 2 - I2C Clock and Potentiometer Display
+
+* Sketch: `activity-02/i2c-clock-potentiometer.ino`
+* Hardware: ESP32 DevKit-style board, 16x2 LCD with I2C backpack, and one potentiometer
+* Wiring assumptions: LCD SDA on `GPIO 21`, LCD SCL on `GPIO 22`, potentiometer wiper on `GPIO 34`
+* Library dependency: `LiquidCrystal_I2C` from the Arduino IDE Library Manager
+* Software behavior: the sketch initializes the I2C display, computes an elapsed digital clock from `millis()`, reads and averages the potentiometer ADC value, and displays both values at the same time
+* LCD output: row 1 shows `Clock HH:MM:SS`; row 2 shows `Pot <raw> <percent>%`
+* Serial feedback: `time=<HH:MM:SS> | pot_raw=<raw> | pot_percent=<percent>%`
