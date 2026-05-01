@@ -121,3 +121,11 @@ activity, following the same repository pattern used in Practice 02.
 * MQTT behavior: the ESP32 connects to a configured WiFi network and broker, publishes sensor telemetry, publishes retained status, and subscribes to LED command messages
 * MQTT topics: `ei/practice03/phase-c/telemetry`, `ei/practice03/phase-c/status`, and `ei/practice03/phase-c/command`
 * Command payloads: `ON`, `OFF`, `TOGGLE`, and `STATUS`
+
+### Research Component - Industrial Communication Protocols
+
+* Document: `research/README.md`
+* Spanish version: `research/README-es.md`
+* Scope: comparison of Modbus, PROFIBUS, PROFINET, CAN/CANopen, EtherNet/IP, HART, OPC UA, IO-Link, and MQTT
+* Interfaces covered: RS-232, RS-485, Ethernet, CAN, 4-20 mA current loop, and IO-Link three-wire sensor/actuator links
+* Content: characteristics, common applications, typical physical/logical interfaces, selection criteria, practical recommendations, and source references
