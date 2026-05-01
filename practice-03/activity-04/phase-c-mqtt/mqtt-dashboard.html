@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EI Practice 03 MQTT</title>
+  <style>
+    :root { color-scheme: light dark; font-family: Arial, sans-serif; }
+    body { margin: 0; padding: 24px; background: #f4f6f8; color: #17202a; }
+    main { max-width: 680px; margin: 0 auto; }
+    h1 { font-size: 1.4rem; margin: 0 0 18px; }
+    section { border: 1px solid #ccd3da; border-radius: 8px; padding: 16px; margin-bottom: 16px; background: white; }
+    label { display: block; font-size: 0.9rem; color: #52606d; margin: 0 0 6px; }
+    input { box-sizing: border-box; width: 100%; padding: 10px; border: 1px solid #aeb8c2; border-radius: 6px; margin-bottom: 12px; font: inherit; }
+    dl { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; margin: 0; }
+    dt { color: #52606d; }
+    dd { margin: 0; font-weight: 700; text-align: right; overflow-wrap: anywhere; }
+    .buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+    button { border: 1px solid #1f6feb; background: #1f6feb; color: white; border-radius: 6px; padding: 10px 14px; font-size: 1rem; cursor: pointer; }
+    button.secondary { background: white; color: #1f6feb; }
+    .bar { height: 14px; border-radius: 7px; background: #d8dee4; overflow: hidden; margin-top: 12px; }
+    .fill { height: 100%; width: 0%; background: #2da44e; transition: width 160ms linear; }
+    @media (prefers-color-scheme: dark) {
+      body { background: #111820; color: #f0f3f6; }
+      section { background: #18222d; border-color: #344150; }
+      dt, label { color: #a8b3bf; }
+      input, button.secondary { background: #18222d; color: #f0f3f6; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Practice 03 Phase C</h1>
+
+    <section>
+      <label for="broker">MQTT WebSocket URL</label>
+      <input id="broker" value="ws://192.168.1.100:9001">
+      <label for="commandTopic">Command topic</label>
+      <input id="commandTopic" value="ei/practice03/phase-c/command">
+      <label for="statusTopic">Status topic</label>
+      <input id="statusTopic" value="ei/practice03/phase-c/status">
+      <label for="telemetryTopic">Telemetry topic</label>
+      <input id="telemetryTopic" value="ei/practice03/phase-c/telemetry">
+      <div class="buttons">
+        <button onclick="connectMqtt()">CONNECT</button>
+        <button class="secondary" onclick="disconnectMqtt()">DISCONNECT</button>
+      </div>
+    </section>
+
+    <section>
+      <dl>
+        <dt>Connection</dt><dd id="connection">disconnected</dd>
+        <dt>LED</dt><dd id="led">-</dd>
+        <dt>Sensor raw</dt><dd id="raw">-</dd>
+        <dt>Sensor percent</dt><dd id="percent">-</dd>
+        <dt>ESP32 IP</dt><dd id="ip">-</dd>
+      </dl>
+      <div class="bar"><div class="fill" id="fill"></div></div>
+    </section>
+
+    <section class="buttons">
+      <button onclick="sendCommand('ON')">LED ON</button>
+      <button class="secondary" onclick="sendCommand('OFF')">LED OFF</button>
+      <button class="secondary" onclick="sendCommand('TOGGLE')">TOGGLE</button>
+      <button class="secondary" onclick="sendCommand('STATUS')">STATUS</button>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+  <script>
+    let client = null;
+
+    function value(id) {
+      return document.getElementById(id).value.trim();
+    }
+
+    function setConnection(text) {
+      document.getElementById('connection').textContent = text;
+    }
+
+    function renderPayload(payload) {
+      try {
+        const data = JSON.parse(payload);
+        if (data.led !== undefined) document.getElementById('led').textContent = data.led;
+        if (data.sensor_raw !== undefined) document.getElementById('raw').textContent = data.sensor_raw;
+        if (data.sensor_percent !== undefined) {
+          document.getElementById('percent').textContent = `${data.sensor_percent}%`;
+          document.getElementById('fill').style.width = `${data.sensor_percent}%`;
+        }
+        if (data.ip !== undefined) document.getElementById('ip').textContent = data.ip;
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    function connectMqtt() {
+      disconnectMqtt();
+      client = mqtt.connect(value('broker'));
+      client.on('connect', () => {
+        setConnection('connected');
+        client.subscribe(value('statusTopic'));
+        client.subscribe(value('telemetryTopic'));
+        sendCommand('STATUS');
+      });
+      client.on('message', (topic, payload) => renderPayload(payload.toString()));
+      client.on('close', () => setConnection('disconnected'));
+      client.on('error', () => setConnection('error'));
+    }
+
+    function disconnectMqtt() {
+      if (client) {
+        client.end(true);
+        client = null;
+      }
+      setConnection('disconnected');
+    }
+
+    function sendCommand(command) {
+      if (!client || !client.connected) {
+        setConnection('not connected');
+        return;
+      }
+      client.publish(value('commandTopic'), command);
+    }
+  </script>
+</body>
+</html>

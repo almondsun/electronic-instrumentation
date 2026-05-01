@@ -110,3 +110,14 @@ activity, following the same repository pattern used in Practice 02.
 * Network behavior: station mode when `WIFI_SSID` and `WIFI_PASSWORD` are configured, with fallback access-point mode named `EI-P03-PhaseB` when credentials are left empty
 * Software behavior: the sketch exposes a web page and JSON API for visualizing the potentiometer value and controlling the LED from any browser connected to the same network
 * Web/API feedback: `led=<on|off> | sensor_raw=<raw> | sensor_percent=<percent>% | ip=<address>`
+
+### Activity 4 Phase C - MQTT Sensor and LED Control
+
+* Sketch: `activity-04/phase-c-mqtt/mqtt-sensor-control.ino`
+* Companion interface: `activity-04/phase-c-mqtt/mqtt-dashboard.html`
+* Hardware: ESP32 DevKit-style board, one LED, and one potentiometer
+* Wiring assumptions: LED on `GPIO 2`, potentiometer wiper on `GPIO 34`
+* Library dependency: `PubSubClient` from the Arduino IDE Library Manager
+* MQTT behavior: the ESP32 connects to a configured WiFi network and broker, publishes sensor telemetry, publishes retained status, and subscribes to LED command messages
+* MQTT topics: `ei/practice03/phase-c/telemetry`, `ei/practice03/phase-c/status`, and `ei/practice03/phase-c/command`
+* Command payloads: `ON`, `OFF`, `TOGGLE`, and `STATUS`
