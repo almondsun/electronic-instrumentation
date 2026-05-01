@@ -92,3 +92,12 @@ activity, following the same repository pattern used in Practice 02.
 * Library dependencies: `Adafruit BMP280 Library` and `Adafruit Unified Sensor` from the Arduino IDE Library Manager
 * Software behavior: the sketch initializes the SPI bus, detects and configures the BMP280, reads temperature and pressure periodically, and retries initialization if the sensor is not available
 * Serial feedback: `temperature_c=<value> | pressure_pa=<value> | pressure_hpa=<value>`
+
+### Activity 4 Phase A - Bluetooth Sensor and LED Control
+
+* Sketch: `activity-04/phase-a-bluetooth/bluetooth-sensor-led.ino`
+* Hardware: ESP32 DevKit-style board with BLE support, one LED, and one potentiometer
+* Wiring assumptions: LED on `GPIO 2`, potentiometer wiper on `GPIO 34`
+* Bluetooth mode: BLE UART-style service named `EI-P03-PhaseA`, using Nordic UART Service-compatible UUIDs
+* Software behavior: the sketch advertises a BLE terminal service, accepts `ON`, `OFF`, `TOGGLE`, `STATUS`, and `HELP` commands from a mobile device, controls the LED, reads the potentiometer, and sends periodic status notifications
+* Bluetooth/serial feedback: `led=<on|off> | sensor_raw=<raw> | sensor_percent=<percent>%`
