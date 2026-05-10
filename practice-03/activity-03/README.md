@@ -9,8 +9,9 @@ exercise required by Practice 03.
 
 ## Hardware and tools
 
-* ESP32 DevKit-style board
-* BMP280 breakout configured for SPI operation
+* Classic ESP32 DevKit-style board with an ESP-WROOM-32 module
+* CP2102 USB-to-UART converter for programming and Serial Monitor access
+* BMP280 pressure/temperature breakout configured for SPI operation
 * Arduino IDE Serial Monitor configured at `115200` baud
 * Arduino libraries:
   * `Adafruit BMP280 Library`
@@ -18,17 +19,24 @@ exercise required by Practice 03.
 
 ## Wiring assumptions
 
-| BMP280 signal | ESP32 pin |
-| --- | --- |
-| `SCK` | `GPIO 18` |
-| `SDO` / `MISO` | `GPIO 19` |
-| `SDI` / `MOSI` | `GPIO 23` |
-| `CS` | `GPIO 5` |
-| `VIN` / `VCC` | `3.3 V` |
-| `GND` | `GND` |
+The tested setup uses an ESP-WROOM-32 DevKit-style board and a BMP280 breakout
+connected over SPI.
+
+| BMP280 breakout label | SPI signal | ESP32 pin |
+| --- | --- | --- |
+| `VCC` | Power | `3V3` |
+| `GND` | Ground | `GND` |
+| `SCL` | `SCK` / clock | `GPIO 18` |
+| `SDA` | `MOSI` / controller output | `GPIO 23` |
+| `CSB` | `CS` / chip select | `GPIO 5` |
+| `SDD` | `MISO` / controller input | `GPIO 19` |
 
 The ESP32 uses 3.3 V logic. Use a BMP280 breakout that is compatible with
 3.3 V SPI signals, and avoid applying 5 V logic to the ESP32 pins.
+
+This wiring matches the sketch constants: `SCK=18`, `MISO=19`, `MOSI=23`, and
+`CS=5`. The sensor is powered from the ESP32 `3V3` pin and reports temperature
+and barometric pressure through the Serial Monitor.
 
 ## Implemented behavior
 
