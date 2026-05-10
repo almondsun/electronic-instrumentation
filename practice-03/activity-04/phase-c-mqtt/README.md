@@ -7,11 +7,11 @@ for Activity 04 Phase C: MQTT-based sensor publishing and remote LED control.
 
 * `mqtt-sensor-control.ino`: ESP32 MQTT publisher/subscriber sketch
 * `mqtt-dashboard.html`: computer-side dashboard for MQTT-over-WebSocket brokers
+* `mqtt_local_config.example.h`: local configuration template for WiFi and broker settings
 
 ## Hardware and tools
 
-* ESP32 DevKit-style board
-* LED connected to `GPIO 2` through an appropriate resistor
+* ESP32 DevKit-style board with an onboard user LED on `GPIO 2`
 * Potentiometer
 * WiFi network shared by the ESP32 and the MQTT broker
 * MQTT broker, such as Mosquitto
@@ -22,26 +22,37 @@ for Activity 04 Phase C: MQTT-based sensor publishing and remote LED control.
 
 | Device signal | ESP32 pin |
 | --- | --- |
-| LED anode | `GPIO 2` through resistor |
-| LED cathode | `GND` |
+| Onboard user LED | `GPIO 2` |
 | Potentiometer wiper | `GPIO 34` |
 | Potentiometer end 1 | `3.3 V` |
 | Potentiometer end 2 | `GND` |
 
-If the board already has an onboard LED on another pin, update `LED_PIN` at the
-top of the sketch. If the selected ESP32 variant does not expose `GPIO 34`,
-update `SENSOR_PIN` to an available ADC-capable pin.
+The tested board has a controllable onboard LED on `GPIO 2`, so no external LED
+is required. If a different ESP32 board uses an active-low onboard LED, set
+`LED_ACTIVE_HIGH` to `false` at the top of the sketch. If the selected ESP32
+variant does not expose `GPIO 34`, update `SENSOR_PIN` to an available
+ADC-capable pin.
+
+The potentiometer must be powered from `3.3 V`, not `5 V`, because the ESP32 ADC
+input is not 5 V tolerant.
 
 ## Configuration
 
-Before uploading the sketch, set these constants in `mqtt-sensor-control.ino`:
+Before uploading the sketch, copy the local configuration template:
 
-* `WIFI_SSID`
-* `WIFI_PASSWORD`
-* `MQTT_BROKER_HOST`
-* `MQTT_BROKER_PORT`
+```text
+cp mqtt_local_config.example.h mqtt_local_config.h
+```
 
-No real WiFi credentials are committed in this repository.
+Then edit `mqtt_local_config.h` and set:
+
+* `EI_WIFI_SSID`
+* `EI_WIFI_PASSWORD`
+* `EI_MQTT_BROKER_HOST`
+* `EI_MQTT_BROKER_PORT`
+
+No real WiFi credentials are committed in this repository. The real
+`mqtt_local_config.h` file is intentionally ignored by Git.
 
 ## MQTT contract
 
