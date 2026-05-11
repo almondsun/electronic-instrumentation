@@ -1,4 +1,4 @@
-# Activity 02: I2C Clock and Potentiometer Display
+# Activity 02: I2C Clock and Potentiometer Display https://youtube.com/shorts/vAdI14EJ-AE?si=ZgH_PgH258p5YITV
 
 This directory contains the ESP32 Arduino sketch for the I2C display exercise
 required by Practice 03.

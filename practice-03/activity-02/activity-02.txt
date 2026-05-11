@@ -1,0 +1,113 @@
+// Pantalla LCD 16x2 tipo HD44780 con adaptador I2C PCF8574.
+// Comunicación mediante protocolo I2C usando SDA = GPIO8 y SCL = GPIO9.
+// Dirección detectada del módulo: 0x27.
+// El LCD muestra:
+// - Primera fila: reloj digital en formato HH:MM:SS
+// - Segunda fila: valor ADC leído desde el potenciómetro conectado al GPIO4.
+// Librería utilizada: LiquidCrystal_I2C.
+
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+
+// LCD I2C 16x2 dirección 0x27
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+// Potenciómetro en GPIO4
+int potPin = 4;
+
+// Hora inicial
+int hora = 3;
+int minuto = 26;
+int segundo = 0;
+
+// Temporizador
+unsigned long previo = 0;
+unsigned long intervalo = 1000;
+
+void setup() {
+
+  Serial.begin(115200);
+
+  // I2C en ESP32-S3
+  Wire.begin(8, 9);
+
+  // Inicializa LCD
+  lcd.init();
+  lcd.backlight();
+  lcd.clear();
+
+  Serial.println("Iniciando reloj digital con ADC...");
+}
+
+void loop() {
+
+  // Leer ADC
+  int valor = analogRead(potPin);
+
+  // Tiempo actual
+  unsigned long actual = millis();
+
+  // Actualizar reloj cada segundo
+  if (actual - previo >= intervalo) {
+
+    previo = actual;
+
+    segundo++;
+
+    if (segundo >= 60) {
+      segundo = 0;
+      minuto++;
+
+      if (minuto >= 60) {
+        minuto = 0;
+        hora++;
+
+        if (hora >= 24) {
+          hora = 0;
+        }
+      }
+    }
+
+    // Mostrar por Serial
+    Serial.print("Hora actual: ");
+
+    if (hora < 10) Serial.print("0");
+    Serial.print(hora);
+    Serial.print(":");
+
+    if (minuto < 10) Serial.print("0");
+    Serial.print(minuto);
+    Serial.print(":");
+
+    if (segundo < 10) Serial.print("0");
+    Serial.print(segundo);
+
+    Serial.print(" | ADC GPIO4: ");
+    Serial.println(valor);
+  }
+
+  // ===== LCD =====
+
+  lcd.clear();
+
+  // Primera línea: reloj
+  lcd.setCursor(0, 0);
+
+  if (hora < 10) lcd.print("0");
+  lcd.print(hora);
+  lcd.print(":");
+
+  if (minuto < 10) lcd.print("0");
+  lcd.print(minuto);
+  lcd.print(":");
+
+  if (segundo < 10) lcd.print("0");
+  lcd.print(segundo);
+
+  // Segunda línea: ADC
+  lcd.setCursor(0, 1);
+  lcd.print("ADC:");
+  lcd.print(valor);
+
+  delay(100);
+}

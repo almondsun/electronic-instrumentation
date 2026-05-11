@@ -1,4 +1,4 @@
-# Activity 03: SPI BMP280 Sensor
+# Activity 03: SPI BMP280 Sensor https://youtu.be/2PxWPzxKLe0?si=HlDrgoFrQ3gDXHv7
 
 This directory contains the ESP32 Arduino sketch for the SPI BMP280 sensor
 exercise required by Practice 03.
