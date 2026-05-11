@@ -5,26 +5,161 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EI Practice 03 MQTT</title>
   <style>
-    :root { color-scheme: light dark; font-family: Arial, sans-serif; }
-    body { margin: 0; padding: 24px; background: #f4f6f8; color: #17202a; }
-    main { max-width: 680px; margin: 0 auto; }
+    :root {
+      color-scheme: light dark;
+      font-family: Arial, sans-serif;
+      --panel: #ffffff;
+      --panel-border: #c8d0d9;
+      --text: #17202a;
+      --muted: #52606d;
+      --accent: #1f6feb;
+      --ok: #2da44e;
+      --track: #d8dee4;
+      --board: #10151c;
+      --board-edge: #303945;
+      --pin: #c5ccd4;
+      --module: #9ea7ad;
+      --module-text: #eef2f5;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 24px; background: #eef2f6; color: var(--text); }
+    main { max-width: 920px; margin: 0 auto; }
     h1 { font-size: 1.4rem; margin: 0 0 18px; }
-    section { border: 1px solid #ccd3da; border-radius: 8px; padding: 16px; margin-bottom: 16px; background: white; }
+    section { border: 1px solid var(--panel-border); border-radius: 8px; padding: 16px; margin-bottom: 16px; background: var(--panel); }
     label { display: block; font-size: 0.9rem; color: #52606d; margin: 0 0 6px; }
     input { box-sizing: border-box; width: 100%; padding: 10px; border: 1px solid #aeb8c2; border-radius: 6px; margin-bottom: 12px; font: inherit; }
     dl { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; margin: 0; }
-    dt { color: #52606d; }
+    dt { color: var(--muted); }
     dd { margin: 0; font-weight: 700; text-align: right; overflow-wrap: anywhere; }
     .buttons { display: flex; gap: 10px; flex-wrap: wrap; }
-    button { border: 1px solid #1f6feb; background: #1f6feb; color: white; border-radius: 6px; padding: 10px 14px; font-size: 1rem; cursor: pointer; }
-    button.secondary { background: white; color: #1f6feb; }
-    .bar { height: 14px; border-radius: 7px; background: #d8dee4; overflow: hidden; margin-top: 12px; }
-    .fill { height: 100%; width: 0%; background: #2da44e; transition: width 160ms linear; }
+    button { border: 1px solid var(--accent); background: var(--accent); color: white; border-radius: 6px; padding: 10px 14px; font-size: 1rem; cursor: pointer; }
+    button.secondary { background: var(--panel); color: var(--accent); }
+    .bar { height: 14px; border-radius: 7px; background: var(--track); overflow: hidden; margin-top: 12px; }
+    .fill { height: 100%; width: 0%; background: var(--ok); transition: width 160ms linear; }
+    .dashboard { display: grid; grid-template-columns: minmax(240px, 330px) 1fr; gap: 18px; align-items: center; }
+    .board-wrap { display: grid; place-items: center; min-height: 430px; }
+    .board {
+      position: relative;
+      width: min(300px, 100%);
+      aspect-ratio: 0.62;
+      border: 3px solid var(--board-edge);
+      border-radius: 22px;
+      background:
+        linear-gradient(90deg, transparent 11%, rgba(255,255,255,0.08) 11% 12%, transparent 12% 88%, rgba(255,255,255,0.08) 88% 89%, transparent 89%),
+        linear-gradient(180deg, #141a22, var(--board));
+      box-shadow: 0 18px 40px rgba(9, 17, 28, 0.28);
+    }
+    .module {
+      position: absolute;
+      left: 22%;
+      top: 14%;
+      width: 56%;
+      height: 31%;
+      border: 2px solid #d8dde1;
+      border-radius: 5px;
+      background: linear-gradient(145deg, #858f96, var(--module));
+      color: var(--module-text);
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-align: center;
+      box-shadow: inset 0 0 18px rgba(255,255,255,0.22);
+    }
+    .antenna {
+      position: absolute;
+      left: 22%;
+      top: 3%;
+      width: 56%;
+      height: 9%;
+      border-bottom: 1px solid rgba(255,255,255,0.22);
+      background: repeating-linear-gradient(90deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 24px);
+    }
+    .pin-col {
+      position: absolute;
+      top: 8%;
+      bottom: 13%;
+      width: 11%;
+      display: grid;
+      grid-template-rows: repeat(15, 1fr);
+      gap: 5px;
+    }
+    .pin-col.left { left: 2%; }
+    .pin-col.right { right: 2%; }
+    .pin { border-radius: 999px; background: radial-gradient(circle at 35% 30%, #f6f8fa 0 18%, var(--pin) 19% 70%, #6d7782 71%); }
+    .usb {
+      position: absolute;
+      left: 38%;
+      bottom: -1%;
+      width: 24%;
+      height: 11%;
+      border: 2px solid #d6dde5;
+      border-bottom: 0;
+      border-radius: 8px 8px 0 0;
+      background: linear-gradient(#f4f7fa, #c6d0da);
+    }
+    .button-dot {
+      position: absolute;
+      bottom: 4%;
+      width: 12%;
+      aspect-ratio: 1;
+      border-radius: 999px;
+      border: 2px solid #5d6874;
+      background: #202b36;
+    }
+    .button-dot.en { left: 12%; }
+    .button-dot.boot { right: 12%; }
+    .led-indicator {
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      border: 2px solid rgba(255,255,255,0.85);
+      background: #3a4652;
+      opacity: 0.7;
+      transition: background 150ms ease, box-shadow 150ms ease, opacity 150ms ease;
+    }
+    .led-indicator.red { left: 21%; top: 65%; }
+    .led-indicator.blue { right: 24%; top: 55%; }
+    body.mqtt-connected .led-indicator.red {
+      background: #ff3434;
+      box-shadow: 0 0 12px #ff3434, 0 0 34px rgba(255, 52, 52, 0.9);
+      opacity: 1;
+    }
+    body.board-led-on .led-indicator.blue {
+      background: #2f7fff;
+      box-shadow: 0 0 12px #2f7fff, 0 0 34px rgba(47, 127, 255, 0.9);
+      opacity: 1;
+    }
+    .label-chip {
+      position: absolute;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+      color: #d9e0e7;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .label-chip.power { left: 14%; top: 72%; }
+    .label-chip.user { right: 14%; top: 62%; }
+    .status-panel { min-width: 0; }
     @media (prefers-color-scheme: dark) {
-      body { background: #111820; color: #f0f3f6; }
-      section { background: #18222d; border-color: #344150; }
-      dt, label { color: #a8b3bf; }
-      input, button.secondary { background: #18222d; color: #f0f3f6; }
+      :root {
+        --panel: #18222d;
+        --panel-border: #344150;
+        --text: #f0f3f6;
+        --muted: #a8b3bf;
+        --track: #303a45;
+      }
+      body { background: #111820; }
+      label { color: var(--muted); }
+      input, button.secondary { background: var(--panel); color: var(--text); }
+    }
+    @media (max-width: 760px) {
+      .dashboard { grid-template-columns: 1fr; }
+      .board-wrap { min-height: 360px; }
+      .board { width: min(250px, 100%); }
     }
   </style>
 </head>
@@ -34,7 +169,7 @@
 
     <section>
       <label for="broker">MQTT WebSocket URL</label>
-      <input id="broker" value="ws://192.168.1.100:9001">
+      <input id="broker" value="ws://192.168.20.45:9001">
       <label for="commandTopic">Command topic</label>
       <input id="commandTopic" value="ei/practice03/phase-c/command">
       <label for="statusTopic">Status topic</label>
@@ -47,15 +182,41 @@
       </div>
     </section>
 
-    <section>
-      <dl>
-        <dt>Connection</dt><dd id="connection">disconnected</dd>
-        <dt>LED</dt><dd id="led">-</dd>
-        <dt>Sensor raw</dt><dd id="raw">-</dd>
-        <dt>Sensor percent</dt><dd id="percent">-</dd>
-        <dt>ESP32 IP</dt><dd id="ip">-</dd>
-      </dl>
-      <div class="bar"><div class="fill" id="fill"></div></div>
+    <section class="dashboard">
+      <div class="board-wrap" aria-label="ESP32 board status visual">
+        <div class="board">
+          <div class="antenna"></div>
+          <div class="module">ESP-WROOM-32</div>
+          <div class="pin-col left">
+            <span class="pin"></span><span class="pin"></span><span class="pin"></span><span class="pin"></span><span class="pin"></span>
+            <span class="pin"></span><span class="pin"></span><span class="pin"></span><span class="pin"></span><span class="pin"></span>
+            <span class="pin"></span><span class="pin"></span><span class="pin"></span><span class="pin"></span><span class="pin"></span>
+          </div>
+          <div class="pin-col right">
+            <span class="pin"></span><span class="pin"></span><span class="pin"></span><span class="pin"></span><span class="pin"></span>
+            <span class="pin"></span><span class="pin"></span><span class="pin"></span><span class="pin"></span><span class="pin"></span>
+            <span class="pin"></span><span class="pin"></span><span class="pin"></span><span class="pin"></span><span class="pin"></span>
+          </div>
+          <div class="led-indicator red" aria-hidden="true"></div>
+          <div class="led-indicator blue" aria-hidden="true"></div>
+          <div class="label-chip power">MQTT</div>
+          <div class="label-chip user">GPIO 2</div>
+          <div class="button-dot en"></div>
+          <div class="button-dot boot"></div>
+          <div class="usb"></div>
+        </div>
+      </div>
+      <div class="status-panel">
+        <dl>
+          <dt>Connection</dt><dd id="connection">disconnected</dd>
+          <dt>MQTT LED</dt><dd id="connectionLed">off</dd>
+          <dt>Board LED</dt><dd id="led">-</dd>
+          <dt>Sensor raw</dt><dd id="raw">-</dd>
+          <dt>Sensor percent</dt><dd id="percent">-</dd>
+          <dt>ESP32 IP</dt><dd id="ip">-</dd>
+        </dl>
+        <div class="bar"><div class="fill" id="fill"></div></div>
+      </div>
     </section>
 
     <section class="buttons">
@@ -76,12 +237,21 @@
 
     function setConnection(text) {
       document.getElementById('connection').textContent = text;
+      const connected = text === 'connected';
+      document.body.classList.toggle('mqtt-connected', connected);
+      document.getElementById('connectionLed').textContent = connected ? 'red on' : 'off';
+    }
+
+    function setBoardLed(value) {
+      const ledOn = value === 'on';
+      document.getElementById('led').textContent = value;
+      document.body.classList.toggle('board-led-on', ledOn);
     }
 
     function renderPayload(payload) {
       try {
         const data = JSON.parse(payload);
-        if (data.led !== undefined) document.getElementById('led').textContent = data.led;
+        if (data.led !== undefined) setBoardLed(data.led);
         if (data.sensor_raw !== undefined) document.getElementById('raw').textContent = data.sensor_raw;
         if (data.sensor_percent !== undefined) {
           document.getElementById('percent').textContent = `${data.sensor_percent}%`;
@@ -113,6 +283,7 @@
         client = null;
       }
       setConnection('disconnected');
+      setBoardLed('-');
     }
 
     function sendCommand(command) {
