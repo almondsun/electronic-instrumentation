@@ -1,19 +1,25 @@
-# Presentation Placeholder
+# Practice 03 Presentation
 
-Place the final presentation for Practice 03 here.
+This directory contains the final Practice 03 presentation and its exported PDF.
 
-Recommended contents:
+## Files
 
-* source slides such as `.pptx`, `.odp`, or similar
-* an exported `.pdf` version when available
-* supporting assets used in the slides
+* `practice-03-presentation-es.pptx`: editable slide deck.
+* `practice-03-presentation-es.pdf`: exported PDF for upload/review.
+* `assets/`: representative frames extracted from the Practice 03 demo videos.
 
-The presentation should briefly cover:
+## Scope Covered
 
-* UART guess-the-number implementation
-* I2C clock and potentiometer display implementation
-* SPI sensor implementation
-* Bluetooth, WiFi, and MQTT implementations
-* industrial protocol comparison
-* conclusions
-* public links to the demonstration videos for the first four points
+The deck follows the same evidence-first structure used for Practice 02:
+
+* platform and validation criteria,
+* UART guess-the-number implementation,
+* I2C clock and potentiometer display implementation,
+* SPI BMP280 implementation,
+* Bluetooth, WiFi, and MQTT phase implementations,
+* industrial protocol comparison,
+* final results table with public video links,
+* conclusion.
+
+The slides use the local video evidence and the audio-derived `.srt` files stored
+under `practice-03/deliverables/videos/` as the source of observed results.
