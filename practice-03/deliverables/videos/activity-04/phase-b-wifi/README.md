@@ -14,7 +14,7 @@ Captions:
 
 What the video shows:
 
-* ESP32 connected to WiFi
+* ESP32-C6 connected to WiFi
 * web server reachable from another device on the same network
-* sensor or component data visible in the browser
-* output control from the web page
+* browser color picker used to select RGB values
+* NeoPixel RGB LED changing color from the web page

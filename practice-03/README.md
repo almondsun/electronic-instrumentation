@@ -105,11 +105,11 @@ activity, following the same repository pattern used in Practice 02.
 ### Activity 4 Phase B - WiFi Web Server
 
 * Sketch: `activity-04/phase-b-wifi/wifi-web-server.ino`
-* Hardware: ESP32 DevKit-style board, one LED, and one potentiometer
-* Wiring assumptions: LED on `GPIO 2`, potentiometer wiper on `GPIO 34`
-* Network behavior: station mode when `WIFI_SSID` and `WIFI_PASSWORD` are configured, with fallback access-point mode named `EI-P03-PhaseB` when credentials are left empty
-* Software behavior: the sketch exposes a web page and JSON API for visualizing the potentiometer value and controlling the LED from any browser connected to the same network
-* Web/API feedback: `led=<on|off> | sensor_raw=<raw> | sensor_percent=<percent>% | ip=<address>`
+* Hardware: ESP32-C6 DevKit-style board with one WS2812/NeoPixel RGB LED
+* Wiring assumptions: NeoPixel data input on `GPIO 8`
+* Network behavior: station mode using local WiFi credentials configured before upload
+* Software behavior: the sketch exposes a browser color picker for selecting and sending RGB values to the ESP32-C6
+* Web/API feedback: `GET /set?r=<0-255>&g=<0-255>&b=<0-255>` updates the RGB LED color
 
 ### Activity 4 Phase C - MQTT Sensor and LED Control
 
