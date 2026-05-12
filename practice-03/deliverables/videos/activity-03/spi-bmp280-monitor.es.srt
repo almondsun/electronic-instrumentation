@@ -1,0 +1,19 @@
+1
+00:00:00,000 --> 00:00:12,000
+Esta actividad conecta el sensor BMP280 al ESP32 mediante la interfaz SPI.
+
+2
+00:00:12,000 --> 00:00:32,000
+El programa inicializa el bus SPI y verifica que el sensor sea detectado correctamente.
+
+3
+00:00:32,000 --> 00:00:58,000
+Las mediciones de temperatura y presion barometrica se leen periodicamente desde el BMP280.
+
+4
+00:00:58,000 --> 00:01:25,000
+Los valores adquiridos se reportan en el monitor serial para comprobar el funcionamiento.
+
+5
+00:01:25,000 --> 00:01:45,000
+La prueba evidencia la comunicacion SPI y la lectura estable del sensor.

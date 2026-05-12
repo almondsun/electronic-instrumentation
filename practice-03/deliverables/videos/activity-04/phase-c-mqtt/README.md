@@ -2,13 +2,17 @@
 
 Public link:
 
-* Pending
+* https://youtube.com/shorts/MiYnQxtlrok?si=RPvyZOGT-_sn066Y
 
 Repository file:
 
-* Pending
+* `mqtt-sensor-control.mp4`
 
-What the video should show:
+Captions:
+
+* `mqtt-sensor-control.es.srt`
+
+What the video shows:
 
 * ESP32 publishing values to an MQTT broker
 * a receiver or web interface sending on/off commands

@@ -1,0 +1,19 @@
+1
+00:00:00,000 --> 00:00:12,000
+El montaje usa un ESP32 con una pantalla LCD 16x2 conectada por I2C.
+
+2
+00:00:12,000 --> 00:00:30,000
+La primera linea de la pantalla muestra el reloj digital en formato horas, minutos y segundos.
+
+3
+00:00:30,000 --> 00:00:52,000
+La segunda linea muestra la lectura ADC del potenciometro conectada al ESP32.
+
+4
+00:00:52,000 --> 00:01:18,000
+Al mover el potenciometro cambia el valor mostrado en pantalla y reportado por el monitor serial.
+
+5
+00:01:18,000 --> 00:01:57,000
+La demostracion confirma la comunicacion I2C y la visualizacion simultanea de tiempo y entrada analogica.

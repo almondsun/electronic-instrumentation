@@ -2,13 +2,17 @@
 
 Public link:
 
-* Pending
+* https://youtube.com/shorts/_HQYwLkiJ9c?si=lQadRs3gCqAGeCbU
 
 Repository file:
 
-* Pending
+* `guess-the-number-uart.mp4`
 
-What the video should show:
+Captions:
+
+* `guess-the-number-uart.es.srt`
+
+What the video shows:
 
 * UART interval input
 * guesses submitted through the Serial Monitor

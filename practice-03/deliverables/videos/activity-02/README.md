@@ -2,13 +2,17 @@
 
 Public link:
 
-* Pending
+* https://youtube.com/shorts/vAdI14EJ-AE?si=ZgH_PgH258p5YITV
 
 Repository file:
 
-* Pending
+* `i2c-clock-potentiometer.mp4`
 
-What the video should show:
+Captions:
+
+* `i2c-clock-potentiometer.es.srt`
+
+What the video shows:
 
 * I2C display connected to the ESP32
 * digital clock data displayed

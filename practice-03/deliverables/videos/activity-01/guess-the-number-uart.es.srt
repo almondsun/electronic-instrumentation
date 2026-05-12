@@ -1,0 +1,19 @@
+1
+00:00:00,000 --> 00:00:08,000
+En esta prueba el ESP32 ejecuta el juego de adivinar el numero usando UART.
+
+2
+00:00:08,000 --> 00:00:18,000
+El monitor serial solicita el valor minimo y el valor maximo del intervalo.
+
+3
+00:00:18,000 --> 00:00:32,000
+Cada intento se envia por el puerto serial y el sistema responde si el numero secreto es mayor o menor.
+
+4
+00:00:32,000 --> 00:00:46,000
+Cuando el valor ingresado coincide, el programa muestra el numero de intentos validos.
+
+5
+00:00:46,000 --> 00:00:54,000
+Al final se puede iniciar una nueva partida o terminar la sesion.

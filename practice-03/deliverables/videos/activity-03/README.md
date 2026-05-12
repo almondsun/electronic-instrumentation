@@ -2,13 +2,17 @@
 
 Public link:
 
-* Pending
+* https://youtu.be/2PxWPzxKLe0?si=HlDrgoFrQ3gDXHv7
 
 Repository file:
 
-* Pending
+* `spi-bmp280-monitor.mp4`
 
-What the video should show:
+Captions:
+
+* `spi-bmp280-monitor.es.srt`
+
+What the video shows:
 
 * SPI sensor or selected SPI device connected to the ESP32
 * pressure and temperature acquisition when using BMP280

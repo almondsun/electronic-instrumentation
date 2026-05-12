@@ -1,0 +1,15 @@
+1
+00:00:00,000 --> 00:00:10,000
+En la fase Bluetooth el ESP32 anuncia un servicio BLE tipo terminal UART.
+
+2
+00:00:10,000 --> 00:00:24,000
+El dispositivo movil se conecta al ESP32 y recibe datos del sensor.
+
+3
+00:00:24,000 --> 00:00:40,000
+Desde la aplicacion terminal se envian comandos para controlar el LED.
+
+4
+00:00:40,000 --> 00:00:57,000
+La respuesta del LED y los mensajes de estado confirman la comunicacion bidireccional.

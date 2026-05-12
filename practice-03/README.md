@@ -77,12 +77,12 @@ activity, following the same repository pattern used in Practice 02.
 ### Activity 2 - I2C Clock and Potentiometer Display
 
 * Sketch: `activity-02/i2c-clock-potentiometer.ino`
-* Hardware: ESP32 DevKit-style board, 16x2 LCD with I2C backpack, and one potentiometer
-* Wiring assumptions: LCD SDA on `GPIO 21`, LCD SCL on `GPIO 22`, potentiometer wiper on `GPIO 34`
+* Hardware: ESP32-S3 DevKit-style board, 16x2 LCD with I2C backpack, and one potentiometer
+* Wiring assumptions: LCD SDA on `GPIO 8`, LCD SCL on `GPIO 9`, potentiometer wiper on `GPIO 4`
 * Library dependency: `LiquidCrystal_I2C` from the Arduino IDE Library Manager
-* Software behavior: the sketch initializes the I2C display, computes an elapsed digital clock from `millis()`, reads and averages the potentiometer ADC value, and displays both values at the same time
-* LCD output: row 1 shows `Clock HH:MM:SS`; row 2 shows `Pot <raw> <percent>%`
-* Serial feedback: `time=<HH:MM:SS> | pot_raw=<raw> | pot_percent=<percent>%`
+* Software behavior: the sketch initializes the I2C display, advances a digital clock from `03:26:00`, reads the potentiometer ADC value, and displays both values at the same time
+* LCD output: row 1 shows `HH:MM:SS`; row 2 shows `ADC:<raw>`
+* Serial feedback: `Current time: <HH:MM:SS> | ADC GPIO4: <raw>`
 
 ### Activity 3 - SPI BMP280 Sensor Monitor
 

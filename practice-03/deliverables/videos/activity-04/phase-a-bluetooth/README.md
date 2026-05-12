@@ -2,13 +2,17 @@
 
 Public link:
 
-* Pending
+* https://youtube.com/shorts/fElDFphvVDI?si=rPs2ZITdKcybS1aW
 
 Repository file:
 
-* Pending
+* `bluetooth-sensor-led.mp4`
 
-What the video should show:
+Captions:
+
+* `bluetooth-sensor-led.es.srt`
+
+What the video shows:
 
 * Bluetooth connection between the ESP32 and a mobile device
 * data sent from the ESP32

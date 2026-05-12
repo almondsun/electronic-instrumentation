@@ -1,0 +1,19 @@
+1
+00:00:00,000 --> 00:00:18,000
+En la fase MQTT el ESP32 se conecta a la red WiFi y al broker configurado.
+
+2
+00:00:18,000 --> 00:00:48,000
+El dispositivo publica telemetria del sensor en los topicos definidos para la practica.
+
+3
+00:00:48,000 --> 00:01:20,000
+Desde el receptor o la pagina HTML se envian comandos ON, OFF, TOGGLE o STATUS.
+
+4
+00:01:20,000 --> 00:01:55,000
+El ESP32 recibe los mensajes del broker y actualiza el estado del LED.
+
+5
+00:01:55,000 --> 00:02:28,000
+La demostracion evidencia el intercambio de mensajes mediado por MQTT.

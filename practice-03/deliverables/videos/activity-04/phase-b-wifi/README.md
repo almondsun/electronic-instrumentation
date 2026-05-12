@@ -2,13 +2,17 @@
 
 Public link:
 
-* Pending
+* https://youtube.com/shorts/Vz8r_O9taPU?si=RDz3G7QgOypG8BYC
 
 Repository file:
 
-* Pending
+* Not stored locally yet
 
-What the video should show:
+Captions:
+
+* `wifi-web-server.es.srt`
+
+What the video shows:
 
 * ESP32 connected to WiFi
 * web server reachable from another device on the same network
