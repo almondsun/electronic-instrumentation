@@ -1,19 +1,59 @@
 1
-00:00:00,000 --> 00:00:12,000
-El montaje usa un ESP32 con una pantalla LCD 16x2 conectada por I2C.
+00:00:00,590 --> 00:00:13,230
+Bueno, para la actividad 2, lo que se pedía era usar un display por comunicación I2C
 
 2
-00:00:12,000 --> 00:00:30,000
-La primera linea de la pantalla muestra el reloj digital en formato horas, minutos y segundos.
+00:00:13,230 --> 00:00:22,350
+para mostrar el valor de un ADC de este potenciómetro de acá y el valor de la hora actual
 
 3
-00:00:30,000 --> 00:00:52,000
-La segunda linea muestra la lectura ADC del potenciometro conectada al ESP32.
+00:00:22,350 --> 00:00:29,790
+basada en la hora local que vendría siendo de las 3.31 pm, entonces aquí tenemos el
 
 4
-00:00:52,000 --> 00:01:18,000
-Al mover el potenciometro cambia el valor mostrado en pantalla y reportado por el monitor serial.
+00:00:29,790 --> 00:00:33,830
+código, ya lo tenemos corriendo, en el monitor serial aparecen los mismos valores
 
 5
-00:01:18,000 --> 00:01:57,000
-La demostracion confirma la comunicacion I2C y la visualizacion simultanea de tiempo y entrada analogica.
+00:00:33,830 --> 00:00:44,470
+del display y aquí vemos la hora, 3.30.20, está un poquito desfasado y el ADC se
+
+6
+00:00:44,470 --> 00:00:49,870
+mantiene en cero porque está hacia el extremo izquierdo, el potenciómetro, pero si
+
+7
+00:00:49,870 --> 00:00:56,030
+lo lleváramos al extremo derecho estaría en 4.095, veamos que el display
+
+8
+00:00:56,030 --> 00:01:01,670
+efectivamente está funcionando, mostrando la hora y el ADC también está en cero,
+
+9
+00:01:01,670 --> 00:01:09,350
+entonces vamos moviendo el potenciómetro completamente a la derecha, ahí ya llegó al
+
+10
+00:01:09,350 --> 00:01:16,190
+límite extremo derecho, vemos entonces que en el serial aparece que está en 4.095
+
+11
+00:01:16,190 --> 00:01:24,190
+el ADC y también en el display aparece que está en 4.095 el ADC, es pues un display
+
+12
+00:01:25,150 --> 00:01:32,030
+que originalmente no tiene comunicación I2C, por lo que tiene implementado un
+
+13
+00:01:32,030 --> 00:01:44,340
+conversor a I2C, vemos aquí los pines del conversor y bueno, ese sería el circuito
+
+14
+00:01:44,340 --> 00:01:49,700
+funcionando, ahí estamos moviendo el potenciómetro y ahí se actualizan los
+
+15
+00:01:49,700 --> 00:01:57,580
+valores del ADC al igual que acá en el serial, entonces esa sería la actividad 2.

@@ -1,19 +1,59 @@
 1
-00:00:00,000 --> 00:00:12,000
-Esta actividad conecta el sensor BMP280 al ESP32 mediante la interfaz SPI.
+00:00:00,780 --> 00:00:06,480
+Hola, en este video voy a mostrar el funcionamiento de la actividad 3 de la práctica 3 en donde
 
 2
-00:00:12,000 --> 00:00:32,000
-El programa inicializa el bus SPI y verifica que el sensor sea detectado correctamente.
+00:00:06,480 --> 00:00:12,380
+se nos pidió utilizar un sensor de presión barométrica y temperatura. Para ello, entonces
 
 3
-00:00:32,000 --> 00:00:58,000
-Las mediciones de temperatura y presion barometrica se leen periodicamente desde el BMP280.
+00:00:12,380 --> 00:00:19,440
+nosotros usamos el BMP280, el cual permite medir la temperatura y presión barométrica.
 
 4
-00:00:58,000 --> 00:01:25,000
-Los valores adquiridos se reportan en el monitor serial para comprobar el funcionamiento.
+00:00:19,440 --> 00:00:25,540
+En esta implementación el sensor no se comunica por I2C, sino que mediante protocolo SPI,
 
 5
-00:01:25,000 --> 00:01:45,000
-La prueba evidencia la comunicacion SPI y la lectura estable del sensor.
+00:00:25,540 --> 00:00:32,340
+que es una interfaz de comunicación serial síncrona. Inicializamos la comunicación a 115,000
+
+6
+00:00:32,340 --> 00:00:37,820
+baudios, lo configuramos y reconocemos el sensor y a partir de ahí se empieza a leer
+
+7
+00:00:37,820 --> 00:00:42,740
+periódicamente los valores de temperatura y presión. Entonces acá vamos a empezar a
+
+8
+00:00:42,740 --> 00:00:51,660
+monitorear y vamos a ver 3 valores principales, uno de temperatura en Celsius, otro que
+
+9
+00:00:51,660 --> 00:00:57,380
+corresponde a la presión media en Pascales y hay otro valor que corresponde a la misma
+
+10
+00:00:57,380 --> 00:01:05,980
+presión convertida a hectopascales. Entonces para la prueba lo que haré será respirar aire caliente
+
+11
+00:01:05,980 --> 00:01:14,740
+sobre el sensor y la temperatura debería aumentar de sus 21.9 grados estables que
+
+12
+00:01:14,740 --> 00:01:25,450
+tiene en este momento, así que empezaré a soplar. Como podemos ver de manera casi
+
+13
+00:01:25,450 --> 00:01:33,330
+que inmediata empezó a subir la temperatura y la presión no cambió mucho que digamos.
+
+14
+00:01:33,330 --> 00:01:39,730
+Entonces aquí podemos ver que incluso ya en este momento está empezando a disminuir la
+
+15
+00:01:39,730 --> 00:01:44,570
+temperatura confirmando que en efecto estamos sensando de manera adecuada.

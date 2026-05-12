@@ -6,7 +6,7 @@ Public link:
 
 Repository file:
 
-* Not stored locally yet
+* `wifi-web-server.mp4`
 
 Captions:
 

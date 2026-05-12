@@ -1,15 +1,31 @@
 1
-00:00:00,000 --> 00:00:10,000
-En la fase Bluetooth el ESP32 anuncia un servicio BLE tipo terminal UART.
+00:00:00,080 --> 00:00:08,680
+En Actividad 4A implementamos una comunicación Bluetooth Serial Clásico entre el ESP32 y el
 
 2
-00:00:10,000 --> 00:00:24,000
-El dispositivo movil se conecta al ESP32 y recibe datos del sensor.
+00:00:08,680 --> 00:00:15,160
+celular. La idea principal es que el celular puede enviar comandos para encender o apagar un led,
 
 3
-00:00:24,000 --> 00:00:40,000
-Desde la aplicacion terminal se envian comandos para controlar el LED.
+00:00:15,160 --> 00:00:23,160
+en este caso uno para encender y cero para apagar. También podemos medir manualmente la lectura de
 
 4
-00:00:40,000 --> 00:00:57,000
-La respuesta del LED y los mensajes de estado confirman la comunicacion bidireccional.
+00:00:23,160 --> 00:00:31,800
+un potenciómetro y además recibir automáticamente cada segundo el valor de este potenciómetro como
+
+5
+00:00:31,800 --> 00:00:38,640
+podemos observar en el vídeo. Al mismo tiempo el ESP32 también muestra toda la información en el
+
+6
+00:00:38,640 --> 00:00:46,080
+monitor serial, o sea podemos ver ambas informaciones tanto en el celular como en el computador.
+
+7
+00:00:47,040 --> 00:00:54,000
+En la protoboard utilizamos un led azul junto con el potenciómetro, como está de día casi no se ve,
+
+8
+00:00:54,000 --> 00:00:57,680
+pero este es controlado por Bluetooth desde el celular.

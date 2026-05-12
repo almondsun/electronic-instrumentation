@@ -1,15 +1,91 @@
 1
-00:00:00,000 --> 00:00:10,000
-En la fase WiFi el ESP32-C6 funciona como servidor web para controlar un LED RGB NeoPixel.
+00:00:00,560 --> 00:00:09,920
+aquí está el código, lo que me permite este código es que la ESP32 se conecte a mi red local por
 
 2
-00:00:10,000 --> 00:00:25,000
-Un navegador conectado a la misma red abre la interfaz publicada por el ESP32-C6.
+00:00:09,920 --> 00:00:16,000
+medio del hotspot del computador, vemos que la red se llama RedMiguel y la contraseña
 
 3
-00:00:25,000 --> 00:00:45,000
-La pagina muestra un selector de color y envia los valores RGB seleccionados al servidor.
+00:00:16,000 --> 00:00:23,360
+hace los números del 1 al 8, perfecto, entonces vamos a visualizar que esté funcionando
 
 4
-00:00:45,000 --> 00:01:00,000
-El cambio de color del NeoPixel confirma la comunicacion WiFi y el control remoto desde la pagina web.
+00:00:23,360 --> 00:00:30,200
+correctamente esto, adicionalmente lo que hace el código es que me crea un HTML para visualizar
+
+5
+00:00:30,200 --> 00:00:40,080
+la página, que es lo que me va a permitir hacer eso por medio del servidor web creado con la ESP32,
+
+6
+00:00:40,080 --> 00:00:50,440
+lo que me va a permitir hacer es controlar el RGB de la placa, me va a permitir cambiar los colores
+
+7
+00:00:50,440 --> 00:00:57,480
+del RGB de la placa y también qué tan atenuada está la luz, así que vamos a compilar el código,
+
+8
+00:00:57,480 --> 00:01:05,460
+bueno ya el código está compilado, vemos que acá está la ESP32 esperando a conectar el WiFi,
+
+9
+00:01:05,460 --> 00:01:13,340
+entonces vamos a activar la red hotspot, vemos que no hay ningún componente conectado todavía
+
+10
+00:01:15,450 --> 00:01:23,690
+y ya aparece conectado un componente que es la ESP32, que precisamente aquí aparece ya
+
+11
+00:01:25,490 --> 00:01:31,690
+que se conectó, esta es la ip del servidor y aquí está el mensaje de que ya se inicia
+
+12
+00:01:31,690 --> 00:01:38,490
+el servidor web correctamente, entonces copiamos y accedemos al servidor web por medio del
+
+13
+00:01:38,490 --> 00:01:51,060
+navegador, escribimos entonces http, 2 puntos, slash slash y ahí estaría la dirección del servidor web,
+
+14
+00:01:51,060 --> 00:02:00,930
+accedemos a él y vemos que esta es la interfaz gráfica del servidor web,
+
+15
+00:02:00,930 --> 00:02:06,090
+¿qué vamos a hacer con esto? sencillo, vamos a seleccionar aquí el color
+
+16
+00:02:07,690 --> 00:02:14,250
+del RGB como queremos acomodarle, en este momento está en verde y ¿qué va a suceder?
+
+17
+00:02:14,250 --> 00:02:20,650
+cuando le demos aquí enviar color, este color se va a ver reflejado aquí en el led RGB pero
+
+18
+00:02:20,650 --> 00:02:25,850
+adicionalmente en el monitor serial vamos a haber reflejado cada cambio que hagamos en el led,
+
+19
+00:02:25,850 --> 00:02:33,550
+entonces vamos a visualizarlo, vamos a enviar por ejemplo este color que ya está por defecto
+
+20
+00:02:34,790 --> 00:02:38,710
+y vemos que se coloca en verde, vamos a ver qué pasa en el monitor serial,
+
+21
+00:02:39,710 --> 00:02:48,070
+nos indica aquí el código del color, como nos está indicando las combinaciones de rojo,
+
+22
+00:02:48,070 --> 00:02:53,630
+verde y azul, como en este caso es verde puro, entonces el verde está al máximo mientras
+
+23
+00:02:53,630 --> 00:02:59,910
+que el rojo y el azul están completamente desactivados, vamos entonces a cambiarlo a un color
