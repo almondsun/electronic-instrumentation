@@ -1,0 +1,486 @@
+\documentclass[aspectratio=169,9pt]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{ragged2e}
+\usepackage{xcolor}
+
+\definecolor{eiBlue}{HTML}{1F4E79}
+\definecolor{eiTeal}{HTML}{2F7E8A}
+\definecolor{eiGray}{HTML}{4A5568}
+\definecolor{eiLight}{HTML}{EEF4F8}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+\setbeamercolor{palette primary}{bg=eiBlue,fg=white}
+\setbeamercolor{palette secondary}{bg=eiTeal,fg=white}
+\setbeamercolor{frametitle}{bg=eiBlue,fg=white}
+\setbeamercolor{title}{bg=eiBlue,fg=white}
+\setbeamercolor{subtitle}{fg=white}
+\setbeamercolor{block title}{bg=eiBlue,fg=white}
+\setbeamercolor{block body}{bg=eiLight,fg=black}
+\setbeamercolor{structure}{fg=eiBlue}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{enumerate items}[default]
+
+\newcommand{\exercise}[1]{\textbf{Ejercicio #1}}
+\newcommand{\result}[1]{\textbf{\color{eiTeal}Resultado:} #1}
+\newcommand{\unit}[1]{\,\mathrm{#1}}
+\newcommand{\SPL}{\mathrm{SPL}}
+\newcommand{\GBW}{\mathrm{GBW}}
+
+\title[Exhibición 03]{Exhibición 03: solución de ejercicios asignados}
+\subtitle{Grupo 1 - Instrumentación electrónica}
+\author[Grupo 1]{\texorpdfstring{Martín Ramírez Espinosa\\Miguel Angel Estrada Ocampo\\Brayan Manuel Gallego Ocampo}{Martín Ramírez Espinosa, Miguel Angel Estrada Ocampo, Brayan Manuel Gallego Ocampo}}
+\institute[LIE]{Laboratorio de Instrumentación Electrónica}
+\date[22 de mayo de 2026]{22 de mayo de 2026}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Asignación del grupo 1}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.52\textwidth}
+      \includegraphics[width=0.98\linewidth]{../../exercises.png}
+    \end{column}
+    \begin{column}{0.44\textwidth}
+      \begin{block}{Ejercicios de la primera fila}
+        \centering
+        \begin{tabular}{ccccccc}
+          \toprule
+          1 & 2 & 3 & 4 & 5 & 6 & 7\\
+          \midrule
+          9.2 & 7.10 & 6.2 & 8.13 & 8.31 & 9.16 & 8.3\\
+          \bottomrule
+        \end{tabular}
+      \end{block}
+      \vspace{0.4em}
+      \justifying
+      La presentación mantiene el criterio de la exhibición anterior: identificar la variable física, elegir el sensor, traducirla a una señal eléctrica y cerrar con las prestaciones mínimas del acondicionamiento.
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Mapa conceptual de la presentación}
+  \begin{tabularx}{\textwidth}{@{}lX@{}}
+    \toprule
+    \textbf{Bloque} & \textbf{Idea dominante}\\
+    \midrule
+    6.2 & Medida resistiva: comparación entre medida a cuatro hilos y polímetro estándar a dos hilos.\\
+    7.10 & Sensor capacitivo diferencial: presión, capacidad variable y salida \(0\)-\(5\unit{V}\).\\
+    8.3, 8.13 & Sensores generadores: termopares y micrófonos piezoeléctricos.\\
+    8.31 & Aislamiento galvánico por conversión tensión-campo magnético-sensor Hall.\\
+    9.2, 9.16 & Selección instrumental: escoger tecnología por campo de medida, simplicidad y rango útil.\\
+    \bottomrule
+  \end{tabularx}
+\end{frame}
+
+\begin{frame}{Contexto de ejercicios dependientes}
+  \small
+  \begin{tabularx}{\textwidth}{@{}lX@{}}
+    \toprule
+    \textbf{Ejercicio} & \textbf{Contexto previo necesario}\\
+    \midrule
+    9.2 & Depende de 9.1: allí se comparan sensores de temperatura. Antes de resolver 9.2 se debe recordar que el LM35, la NTC, el termopar y la PT100 tienen campos de medida y complejidades de acondicionamiento distintas.\\
+    6.2 & Depende directamente de 6.1: el problema anterior calcula el error de una medida de baja resistencia con fuente de \(20\unit{mA}\), conexión a cuatro hilos y polímetro de \(200\unit{mV}\).\\
+    8.31 & Depende de 8.30: se reutiliza el sensor Hall A1301, el núcleo U-I de ferrita y la etapa con ajuste de offset/ganancia; cambia la variable medida, de corriente a tensión aislada.\\
+    \bottomrule
+  \end{tabularx}
+\end{frame}
+
+\begin{frame}{\exercise{9.2}: contexto del problema anterior}
+  \begin{block}{Referencia a 9.1}
+    El problema 9.2 no empieza desde cero: usa la comparación de sensores del problema 9.1. Allí se consideran, entre otros, sensores integrados tipo LM35, NTC, termopares y PT100.
+  \end{block}
+
+  \begin{itemize}
+    \item El criterio que arrastra 9.2 es el campo de medida real de cada sensor.
+    \item También importa la dificultad de acondicionamiento: compensación de unión fría en termopares, puente en RTD y fuerte no linealidad en NTC.
+    \item Con ese contexto, la pregunta ya no es calcular una curva, sino elegir una tecnología adecuada para \(-20^\circ\mathrm{C}\) a \(200^\circ\mathrm{C}\).
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\exercise{9.2}: medida de temperatura de laboratorio}
+  \begin{block}{Planteamiento}
+    Se desea medir temperatura en un equipo de laboratorio con campo de medida entre \(-20^\circ\mathrm{C}\) y \(200^\circ\mathrm{C}\). La decisión se toma a partir de los dispositivos comparados en el problema anterior.
+  \end{block}
+
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.47\textwidth}
+      Criterio de descarte:
+      \begin{itemize}
+        \item LM35: no cubre con margen suficiente todo el alcance.
+        \item NTC: puede acercarse al campo, pero su linealidad es pobre para una medida amplia.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      Alternativas viables:
+      \begin{itemize}
+        \item Termopar: cubre el rango, pero exige compensación de unión fría.
+        \item PT100: cubre el rango y se acondiciona con puente de medida.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \result{sin restricciones adicionales de coste o exactitud, la opción más manejable es una PT100 con puente y amplificación posterior.}
+\end{frame}
+
+\begin{frame}{\exercise{7.10}: sensor capacitivo de presión diferencial}
+  \begin{block}{Planteamiento}
+    El sensor está formado por tres láminas metálicas paralelas. Las placas fijas están separadas \(0.5\unit{mm}\) y tienen \(2\unit{cm^2}\); la presión diferencial deforma la placa central y modifica las capacidades \(C_1\) y \(C_2\).
+  \end{block}
+
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      Capacidad nominal por rama:
+      \[
+        C_0=\frac{\varepsilon_0 A}{d}
+        =\frac{8.85\cdot10^{-12}(2\cdot10^{-4})}{0.5\cdot10^{-3}}
+        \simeq 3.54\unit{pF}.
+      \]
+      Con deformación máxima media del \(30\%\):
+      \[
+        C_1\simeq\frac{C_0}{0.7}=5.06\unit{pF},
+        \qquad
+        C_2\simeq\frac{C_0}{1.3}=2.72\unit{pF}.
+      \]
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      La variable útil no es una capacidad absoluta sino el desequilibrio:
+      \[
+        \Delta C=C_1-C_2 .
+      \]
+      Por tanto conviene excitar en alterna y usar demodulación o rectificación para obtener una salida continua proporcional a la presión diferencial.
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{\exercise{7.10}: acondicionamiento propuesto}
+  \begin{block}{Prestación exigida}
+    La salida debe cubrir \(0\) a \(5\unit{V}\) y respetar un ancho de banda a \(3\unit{dB}\) de al menos \(500\unit{Hz}\).
+  \end{block}
+
+  \begin{itemize}
+    \item Se usa un puente capacitivo diferencial para convertir \(\Delta C\) en amplitud alterna.
+    \item La frecuencia de excitación debe quedar suficientemente por encima de \(500\unit{Hz}\) para que el filtro de salida no limite la dinámica de presión.
+    \item El rectificador/demodulador debe conservar el signo de \(P_2-P_1\) si se necesita presión bidireccional.
+    \item La etapa final ajusta offset y ganancia para mapear el extremo negativo a \(0\unit{V}\) y el positivo a \(5\unit{V}\).
+  \end{itemize}
+
+  \result{el circuito se define por un puente capacitivo en alterna, demodulación síncrona o rectificación de precisión, filtro con \(f_{3dB}\ge500\unit{Hz}\) y amplificación calibrada a \(0\)-\(5\unit{V}\).}
+\end{frame}
+
+\begin{frame}{\exercise{6.2}: contexto del problema anterior}
+  \begin{block}{Referencia a 6.1}
+    El problema 6.1 diseña una medida de resistencias bajas en la banda \(1\) a \(10\unit{\Omega}\), con fuente de \(20\unit{mA}\), conexión a cuatro hilos y un polímetro de \(3.5\) dígitos.
+  \end{block}
+
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      Resultado de 6.1:
+      \[
+        V_m=\frac{100\unit{k\Omega}R_x}{100\unit{k\Omega}+R_x}\,20\unit{mA}.
+      \]
+      Para \(R_x=10\unit{\Omega}\):
+      \[
+        V_m\simeq199.80\unit{mV}.
+      \]
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      Error del sistema a cuatro hilos:
+      \[
+        \varepsilon_{lin}\simeq0.018\%,
+        \qquad
+        \varepsilon_{res}\simeq\frac{1}{2000}=0.05\%.
+      \]
+      Por suma en peor caso:
+      \[
+        \varepsilon_T\simeq0.068\%.
+      \]
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{\exercise{6.2}: comparación con polímetro estándar}
+  \begin{block}{Planteamiento propio de 6.2}
+    Se compara el resultado de 6.1 con un polímetro estándar de \(0.1\%\) en escala de \(10\unit{\Omega}\), usando cables de \(0.25\unit{\Omega}\) y resistencia de contacto no menor que \(70\unit{m\Omega}\).
+  \end{block}
+
+  En una medida estándar a dos hilos, el instrumento mide:
+  \[
+    R_{med}=R_x+2R_w+2R_c.
+  \]
+
+  Con los datos del enunciado:
+  \[
+    \Delta R=2(0.25)+2(0.07)=0.64\unit{\Omega}.
+  \]
+
+  En el fondo de escala de \(10\unit{\Omega}\):
+  \[
+    \varepsilon_{cables+contactos}=\frac{0.64}{10}\cdot100=6.4\%.
+  \]
+
+  \result{la conexión a dos hilos queda dominada por cables y contactos; el error es mucho mayor que el \(0.068\%\) del método a cuatro hilos del problema 6.1.}
+\end{frame}
+
+\begin{frame}{\exercise{8.13}: micrófono piezoeléctrico}
+  \begin{block}{Planteamiento}
+    Un micrófono Endevco 2510M4A debe captar sonido entre \(100\) y \(150\unit{dB_{SPL}}\) y entregar \(200\unit{mV_{RMS}}\) mediante amplificación.
+  \end{block}
+
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.47\textwidth}
+      Conversión de nivel de presión:
+      \[
+        L_P=20\log\frac{P}{20\unit{\mu Pa}}.
+      \]
+      Por tanto:
+      \[
+        100\unit{dB_{SPL}}\to 2\unit{Pa},
+        \qquad
+        150\unit{dB_{SPL}}\to 633\unit{Pa}.
+      \]
+    \end{column}
+    \begin{column}{0.49\textwidth}
+      Con sensibilidad \(0.155\unit{pC/Pa}\):
+      \[
+        Q_{\max}=0.155(633)\simeq98.1\unit{pC}.
+      \]
+      Con capacidad de salida \(C=5200\unit{pF}\):
+      \[
+        V_{mic,\max}\simeq\frac{98.1\unit{pC}}{5200\unit{pF}}
+        =18.9\unit{mV_{RMS}}.
+      \]
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{\exercise{8.13}: amplificador requerido}
+  \begin{block}{Ganancia y ancho de banda}
+    Para llegar a \(200\unit{mV_{RMS}}\):
+    \[
+      G=\frac{200}{18.9}\simeq 10.6 .
+    \]
+    Si se admite \(1\%\) de error de ganancia hasta \(4\unit{kHz}\), una especificación conservadora para el operacional es:
+    \[
+      A_d\gtrsim 10^3,
+      \qquad
+      \GBW\approx 4\unit{MHz}.
+    \]
+  \end{block}
+
+  \begin{block}{Una implementación directa}
+    Etapa no inversora con:
+    \[
+      R_1=100\unit{\Omega},\qquad R_2=960\unit{\Omega},
+      \qquad G=1+\frac{R_2}{R_1}=10.6.
+    \]
+  \end{block}
+
+  \result{el micrófono se puede acondicionar con una etapa no inversora de ganancia 10.6 y operacional con margen de \(\GBW\) del orden de megahercios.}
+\end{frame}
+
+\begin{frame}{\exercise{8.31}: contexto del problema anterior}
+  \begin{block}{Referencia a 8.30}
+    El ejercicio 8.31 usa el mismo esquema del problema 8.30: sensor Hall A1301, núcleo U-I de ferrita, \(A_e=2\unit{cm^2}\), frecuencia de referencia de \(1\unit{kHz}\) y electrónica con ajuste de offset y ganancia.
+  \end{block}
+
+  \begin{itemize}
+    \item En 8.30 la corriente de línea genera el campo que mide el Hall.
+    \item Con \(10\unit{A}\) se usan \(N=17\) vueltas y el campo queda próximo al límite admisible del sensor.
+    \item Para ampliar a \(50\unit{A}\), el libro reduce el número de vueltas a \(3\) y mantiene la misma idea de acondicionamiento.
+    \item En 8.31 se conserva el bloque Hall, pero la corriente del devanado se obtiene desde una tensión de hasta \(\pm400\unit{V}\), manteniendo aislamiento galvánico.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\exercise{8.31}: aislamiento galvánico de una tensión}
+  \begin{block}{Planteamiento}
+    Se desea medir una tensión de hasta \(\pm400\unit{V}\) con aislamiento galvánico y obtener una salida \(-5\) a \(5\unit{V}\).
+  \end{block}
+
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      Se convierte la tensión en una corriente pequeña por un devanado:
+      \[
+        I=\frac{V}{R+j\omega L}.
+      \]
+      Para que la frecuencia afecte poco:
+      \[
+        R\gg \omega L,
+        \qquad R\approx 10\omega L.
+      \]
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      El campo en el núcleo se aproxima por:
+      \[
+        B=\frac{V}{10\omega A_eN}.
+      \]
+      Fijando \(B_{\max}=700\unit{G}=0.07\unit{T}\),
+      \(V=400\unit{V}\), \(A_e=2\unit{cm^2}\) y \(f=1\unit{kHz}\):
+      \[
+        N\simeq 1820\ \text{vueltas}.
+      \]
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{\exercise{8.31}: dimensionamiento y salida}
+  \begin{block}{Valores del devanado}
+    Con \(N\simeq1820\), el libro obtiene:
+    \[
+      L\simeq270\unit{mH},
+      \qquad
+      R\simeq17.0\unit{k\Omega}.
+    \]
+  \end{block}
+
+  \begin{itemize}
+    \item El sensor Hall trabaja dentro de su campo admisible y mantiene separación galvánica entre la línea de \(400\unit{V}\) y la electrónica de salida.
+    \item La salida del Hall se centra mediante ajuste de offset.
+    \item La etapa final usa ganancia ajustable para cubrir \(-5\) a \(5\unit{V}\).
+    \item Si las \(1820\) vueltas no caben físicamente, debe aumentarse la sección efectiva del núcleo o rediseñarse el conjunto magnético.
+  \end{itemize}
+
+  \result{la medida queda aislada al convertir tensión en campo magnético, y la electrónica de baja tensión sólo mide el campo mediante el sensor Hall.}
+\end{frame}
+
+\begin{frame}{\exercise{9.16}: caudal de gas por efecto Venturi}
+  \begin{block}{Planteamiento}
+    Por una tubería de \(1\unit{m}\) de diámetro circula un gas de densidad \(1.145\unit{kg/m^3}\) a \(2\unit{atm}\). Se requiere medir caudal con alcance de \(10\unit{m^3/s}\).
+  \end{block}
+
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      Para un Venturi:
+      \[
+        Q=A_1
+        \sqrt{\frac{2(P_1-P_2)}
+        {\rho\left(\frac{A_1^2}{A_2^2}-1\right)}}.
+      \]
+      Con \(A_1=1.57\unit{m^2}\) y \(A_2=0.785\unit{m^2}\):
+      \[
+        P_1-P_2\simeq69.7\unit{Pa}.
+      \]
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      El salto de presión es muy bajo frente a sensores habituales de \(10\unit{mbar}\):
+      \[
+        10\unit{mbar}=1000\unit{Pa}.
+      \]
+      Se aprovecha menos del \(10\%\) del alcance del sensor.
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{\exercise{9.16}: alternativa y cadena de medida}
+  \begin{block}{Reducir la sección de paso}
+    Si el estrechamiento baja hasta el \(20\%\) del área:
+    \[
+      P_1-P_2\simeq92.9\unit{Pa},
+      \qquad
+      v_1\simeq6.36\unit{m/s},
+      \qquad
+      v_2\simeq14.3\unit{m/s}.
+    \]
+    La velocidad sigue siendo baja, por lo que no aparece una perturbación extrema del flujo.
+  \end{block}
+
+  \begin{itemize}
+    \item Sensor principal: presión diferencial de bajo alcance, alrededor de \(10\unit{mbar}\).
+    \item Acondicionamiento: amplificación posterior para usar mejor la entrada del conversor.
+    \item Cálculo: microcontrolador con parámetros geométricos del Venturi y densidad del gas.
+  \end{itemize}
+
+  \result{la opción viable es un Venturi con sensor diferencial sensible y cálculo digital del caudal; el reto principal es medir diferencias de presión pequeñas.}
+\end{frame}
+
+\begin{frame}{\exercise{8.3}: termopar tipo J}
+  \begin{block}{Planteamiento}
+    Un termopar tipo J tiene una curva de calibración polinómica en el intervalo \(760^\circ\mathrm{C}\) a \(1200^\circ\mathrm{C}\). Se pide la mejor linealización en todo el campo y luego una linealización específica para \(800^\circ\mathrm{C}\) a \(900^\circ\mathrm{C}\).
+  \end{block}
+
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.48\textwidth}
+      Modelo de calibración:
+      \[
+        V=\sum_{i=0}^{5}a_iT^i\quad [\unit{\mu V}].
+      \]
+      La linealización global obtenida en el libro es:
+      \[
+        V\simeq0.060361T-2.5880\quad [\unit{mV}].
+      \]
+      Sensibilidad:
+      \[
+        S\simeq60.361\unit{\mu V/^\circ C}.
+      \]
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      Error de linealidad global:
+      \[
+        \varepsilon_{global}\simeq1.38\%.
+      \]
+      En una zona más estrecha, \(800^\circ\mathrm{C}\) a \(900^\circ\mathrm{C}\):
+      \[
+        V\simeq0.063885T-5.5978\quad [\unit{mV}],
+      \]
+      y el error baja a:
+      \[
+        \varepsilon_{800-900}\simeq0.34\%.
+      \]
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{\exercise{8.3}: decisión de linealización}
+  \begin{block}{Comparación}
+    Si se usa la recta global dentro del intervalo \(800^\circ\mathrm{C}\) a \(900^\circ\mathrm{C}\), el error en esa zona sería del orden de \(3.23\%\). Al recalcular la recta sólo para ese campo de trabajo, el error cae hasta \(0.34\%\).
+  \end{block}
+
+  \begin{itemize}
+    \item La sensibilidad local es mayor que la sensibilidad global: \(63.885\unit{\mu V/^\circ C}\) frente a \(60.361\unit{\mu V/^\circ C}\).
+    \item La linealización debe hacerse sobre el campo real de operación del horno, no necesariamente sobre todo el rango disponible del termopar.
+    \item El precio de mejorar linealidad es perder validez fuera del intervalo específico.
+  \end{itemize}
+
+  \result{para un horno entre \(800^\circ\mathrm{C}\) y \(900^\circ\mathrm{C}\), conviene una linealización local; reduce el error de \(3.23\%\) a \(0.34\%\).}
+\end{frame}
+
+\begin{frame}{Resumen numérico}
+  \small
+  \begin{tabularx}{\textwidth}{@{}lXl@{}}
+    \toprule
+    \textbf{Ej.} & \textbf{Resultado principal} & \textbf{Decisión}\\
+    \midrule
+    9.2 & Campo \(-20\) a \(200^\circ\mathrm{C}\). & Preferir PT100; termopar viable con compensación.\\
+    7.10 & \(C_0\simeq3.54\unit{pF}\); \(C_1\approx5.06\unit{pF}\), \(C_2\approx2.72\unit{pF}\). & Puente capacitivo y salida \(0\)-\(5\unit{V}\).\\
+    6.2 & Error a dos hilos por cables/contactos: \(0.64\unit{\Omega}\), es decir \(6.4\%\) sobre \(10\unit{\Omega}\). & Usar cuatro hilos para baja resistencia.\\
+    8.13 & \(Q_{\max}\approx98.1\unit{pC}\), \(V_{mic}\approx18.9\unit{mV}\), \(G\approx10.6\). & No inversor con \(\GBW\sim4\unit{MHz}\).\\
+    8.31 & \(N\approx1820\), \(L\approx270\unit{mH}\), \(R\approx17\unit{k\Omega}\). & Aislamiento magnético con sensor Hall.\\
+    9.16 & \(\Delta P\approx70\)-\(93\unit{Pa}\) para \(Q=10\unit{m^3/s}\). & Venturi + sensor diferencial de bajo alcance.\\
+    8.3 & Termopar J: linealización global \(1.38\%\); linealización local \(800\)-\(900^\circ\mathrm{C}\): \(0.34\%\). & Linealizar sobre el campo real.\\
+    \bottomrule
+  \end{tabularx}
+\end{frame}
+
+\begin{frame}{Conclusiones generales}
+  \begin{itemize}
+    \item La elección del sensor se decide primero por el campo de medida y luego por la complejidad del acondicionamiento.
+    \item Cuando un ejercicio referencia al anterior, la solución debe empezar recuperando el contrato heredado: sensor, rango, conexión o circuito base.
+    \item En medidas resistivas de bajo valor, la forma de conexión puede pesar más que la especificación nominal del instrumento.
+    \item En sensores capacitivos y piezoeléctricos, las capacitancias parásitas forman parte del circuito, no son un detalle secundario.
+    \item Para aislamiento galvánico o caudales de gas, el sensor mide una variable intermedia: campo magnético o presión diferencial.
+    \item El resultado útil no es sólo el cálculo; es la cadena completa sensor-acondicionamiento-conversión-salida.
+  \end{itemize}
+\end{frame}
+
+\end{document}
