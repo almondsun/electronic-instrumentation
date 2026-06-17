@@ -57,15 +57,8 @@ void loop() {
     Serial.println("Tanque casi lleno");
     pixels.setPixelColor(0, pixels.Color(255, 255, 0));
     pixels.show();
-    if (tiempoInicio == 0) {
-      tiempoInicio = millis();
-    }
-
-    if (millis() - tiempoInicio >= 3000) {
-      llenar = true;
-    } else {
-      llenar = false;
-    }
+    llenar = true;
+    tiempoInicio = 0;
   }
 
   else if (distancia < 13.9) {

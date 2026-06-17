@@ -71,9 +71,7 @@ constexpr uint8_t NUM_PIXELS = 1;
 constexpr float FULL_DISTANCE_CM = 2.5F;
 constexpr float NEARLY_FULL_DISTANCE_CM = 6.0F;
 constexpr float EMPTY_DISTANCE_CM = 13.9F;
-constexpr uint32_t NEARLY_FULL_CONFIRM_MS = 3000;
 constexpr uint32_t ECHO_TIMEOUT_US = 30000;
-constexpr uint32_t WIFI_RETRY_PERIOD_MS = 5000;
 constexpr uint32_t MQTT_RETRY_PERIOD_MS = 3000;
 constexpr uint32_t TELEMETRY_PERIOD_MS = 1000;
 constexpr uint32_t MQTT_DIAGNOSTIC_PERIOD_MS = 15000;
@@ -107,7 +105,6 @@ PubSubClient mqttClient(wifiClient);
 ControlMode g_controlMode = ControlMode::Automatic;
 TankReading g_lastReading = {0.0F, 0, TankState::SensorError, false};
 bool g_pumpOn = false;
-uint32_t g_nearlyFullSinceMs = 0;
 
 const char *tankStateName(TankState state) {
   switch (state) {
@@ -202,29 +199,22 @@ TankReading readTank() {
 
 void applyAutomaticControl(const TankReading &reading) {
   if (!reading.valid) {
-    g_nearlyFullSinceMs = 0;
     setPump(false);
     return;
   }
 
   switch (reading.state) {
     case TankState::Full:
-      g_nearlyFullSinceMs = 0;
       setPump(false);
       break;
     case TankState::NearlyFull:
-      if (g_nearlyFullSinceMs == 0) {
-        g_nearlyFullSinceMs = millis();
-      }
-      setPump(millis() - g_nearlyFullSinceMs < NEARLY_FULL_CONFIRM_MS);
+      setPump(true);
       break;
     case TankState::Low:
     case TankState::Empty:
-      g_nearlyFullSinceMs = 0;
       setPump(true);
       break;
     case TankState::SensorError:
-      g_nearlyFullSinceMs = 0;
       setPump(false);
       break;
   }
@@ -347,11 +337,11 @@ void onMqttMessage(char *topic, byte *payload, unsigned int length) {
 }
 
 bool ensureWifiConnected() {
-  static uint32_t lastAttemptMs = 0;
-  static bool firstAttempt = true;
   static wl_status_t previousStatus = WL_IDLE_STATUS;
 
-  if (WiFi.status() == WL_CONNECTED) {
+  const wl_status_t status = WiFi.status();
+
+  if (status == WL_CONNECTED) {
     if (previousStatus != WL_CONNECTED) {
       previousStatus = WL_CONNECTED;
       Serial.print("wifi_connected_ip=");
@@ -363,27 +353,11 @@ bool ensureWifiConnected() {
   if (previousStatus == WL_CONNECTED) {
     Serial.println("wifi_disconnected");
   }
-  previousStatus = WiFi.status();
+  previousStatus = status;
 
-  const uint32_t nowMs = millis();
-  if (!firstAttempt && nowMs - lastAttemptMs < WIFI_RETRY_PERIOD_MS) {
-    return false;
-  }
-
-  firstAttempt = false;
-  lastAttemptMs = nowMs;
-
-  if (strlen(WIFI_SSID) == 0) {
-    Serial.println("wifi_error=missing WIFI_SSID");
-    return false;
-  }
-
-  Serial.print("wifi_connecting=");
-  Serial.println(WIFI_SSID);
-
-  WiFi.mode(WIFI_STA);
-  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-
+  // The initial connection is started once in setup(); the ESP32's
+  // auto-reconnect handles the rest. Calling WiFi.begin()/reconnect() while
+  // the STA is still connecting causes "sta is connecting" errors.
   return false;
 }
 
@@ -452,6 +426,16 @@ void setup() {
 
   WiFi.mode(WIFI_STA);
   WiFi.setSleep(false);
+  WiFi.setAutoReconnect(true);
+
+  if (strlen(WIFI_SSID) == 0) {
+    Serial.println("wifi_error=missing WIFI_SSID");
+  } else {
+    Serial.print("wifi_connecting=");
+    Serial.println(WIFI_SSID);
+    WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  }
+
   mqttClient.setServer(MQTT_BROKER_HOST, MQTT_BROKER_PORT);
   mqttClient.setCallback(onMqttMessage);
   mqttClient.setBufferSize(PAYLOAD_BUFFER_SIZE);
